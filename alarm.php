@@ -11,8 +11,7 @@ and open the template in the editor.
     </head>
     <body>
         <?php
-        header("Location: main.php");
+        ECHO "ERRO";
         ?>
-        
     </body>
 </html>
