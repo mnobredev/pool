@@ -10,8 +10,9 @@ and open the template in the editor.
         <title></title>
     </head>
     <body>
+        
         <?php
-        // put your code here ola
+        
         ?>
     </body>
 </html>
