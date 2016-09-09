@@ -13,9 +13,12 @@ and open the template in the editor.
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" crossorigin="anonymous">
         <!-- Latest compiled and minified JavaScript -->
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
-        <link rel="stylesheet" href="//cdn.jsdelivr.net/chartist.js/latest/chartist.min.css">
-        <script src="//cdn.jsdelivr.net/chartist.js/latest/chartist.min.js"></script>
-        <style>.ct-label{font-size: 12px;}.ct-series-a .ct-bar, .ct-series-a .ct-line, .ct-series-a .ct-point, .ct-series-a .ct-slice-donut{stroke:lightblue;}</style>
+        <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+        <script type="text/javascript">
+            google.charts.load('current', {packages: ['corechart']});
+            google.charts.setOnLoadCallback(drawChart);
+        </script>
+        <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
         <title>ATEC Pool App</title>
     </head>
     <body>
@@ -36,6 +39,7 @@ and open the template in the editor.
         $phreading = [];
         $clreading = [];
         $hora = [];
+        $minuto = [];
         $phideal = [];
         $clideal = [];
         
@@ -45,12 +49,37 @@ and open the template in the editor.
         while ($row = mysqli_fetch_assoc($rs_result)) {
                 array_push($phreading,$row['ph_status']);
                 array_push($clreading,$row['chlorine_status']);
-                array_push($hora,($row['hour'].($row['minute'])*1.66));
-                //$demo = $row['hour']+($row['minute'])*1.66);
-                echo $demo."<br>";
+                array_push($hora, $row['hour']);
+                array_push($minuto, $row['minute']);
                 array_push($phideal,"7.2");
                 array_push($clideal,"1");
             }
+            
+        $hour=[];
+        $ph=[];
+        
+        for ($hours=0; $hours<24; $hours++){
+            
+            $counter=0;
+            $media=0;
+            $hour[$hours]=$hours;
+            
+            for ($index=0; $index<count($hora);$index++) {
+                if ($hora[$index]==$hours){
+                    $phreading[$index] = str_replace(",",".",$phreading[$index]);
+                    $media+= $phreading[$index];
+                    $counter++;
+                }
+            }
+                
+            if ($counter!=0){
+                $ph[$hours]=$media/$counter;
+            }
+            
+            else{
+                $ph[$hours]=0;
+            }
+        }
         ?>
         
         <nav class="navbar navbar-inverse navbar-fixed-top">
@@ -89,7 +118,7 @@ and open the template in the editor.
      
         <div class="col-md-6">
           <h2>PH</h2>
-          <div class="ct-chart ct-golden-section" id="phchart"></div>
+          <div class="ct-chart ct-golden-section" id="chart_div"></div>
         </div>
         <div class="col-md-6">
           <h2>Cloro</h2>
@@ -104,13 +133,19 @@ and open the template in the editor.
       </footer>
     </div>
         <script type="text/javascript">
-            var phArray =<?php echo json_encode($phreading); ?>;
+            var phArray = [];
+            var hrArray = [];
+            var minArray = [];
+            var phArray =<?php echo json_encode($ph); ?>;
             var clArray =<?php echo json_encode($clreading); ?>;   
-            var hrArray =<?php echo json_encode($hora); ?>;
+            var hrArray =<?php echo json_encode($hour); ?>;
+            var minArray =<?php echo json_encode($minuto); ?>;
             var phIdealArray =<?php echo json_encode($phideal); ?>;
             var clIdealArray =<?php echo json_encode($clideal); ?>;
         </script>
         <script src="phtable.js"></script>
+        <!--
         <script src="cltable.js"></script>
+        -->
     </body>
 </html>
