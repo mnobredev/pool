@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: 09-Set-2016 às 18:04
+-- Generation Time: 09-Set-2016 às 22:38
 -- Versão do servidor: 10.1.10-MariaDB
 -- PHP Version: 5.6.19
 
@@ -277,8 +277,16 @@ CREATE TABLE `user` (
   `user_id` int(11) NOT NULL,
   `user_type` int(11) NOT NULL,
   `email` varchar(50) NOT NULL,
-  `password` varchar(50) NOT NULL
+  `password` varchar(50) NOT NULL,
+  `hash` varchar(1000) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+--
+-- Extraindo dados da tabela `user`
+--
+
+INSERT INTO `user` (`user_id`, `user_type`, `email`, `password`, `hash`) VALUES
+(1, 0, 'antnunessilva@gmail.com', '123456789', '5ffbb973de527f391cbee8d788b62161');
 
 --
 -- Indexes for dumped tables
@@ -342,7 +350,7 @@ ALTER TABLE `readings`
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
