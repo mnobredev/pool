@@ -29,6 +29,12 @@
              
          }
          
+         
+         
+        function selectHandler(e) {
+                        
+        }
+         
         var formatter = new google.visualization.NumberFormat({
             fractionDigits: 2
 });
@@ -46,5 +52,6 @@
       };
       // Instantiate and draw our chart, passing in some options.
       var chart = new google.visualization.ColumnChart(document.getElementById('chart_div'));
+      google.visualization.events.addListener(chart, 'select', selectHandler);
       chart.draw(data, options);
     }
