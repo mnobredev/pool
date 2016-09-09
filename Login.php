@@ -1,5 +1,4 @@
 <?php
-
 /* 
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -15,14 +14,12 @@ if(isset($_POST["Login"]))
 	if(!$row){
         $Message = urlencode("Dados inválidos");
 		header("Location: login.php?Message=".$Message);
-
 	}else{
 		session_start();
 		$_SESSION["id"] = $row["ID_user"];
 		header("Location: main.php");
 	}
 }
-
 ?>
 <html>
 <head>
