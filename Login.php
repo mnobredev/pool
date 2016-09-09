@@ -8,7 +8,7 @@
 if(isset($_POST["Login"]))
 {
     include 'chave.php'; // chave de login
-	$sql = mysqli_query($conn,"SELECT * FROM users WHERE Login = '$_POST[username]' 
+	$sql = mysqli_query($conn,"SELECT * FROM users WHERE Login = '$_POST[login]' 
 		AND password = '$_POST[pass]'" );
 	$row = mysqli_fetch_array($sql);
     
@@ -31,7 +31,7 @@ if(isset($_POST["Login"]))
 <body>
 <form method="POST" action="">
 <label>Login:</label><input type="text" name="login" id="login"><br>
-<label>Senha:</label><input type="password" name="senha" id="senha"><br>
+<label>Senha:</label><input type="password" name="pass" id="pass"><br>
 <input type="submit" value="Login" id="Login" name="Login">
 </form>
 </body>
