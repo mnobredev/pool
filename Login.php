@@ -7,13 +7,20 @@
 if(isset($_POST["Login"]))
 {
     include 'chave.php'; // chave de login
-	$sql = mysqli_query($conn,"SELECT * FROM users WHERE Login = '$_POST[login]' 
-		AND password = '$_POST[pass]'" );
+    
+    
+    	
+$usrcrp =md5($_POST[login]).md5($_POST[pass]);
+$usrcrp1 = md5($usrcrp);
+    
+	$sql = mysqli_query($conn,"SELECT * FROM user WHERE email = '$_POST[login]' 
+		AND password = '$_POST[pass]' AND hash = '$usrcrp1'" );
+        echo $sql;
 	$row = mysqli_fetch_array($sql);
     
 	if(!$row){
         $Message = urlencode("Dados inválidos");
-		header("Location: login.php?Message=".$Message);
+		header("Location: login.php?Message=".$row);
 	}else{
 		session_start();
 		$_SESSION["id"] = $row["ID_user"];
