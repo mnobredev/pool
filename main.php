@@ -54,24 +54,30 @@ and open the template in the editor.
                 array_push($phideal,"7.2");
                 array_push($clideal,"1");
             }
+            
         $hour=[];
         $ph=[];
         
         for ($hours=0; $hours<24; $hours++){
-            $media=0;
+            
             $counter=0;
+            $media=0;
             $hour[$hours]=$hours;
+            
             for ($index=0; $index<count($hora);$index++) {
                 if ($hora[$index]==$hours){
-                    $media+=$phreading[$index];
+                    $phreading[$index] = str_replace(",",".",$phreading[$index]);
+                    $media+= $phreading[$index];
                     $counter++;
                 }
-                if ($counter!=0){
-                    $ph[$hours]=$media/$counter;
-                }
-                else{
-                    $ph[$hours]=0;
-                }
+            }
+                
+            if ($counter!=0){
+                $ph[$hours]=$media/$counter;
+            }
+            
+            else{
+                $ph[$hours]=0;
             }
         }
         ?>

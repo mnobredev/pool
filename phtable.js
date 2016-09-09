@@ -21,8 +21,7 @@
             var hour = parseInt(hrArray[i]);
             var minute = parseInt(minArray[i]);
             var ph = parseFloat(phArray[i]);
-            console.log(ph);
-            console.log(phArray[i]);
+            
 
              data.addRows([
                  [hour+':00', ph]
