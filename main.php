@@ -118,7 +118,7 @@ and open the template in the editor.
      
         <div class="col-md-6">
           <h2>PH</h2>
-          <div class="ct-chart ct-golden-section" id="chart_div"></div>
+          <div class="ct-chart ct-golden-section" id="phchart"></div>
         </div>
         <div class="col-md-6">
           <h2>Cloro</h2>
@@ -136,6 +136,10 @@ and open the template in the editor.
             var phArray = [];
             var hrArray = [];
             var minArray = [];
+            var phArrayphora = [];
+            var hrArrayphora = [];
+            var hrArrayphora =<?php echo json_encode($hora); ?>;
+            var phArrayphora =<?php echo json_encode($phreading); ?>;
             var phArray =<?php echo json_encode($ph); ?>;
             var clArray =<?php echo json_encode($clreading); ?>;   
             var hrArray =<?php echo json_encode($hour); ?>;
