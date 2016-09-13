@@ -24,62 +24,28 @@ and open the template in the editor.
     <body>
         <?php
             
-            $servername="localhost";
-            $username="root";
-            $password="";
-
-            $conn = mysqli_connect($servername, $username, $password);
-            //Verificar se ligou
-            if(!$conn){
-                die("Erro".mysqli_connect_error());
-            }
-            mysqli_select_db($conn,"pooldb");
-            mysqli_set_charset($conn, "utf8_general_ci");
+        include 'chave.php';
         
-        $phreading = [];
-        $clreading = [];
-        $hora = [];
-        $minuto = [];
+        $rawphreading = []; //recieves all readings from current month
+        $rawclreading = []; //recieves all readings from current month
+        $rawday = []; //recieves all day readings from current month
+        $rawhour = []; //recieves all hour readings from current month
+        $rawminute = []; //recieves all minute readings from current month
         $phideal = [];
         $clideal = [];
         
-        $sql = "SELECT ph_status, chlorine_status, HOUR(date) as hour, MINUTE(date) as minute FROM readings where DATE(date)=DATE(NOW())";
+        $sql = "SELECT ph_status, chlorine_status,DAY(date) as day, HOUR(date) as hour, MINUTE(date) as minute FROM readings where MONTH(date)=MONTH(NOW())";
         $rs_result = mysqli_query ($conn, $sql);
         
         while ($row = mysqli_fetch_assoc($rs_result)) {
-                array_push($phreading,$row['ph_status']);
-                array_push($clreading,$row['chlorine_status']);
-                array_push($hora, $row['hour']);
-                array_push($minuto, $row['minute']);
+                array_push($rawphreading,$row['ph_status']);
+                array_push($rawclreading,$row['chlorine_status']);
+                array_push($rawday, $row['day']);
+                array_push($rawhour, $row['hour']);
+                array_push($rawminute, $row['minute']);
                 array_push($phideal,"7.2");
                 array_push($clideal,"1");
             }
-            
-        $hour=[];
-        $ph=[];
-        
-        for ($hours=0; $hours<24; $hours++){
-            
-            $counter=0;
-            $media=0;
-            $hour[$hours]=$hours;
-            
-            for ($index=0; $index<count($hora);$index++) {
-                if ($hora[$index]==$hours){
-                    $phreading[$index] = str_replace(",",".",$phreading[$index]);
-                    $media+= $phreading[$index];
-                    $counter++;
-                }
-            }
-                
-            if ($counter!=0){
-                $ph[$hours]=$media/$counter;
-            }
-            
-            else{
-                $ph[$hours]=0;
-            }
-        }
         ?>
         
         <nav class="navbar navbar-inverse navbar-fixed-top">
@@ -119,6 +85,7 @@ and open the template in the editor.
         <div class="col-md-6">
           <h2>PH</h2>
           <div class="ct-chart ct-golden-section" id="phchart"></div>
+          <button class="btn btn-default" type="submit" id="phback">Back</button>
         </div>
         <div class="col-md-6">
           <h2>Cloro</h2>
@@ -136,14 +103,16 @@ and open the template in the editor.
             var phArray = [];
             var hrArray = [];
             var minArray = [];
+            var dayArray = [];
             var phArrayphora = [];
             var hrArrayphora = [];
-            var hrArrayphora =<?php echo json_encode($hora); ?>;
-            var phArrayphora =<?php echo json_encode($phreading); ?>;
+            var hrArrayphora =<?php echo json_encode($rawhour); ?>;
+            var phArrayphora =<?php echo json_encode($rawphreading); ?>;
+            var dayArray =<?php echo json_encode($rawday); ?>;
             var phArray =<?php echo json_encode($ph); ?>;
-            var clArray =<?php echo json_encode($clreading); ?>;   
+            var clArray =<?php echo json_encode($rawclreading); ?>;   
             var hrArray =<?php echo json_encode($hour); ?>;
-            var minArray =<?php echo json_encode($minuto); ?>;
+            var minArray =<?php echo json_encode($rawminute); ?>;
             var phIdealArray =<?php echo json_encode($phideal); ?>;
             var clIdealArray =<?php echo json_encode($clideal); ?>;
         </script>
