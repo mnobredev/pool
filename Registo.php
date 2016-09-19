@@ -43,19 +43,19 @@ $sql3 = mysqli_query($conn, "Insert into customer(address, city, customer_user_i
 </head>
 <body>
 <form method="POST" action="">
-<label>Primeiro Nome:</label><input type="text" name="Fname" id="Fname"><br>
-<label>Ultimo Nome:</label><input type="text" name="Lname" id="Lname"><br>
-<label>Morada:</label><input type="text" name="Address" id="Address"><br>
-<label>Cidade:</label><input type="text" name="City" id="City"><br>
-<label>Código Postal:</label><input type="text" name="Cpostal" id="Cpostal"><br>
-<label>Mac Address:</label><input type="text" name="mac1" id="mac1" size="2" maxlength="2">
-<input type="text" name="mac2" id="mac2" size="2" maxlength="2">
-<input type="text" name="mac3" id="mac3" size="2" maxlength="2">
-<input type="text" name="mac4" id="mac4" size="2" maxlength="2">
-<input type="text" name="mac5" id="mac5" size="2" maxlength="2">
-<input type="text" name="mac6" id="mac6" size="2" maxlength="2"><br>
-<label>Login:</label><input type="text" name="login" id="login"><br>
-<label>Senha:</label><input type="password" name="pass" id="pass"><br>
+    <label>Primeiro Nome:</label><input type="text" name="Fname" id="Fname" required><br>
+<label>Ultimo Nome:</label><input type="text" name="Lname" id="Lname" required><br>
+<label>Morada:</label><input type="text" name="Address" id="Address" required><br>
+<label>Cidade:</label><input type="text" name="City" id="City" required><br>
+<label>Código Postal:</label><input type="text" name="Cpostal" id="Cpostal" required><br>
+<label>Mac Address:</label><input type="text" name="mac1" id="mac1" size="2" maxlength="2" required>
+<input type="text" name="mac2" id="mac2" size="2" maxlength="2" required>
+<input type="text" name="mac3" id="mac3" size="2" maxlength="2" required>
+<input type="text" name="mac4" id="mac4" size="2" maxlength="2" required>
+<input type="text" name="mac5" id="mac5" size="2" maxlength="2" required>
+<input type="text" name="mac6" id="mac6" size="2" maxlength="2" required><br>
+<label>Login:</label><input type="text" name="login" id="login" required><br>
+<label>Senha:</label><input type="password" name="pass" id="pass" required><br>
 
 <input type="submit" value="submit" id="submit" name="submit">
 
