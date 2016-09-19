@@ -28,6 +28,7 @@ and open the template in the editor.
         $rawday = []; //recieves all day readings from current month
         $rawhour = []; //recieves all hour readings from current month
         $rawminute = []; //recieves all minute readings from current month
+        $otherdates = []; //recieves all months where readings are found
         $phideal = [];
         $clideal = [];
         
@@ -43,6 +44,11 @@ and open the template in the editor.
                 array_push($phideal,"7.2");
                 array_push($clideal,"1");
             }
+        $sql = "select distinct DATE_FORMAT(date, '%m-%Y') as mmyyyy from readings";
+        $rs_result = mysqli_query ($conn, $sql);
+        while ($row = mysqli_fetch_assoc($rs_result)) {
+             array_push($otherdates,$row['mmyyyy']);
+        }
         ?>
         
         <nav class="navbar navbar-inverse navbar-fixed-top">
@@ -58,13 +64,16 @@ and open the template in the editor.
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <form class="navbar-form navbar-right">
-            <div class="form-group">
-              <input type="text" placeholder="Email" class="form-control">
+            <div class="btn-group">
+                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Entrou como António Silva <span class="caret"></span></button>
+                <ul class="dropdown-menu col-xs-12">
+                    <li><a href="#"><span class="glyphicon glyphicon-user" aria-label="Logout"></span>   Perfil</a></li>
+                    <li><a href="#"><span class="glyphicon glyphicon-dashboard" aria-label="Logout"></span>   Leituras</a></li>
+                    <li role="separator" class="divider"></li>
+                    <li><a href="#"><span class="glyphicon glyphicon-log-out" aria-label="Logout"></span>   Logout</a></li>
+                </ul>
             </div>
-            <div class="form-group">
-              <input type="password" placeholder="Password" class="form-control">
-            </div>
-            <button type="submit" class="btn btn-success">Sign in</button>
+            <button type="button" class="btn btn-danger"><span class="glyphicon glyphicon-log-out" aria-label="Logout"></span></button>
           </form>
         </div><!--/.navbar-collapse -->
       </div>
@@ -79,26 +88,25 @@ and open the template in the editor.
     <div class="container">
      
         <div class="col-md-12">
-          <h2 id="phtitle">PH</h2>
-          <div class="ct-chart ct-golden-section" id="phchart"></div>
-          <button class="btn btn-default" type="submit" id="phback">Back</button>
-
+        <h2 id="phtitle">PH</h2>
+        <div class="ct-chart ct-golden-section" id="phchart"></div>
+            <button class="btn btn-default" type="submit" id="phback">Back</button>
+            <div class="dropdown">
+                <button id="phother" class="btn btn-default dropdown-toggle" style="visibility: hidden;" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Escolha outro mês<span class="caret"></span></button>
+                <ul class="dropdown-menu">
+                    <?php
+                        foreach ($otherdates as $dates){
+                            echo '<li id="'.$dates.'"><a>'.$dates.'</a></li>';
+                        }
+                    ?>
+                </ul>
+        </div>
         </div>
         <div class="col-md-6">
           <h2>Cloro</h2>
           <div class="ct-chart ct-golden-section" id="clchart"></div>
         </div>
       </div>
-        
-        <div class="dropdown">
-            <button id="dLabel" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Dropdown Example
-                <span class="caret"></span></button>
-            <ul class="dropdown-menu">
-                    <li><a href="#">HTML</a></li>
-                    <li><a href="#">CSS</a></li>
-                    <li><a href="#">JavaScript</a></li>
-            </ul>
-        </div>
 
       <hr>
 
