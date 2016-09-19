@@ -8,17 +8,7 @@
             
             echo "Valor do PH: $ph <br>Valor do Cloro: $cloro";
 
-            $servername="localhost";
-            $username="root";
-            $password="";
-
-            $conn = mysqli_connect($servername, $username, $password);
-            //Verificar se ligou
-            if(!$conn){
-                die("Erro".mysqli_connect_error());
-            }
-            mysqli_select_db($conn,"pooldb");
-            mysqli_set_charset($conn, "utf8_general_ci");
+            include 'chave.php';
             
             $sql = "INSERT INTO readings (reading_device_id, chlorine_status, ph_status, date) VALUES ('$mac', '$cloro', '$ph', NOW());"; 
             mysqli_query ($conn, $sql);
