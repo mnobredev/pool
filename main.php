@@ -7,19 +7,16 @@ and open the template in the editor.
 <html>
     <head>
         <meta charset="UTF-8">
-        <!-- Latest compiled and minified CSS -->
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" crossorigin="anonymous">
-        <!-- Optional theme -->
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" crossorigin="anonymous">
-        <!-- Latest compiled and minified JavaScript -->
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+        <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
         <script type="text/javascript" src="https://www.google.com/jsapi"></script>
         <script type="text/javascript">
             google.charts.load('current', {packages: ['corechart']});
             google.charts.setOnLoadCallback(drawChart);
         </script>
         <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-        <title>ATEC Pool App</title>
+        <title>Projecto Final ATEC</title>
     </head>
     <body>
         <?php
@@ -57,7 +54,7 @@ and open the template in the editor.
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="#">ATEC Pool App</a>
+          <a class="navbar-brand" href="#">ATEC - Projecto Final</a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <form class="navbar-form navbar-right">
@@ -72,7 +69,6 @@ and open the template in the editor.
         </div><!--/.navbar-collapse -->
       </div>
     </nav>
-      
         
         
     <div class="jumbotron">
@@ -82,16 +78,27 @@ and open the template in the editor.
     </div>
     <div class="container">
      
-        <div class="col-md-6">
-          <h2>PH</h2>
+        <div class="col-md-12">
+          <h2 id="phtitle">PH</h2>
           <div class="ct-chart ct-golden-section" id="phchart"></div>
           <button class="btn btn-default" type="submit" id="phback">Back</button>
+
         </div>
         <div class="col-md-6">
           <h2>Cloro</h2>
           <div class="ct-chart ct-golden-section" id="clchart"></div>
         </div>
       </div>
+        
+        <div class="dropdown">
+            <button id="dLabel" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Dropdown Example
+                <span class="caret"></span></button>
+            <ul class="dropdown-menu">
+                    <li><a href="#">HTML</a></li>
+                    <li><a href="#">CSS</a></li>
+                    <li><a href="#">JavaScript</a></li>
+            </ul>
+        </div>
 
       <hr>
 
