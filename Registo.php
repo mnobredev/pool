@@ -33,7 +33,7 @@ if (isset($_POST["submit"])) {
             $mac.=$_POST['mac' . $i . ''];
         }
     }
-    echo $mac;
+  
     
     $macverify = mysqli_query($conn, "Select device_mac FROM device WHERE device_mac = '" . $mac . "'");
     while ($row = mysqli_fetch_array($macverify)) {
