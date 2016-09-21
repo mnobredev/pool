@@ -63,7 +63,6 @@ if (isset($_POST["submit"])) {
 }
 ?>
 <html>
-<<<<<<< HEAD
     <head>
         <title> Registo de Utilizadores 1</title>
     </head>
@@ -82,26 +81,7 @@ if (isset($_POST["submit"])) {
             <input type="text" name="mac6" id="mac6" size="2" pattern=".{2,}" maxlength="2" required><br>
             <label>Login:</label><input type="text" name="login" id="login" required><br>
             <label>Senha:</label><input type="password" name="pass" id="pass" required><br>
-=======
-<head>
-<title> Registo de Utilizadores 1</title>
-</head>
-<body>
-<form method="POST" action="">
-    <label>Primeiro Nome:</label><input type="text" name="Fname" id="Fname" required><br>
-<label>Ultimo Nome:</label><input type="text" name="Lname" id="Lname" required><br>
-<label>Morada:</label><input type="text" name="Address" id="Address" required><br>
-<label>Cidade:</label><input type="text" name="City" id="City" required><br>
-<label>Código Postal:</label><input type="text" name="Cpostal" id="Cpostal" required><br>
-<label>Mac Address:</label><input type="text" name="mac1" id="mac1" size="2" maxlength="2" required>
-<input type="text" name="mac2" id="mac2" size="2" maxlength="2" required>
-<input type="text" name="mac3" id="mac3" size="2" maxlength="2" required>
-<input type="text" name="mac4" id="mac4" size="2" maxlength="2" required>
-<input type="text" name="mac5" id="mac5" size="2" maxlength="2" required>
-<input type="text" name="mac6" id="mac6" size="2" maxlength="2" required><br>
-<label>Login:</label><input type="text" name="login" id="login" required><br>
-<label>Senha:</label><input type="password" name="pass" id="pass" required><br>
->>>>>>> 7398ff6dd75840de97e86738ca592c6b7573e1e5
+
 
             <input type="submit" value="submit" id="submit" name="submit">
 
