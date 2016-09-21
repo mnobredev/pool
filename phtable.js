@@ -16,9 +16,6 @@
                 ticks: [6, 6.5,7,7.5,8],
                 title: 'Média de leitura'
             },
-            hAxis:{
-                title: 'Hora',
-            },
             legend: {position: 'none'},
             
         };
@@ -59,6 +56,10 @@
     month[9] = "Outubro";
     month[10] = "Novembro";
     month[11] = "Dezembro";
+    
+    document.getElementsByClassName(".dropdown-menu li a").onclick = function month(){
+        alert("Button clicked, id "+this.id+", text"+this.innerHTML);
+    }
 
     document.getElementById("phback").onclick = function back(){
         
@@ -112,6 +113,9 @@
         }
 
         else if (status=="day"){
+            
+            document.getElementById("phother").style.visibility = "visible";
+            document.getElementById("phback").style.visibility = "hidden";
 
             var chosenmonth = new google.visualization.DataTable();
             chosenmonth.addColumn('number', 'Day of the Month');
@@ -212,12 +216,6 @@
         if (status=="day"){
            
             var hour = new google.visualization.DataTable();
-               
-            var $dropdown = $(".dropdown-menu");
-            var menuItemNo = $dropdown.find("li").length;
-            var menuItemId = "menuitem" + menuItemNo;    
-
-            $dropdown.append("<li><a href='#'><input type='checkbox' id='1' checked='checked' /> Menu Item 1</a></li>");
             
             //get by day
             hour.addColumn('string', 'Time of Day');
@@ -249,6 +247,8 @@
             }
             
         else if (status=="month"){
+            document.getElementById("phother").style.visibility = "hidden";
+            document.getElementById("phback").style.visibility = "visible";
             console.log(value);
         var day = new google.visualization.DataTable();
         day.addColumn('string', 'Time of Day');
