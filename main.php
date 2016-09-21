@@ -41,8 +41,6 @@ and open the template in the editor.
                 array_push($rawday, $row['day']);
                 array_push($rawhour, $row['hour']);
                 array_push($rawminute, $row['minute']);
-                array_push($phideal,"7.2");
-                array_push($clideal,"1");
             }
         $sql = "select distinct DATE_FORMAT(date, '%m-%Y') as mmyyyy from readings";
         $rs_result = mysqli_query ($conn, $sql);
@@ -90,13 +88,13 @@ and open the template in the editor.
         <div class="col-md-12">
         <h2 id="phtitle">PH</h2>
         <div class="ct-chart ct-golden-section" id="phchart"></div>
-            <button class="btn btn-default" type="submit" id="phback">Back</button>
-            <div class="dropdown">
-                <button id="phother" class="btn btn-default dropdown-toggle" style="visibility: hidden;" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Escolha outro mês<span class="caret"></span></button>
+            <button class="btn btn-default" style="display:block" type="submit" id="phback">Back</button>
+            <div id="phother" class="dropdown" style="display:none">
+                <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Escolha outro mês<span class="caret"></span></button>
                 <ul class="dropdown-menu">
                     <?php
                         foreach ($otherdates as $dates){
-                            echo '<li id="'.$dates.'"><a>'.$dates.'</a></li>';
+                            echo '<li id="'.$dates.'"><a class="monthlink" id="'.$dates.'">'.$dates.'</a></li>';
                         }
                     ?>
                 </ul>
@@ -109,27 +107,22 @@ and open the template in the editor.
       </div>
 
       <hr>
-
+      
       <footer>
         <p>© 2016 ATEC - Academia de Formação</p>
       </footer>
     </div>
         <script type="text/javascript">
-            var phArray = [];
-            var hrArray = [];
-            var minArray = [];
-            var dayArray = [];
             var phArrayphora = [];
             var hrArrayphora = [];
+            var dayArray = [];
+            var clArray = [];
+            var minArray = [];
             var hrArrayphora =<?php echo json_encode($rawhour); ?>;
             var phArrayphora =<?php echo json_encode($rawphreading); ?>;
             var dayArray =<?php echo json_encode($rawday); ?>;
-            var phArray =<?php echo json_encode($ph); ?>;
             var clArray =<?php echo json_encode($rawclreading); ?>;   
-            var hrArray =<?php echo json_encode($hour); ?>;
             var minArray =<?php echo json_encode($rawminute); ?>;
-            var phIdealArray =<?php echo json_encode($phideal); ?>;
-            var clIdealArray =<?php echo json_encode($clideal); ?>;
         </script>
         <script src="phtable.js"></script>
         <!--

@@ -6,11 +6,11 @@
  * and open the template in the editor.
  */
 
-$id = $_REQUEST['id_data'];
+$id = $_REQUEST['mesano'];
 
         include '../chave.php';
 
-        $sql = "select * from readings where DATE_FORMAT(date, '%m-%Y') like '%$id%';"; 
+        $sql = "SELECT ph_status, chlorine_status,DAY(date) as day, HOUR(date) as hour, MINUTE(date) as minute FROM readings where DATE_FORMAT(date, '%m-%Y') like '%$id%';"; 
         $rs_result = mysqli_query ($conn, $sql);
 
         $ar = [];

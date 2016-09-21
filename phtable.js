@@ -57,12 +57,86 @@
     month[10] = "Novembro";
     month[11] = "Dezembro";
     
-    document.getElementsByClassName(".dropdown-menu li a").onclick = function month(){
-        alert("Button clicked, id "+this.id+", text"+this.innerHTML);
-    }
+    jQuery('.monthlink').click(function(){
+
+        var clickedID = $(this).attr('id'); 
+        var xmlhttp = new XMLHttpRequest();
+        var url = "handler/hvaloresmes.php?mesano="+clickedID;
+        
+        xmlhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+            var myArr = JSON.parse(this.responseText);
+            phArrayphora = [];
+            hrArrayphora = [];
+            dayArray = [];
+            clArray = [];
+            minArray = [];
+            myFunction(myArr);
+            
+            function myFunction(arr) {
+                var i;
+                for(i = 0; i < arr.length; i++) {
+                    phArrayphora[i]=arr[i].ph_status;
+                    hrArrayphora[i]=arr[i].hour;
+                    dayArray[i]=arr[i].day;
+                    clArray[i]=arr[i].chlorine_status;
+                    minArray[i]=arr[i].minute;
+                }
+            }
+            selectedMonth=parseInt(clickedID.substring(0, 2))-1;
+            selectedYear=parseInt(clickedID.substring(3, 8));
+
+            var chosenmonth = new google.visualization.DataTable();
+            chosenmonth.addColumn('number', 'Day of the Month');
+            chosenmonth.addColumn('number', 'PH');
+            chosenmonth.addColumn({type:'string', role:'style'});
+            document.getElementById("phtitle").innerHTML = "PH - Média por dia de "+month[selectedMonth]+" de "+selectedYear;
+            var size = dayArray.length;
+            for (var h=1; h<=31; h++){
+                
+                var counter=0;
+                var media=0;
+                for (var i=0; i<size; i++){
+                        if (dayArray[i]==h){
+                            var res = phArrayphora[i].replace(",", ".");
+                            media+= parseFloat(res);
+                            counter++;
+                        }
+                    }
+
+                if (counter!=0){
+                    if ((media/counter)<7||(media/counter)>7.2 )
+                    chosenmonth.addRows([[h, media/counter, 'color:red']]);
+                    else
+                    chosenmonth.addRows([[h, media/counter, 'color:#3366cc']]); 
+                }
+                else{
+                    chosenmonth.addRows([[h, 0, 'color:red']]);
+                }
+            }
+            
+            function selectHandler() {
+            
+                var selectedItem = chart.getSelection()[0];
+                if (selectedItem) {
+                    var value = selectedItem.row;
+                }
+                clicked(value); 
+            }
+            var formatter = new google.visualization.NumberFormat({fractionDigits: 2});
+            formatter.format(chosenmonth, 1);
+            var chart = new google.visualization.ColumnChart(document.getElementById('phchart'));
+            google.visualization.events.addListener(chart, 'select', selectHandler);
+            chart.draw(chosenmonth,optmonth);
+            status="month";
+        }
+    };
+    xmlhttp.open("GET", url, true);
+    xmlhttp.send();
+    
+    })
 
     document.getElementById("phback").onclick = function back(){
-        
         var chosenday = new google.visualization.DataTable();
         if (status=="hour"){
 
@@ -114,8 +188,8 @@
 
         else if (status=="day"){
             
-            document.getElementById("phother").style.visibility = "visible";
-            document.getElementById("phback").style.visibility = "hidden";
+            document.getElementById("phother").style.display = "block";
+            document.getElementById("phback").style.display = "none";
 
             var chosenmonth = new google.visualization.DataTable();
             chosenmonth.addColumn('number', 'Day of the Month');
@@ -128,13 +202,11 @@
                 var counter=0;
                 var media=0;
                 for (var i=0; i<size; i++){
-                    if (selectedMonth+1==9){
                         if (dayArray[i]==h){
                             var res = phArrayphora[i].replace(",", ".");
                             media+= parseFloat(res);
                             counter++;
                         }
-                    }
                 }
 
                 if (counter!=0){
@@ -247,12 +319,13 @@
             }
             
         else if (status=="month"){
-            document.getElementById("phother").style.visibility = "hidden";
-            document.getElementById("phback").style.visibility = "visible";
+            document.getElementById("phother").style.display = "none";
+            document.getElementById("phback").style.display = "block";
             console.log(value);
         var day = new google.visualization.DataTable();
         day.addColumn('string', 'Time of Day');
         day.addColumn('number', 'PH');
+        day.addColumn({type:'string', role:'style'});
         document.getElementById("phtitle").innerHTML = "PH - Média por hora do dia "+selectedDay+"/"+(parseInt(selectedMonth)+1)+"/"+selectedYear;
         var size = dayArray.length;
         
@@ -268,10 +341,13 @@
                 }
             }
             if (counter!=0){
-                day.addRows([[h+':00', media/counter]]);
+                if ((media/counter)<7||(media/counter)>7.2 )
+                day.addRows([[h+':00', media/counter, 'color:red']]);
+                else
+                day.addRows([[h+':00', media/counter, 'color:#3366cc']]); 
             }
             else{
-                day.addRows([[h+':00', 0]]);
+                day.addRows([[h+':00', 0, 'color:red']]);
             }
         }
         
