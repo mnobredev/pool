@@ -102,7 +102,7 @@ and open the template in the editor.
                 </ul>
         </div>
         </div>
-        <div id="mostra-me" class="col-md-12">
+        <div class="col-md-12">
           <h2 id="cltitle">Cloro</h2>
           <div class="ct-chart ct-golden-section" id="clchart"></div>
           <button class="btn btn-default" style="display:block" type="submit" id="clback">Back</button>

@@ -33,7 +33,7 @@ if (isset($_POST["submit"])) {
             $mac.=$_POST['mac' . $i . ''];
         }
     }
-  
+    
     
     $macverify = mysqli_query($conn, "Select device_mac FROM device WHERE device_mac = '" . $mac . "'");
     while ($row = mysqli_fetch_array($macverify)) {
@@ -51,7 +51,7 @@ if (isset($_POST["submit"])) {
     ];
     $password_hash1 = password_hash($_POST['pass'], PASSWORD_BCRYPT, $options);
 
-    $sql = mysqli_query($conn, "Insert into user(user_type, email, h) VALUES('1','" . $_POST['login'] . "', '$password_hash1' )");
+    $sql = mysqli_query($conn, "Insert into user(user_type, email, password) VALUES('1','" . $_POST['login'] . "', '$password_hash1' )");
     $sql1 = mysqli_query($conn, "SELECT user_id FROM user WHERE email = '" . $_POST['login'] . "'");
 
     while ($row = mysqli_fetch_array($sql1)) {
@@ -74,12 +74,12 @@ if (isset($_POST["submit"])) {
             <label>Cidade:</label><input type="text" name="City" id="City" required><br>
             <label>Código Postal:</label><input type="text" name="Cpostal" id="Cpostal" required><br>
             <label>Mac Address:</label><input type="text" name="mac1" id="mac1" size="2" pattern=".{2,}" maxlength="2" required>
-            <input type="text" name="mac2" id="mac2" size="2" pattern=".{2,}" maxlength="2" required>
-            <input type="text" name="mac3" id="mac3" size="2" pattern=".{2,}" maxlength="2" required>
-            <input type="text" name="mac4" id="mac4" size="2" pattern=".{2,}" maxlength="2" required>
-            <input type="text" name="mac5" id="mac5" size="2" pattern=".{2,}" maxlength="2" required>
-            <input type="text" name="mac6" id="mac6" size="2" pattern=".{2,}" maxlength="2" required><br>
-            <label>Login:</label><input type="text" name="login" id="login" required><br>
+            <input class="col-md-1" type="text" name="mac2" id="mac2" size="2" pattern=".{2,}" maxlength="2" required>
+            <input class="col-md-1" type="text" name="mac3" id="mac3" size="2" pattern=".{2,}" maxlength="2" required>
+            <input class="col-md-1" type="text" name="mac4" id="mac4" size="2" pattern=".{2,}" maxlength="2" required>
+            <input class="col-md-1" type="text" name="mac5" id="mac5" size="2" pattern=".{2,}" maxlength="2" required>
+            <input class="col-md-1" type="text" name="mac6" id="mac6" size="2" pattern=".{2,}" maxlength="2" required><br>
+            <label>Login:</label><input type="email" name="login" id="login" required><br>
             <label>Senha:</label><input type="password" name="pass" id="pass" required><br>
 
 
