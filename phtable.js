@@ -1,4 +1,3 @@
-   
     google.charts.load('current', {packages: ['corechart', 'bar']});
     google.charts.setOnLoadCallback(drawToday);
     
@@ -7,6 +6,7 @@
     var selectedDay = today.getDate();
     var selectedMonth = today.getMonth();
     var selectedYear = today.getFullYear();
+    var month = ["Janeiro","Fevereiro","Março","Abril","Maio","Junho","Julho","Agosto","Setembro","Outubro","Novembro","Dezembro"];
     var options = {
             vAxis: {
                 viewWindow: {
@@ -21,41 +21,27 @@
         };
         
     var optmonth = {
-            vAxis: {
-                viewWindow: {
-                    min: 6,
-                    max: 8
-                },
-                ticks: [6, 6.5,7,7.5,8],
-                title: 'Média de leitura'
+        vAxis: {
+            viewWindow: {
+                min: 6,
+                max: 8
             },
-            hAxis:{
-                
-                viewWindow: {         
-                    min: 1,
-                    max: 31
-                },
-                    ticks: [1,3,5,7,9,11,13,15,17,19,21,23,25,27,29,31],
-                    title: 'Dia do mês',
-                    gridlines: { color: 'white' }
+            ticks: [6, 6.5,7,7.5,8],
+            title: 'Média de leitura'
+        },
+        hAxis:{
+
+            viewWindow: {         
+                min: 1,
+                max: 31
             },
-            legend: {position: 'none'},
-            
-        };
-    
-    var month = new Array();
-    month[0] = "Janeiro";
-    month[1] = "Fevereiro";
-    month[2] = "Março";
-    month[3] = "Abril";
-    month[4] = "Maio";
-    month[5] = "Junho";
-    month[6] = "Julho";
-    month[7] = "Agosto";
-    month[8] = "Setembro";
-    month[9] = "Outubro";
-    month[10] = "Novembro";
-    month[11] = "Dezembro";
+                ticks: [1,3,5,7,9,11,13,15,17,19,21,23,25,27,29,31],
+                title: 'Dia do mês',
+                gridlines: { color: 'white' }
+        },
+        legend: {position: 'none'},
+
+    };
     
     jQuery('.monthlink').click(function(){
 
@@ -64,25 +50,28 @@
         var url = "handler/hvaloresmes.php?mesano="+clickedID;
         
         xmlhttp.onreadystatechange = function() {
-            if (this.readyState == 4 && this.status == 200) {
-            var myArr = JSON.parse(this.responseText);
-            phArrayphora = [];
-            hrArrayphora = [];
-            dayArray = [];
-            clArray = [];
-            minArray = [];
-            myFunction(myArr);
             
-            function myFunction(arr) {
-                var i;
-                for(i = 0; i < arr.length; i++) {
-                    phArrayphora[i]=arr[i].ph_status;
-                    hrArrayphora[i]=arr[i].hour;
-                    dayArray[i]=arr[i].day;
-                    clArray[i]=arr[i].chlorine_status;
-                    minArray[i]=arr[i].minute;
+            if (this.readyState == 4 && this.status == 200) {
+            
+                var myArr = JSON.parse(this.responseText);
+                phArrayphora = [];
+                hrArrayphora = [];
+                dayArray = [];
+                clArray = [];
+                minArray = [];
+                myFunction(myArr);
+            
+                function myFunction(arr) {
+                    
+                    var i;
+                    for(i = 0; i < arr.length; i++) {
+                        phArrayphora[i]=arr[i].ph_status;
+                        hrArrayphora[i]=arr[i].hour;
+                        dayArray[i]=arr[i].day;
+                        clArray[i]=arr[i].chlorine_status;
+                        minArray[i]=arr[i].minute;
+                    }
                 }
-            }
             selectedMonth=parseInt(clickedID.substring(0, 2))-1;
             selectedYear=parseInt(clickedID.substring(3, 8));
 
