@@ -20,8 +20,10 @@ and open the template in the editor.
     </head>
     <body>
         <?php
-            
-        include 'chave.php';
+        /*
+        include 'tools/checksession.php';
+         */    
+        include 'tools/chave.php';
         
         $rawphreading = []; //recieves all readings from current month
         $rawclreading = []; //recieves all readings from current month
@@ -100,9 +102,20 @@ and open the template in the editor.
                 </ul>
         </div>
         </div>
-        <div class="col-md-6">
-          <h2>Cloro</h2>
+        <div id="mostra-me" class="col-md-12">
+          <h2 id="cltitle">Cloro</h2>
           <div class="ct-chart ct-golden-section" id="clchart"></div>
+          <button class="btn btn-default" style="display:block" type="submit" id="clback">Back</button>
+            <div id="clother" class="dropdown" style="display:none">
+                <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Escolha outro mês<span class="caret"></span></button>
+                <ul class="dropdown-menu">
+                    <?php
+                        foreach ($otherdates as $dates){
+                            echo '<li id="'.$dates.'"><a class="monthlink" id="'.$dates.'">'.$dates.'</a></li>';
+                        }
+                    ?>
+                </ul>
+        </div>
         </div>
       </div>
 
@@ -124,9 +137,8 @@ and open the template in the editor.
             var clArray =<?php echo json_encode($rawclreading); ?>;   
             var minArray =<?php echo json_encode($rawminute); ?>;
         </script>
-        <script src="phtable.js"></script>
-        <!--
-        <script src="cltable.js"></script>
-        -->
+        <script src="phtable.js"></script><!--
+        <script src="cltable.js"></script>-->
+        
     </body>
 </html>

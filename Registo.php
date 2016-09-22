@@ -5,7 +5,7 @@
  * and open the template in the editor.
  */
 if (isset($_POST["submit"])) {
-    include 'chave.php'; // chave de login
+    include 'tools/chave.php'; // chave de login
 
     $usertest = mysqli_query($conn, "Select email FROM user WHERE email = '" . $_POST['login'] . "'");
     while ($row = mysqli_fetch_array($usertest)) {

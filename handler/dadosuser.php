@@ -8,7 +8,7 @@
 
 
 $id = $_REQUEST['email'];
-include 'chave.php';
+include '../tools/chave.php';
 
         $user = mysqli_query ($conn, "Select user_id from user where email='".$id."'");
         while ($row = mysqli_fetch_array($user)) {

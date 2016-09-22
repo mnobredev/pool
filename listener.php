@@ -8,7 +8,7 @@
             
             echo "Valor do PH: $ph <br>Valor do Cloro: $cloro";
 
-            include 'chave.php';
+            include 'tools/chave.php';
             
             $sql = "INSERT INTO readings (reading_device_id, chlorine_status, ph_status, date) VALUES ('$mac', '$cloro', '$ph', NOW());"; 
             mysqli_query ($conn, $sql);

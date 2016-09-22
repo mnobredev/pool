@@ -8,7 +8,7 @@
 
 $id = $_REQUEST['mesano'];
 
-        include '../chave.php';
+        include '../tools/chave.php';
 
         $sql = "SELECT ph_status, chlorine_status,DAY(date) as day, HOUR(date) as hour, MINUTE(date) as minute FROM readings where DATE_FORMAT(date, '%m-%Y') like '%$id%';"; 
         $rs_result = mysqli_query ($conn, $sql);
