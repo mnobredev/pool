@@ -31,7 +31,11 @@ $paypal_id='poolreadapp@gmail.com';
     <input type="hidden" name="cancel_return" value="">
     <input type="hidden" name="return" value="">
     <input type='hidden' name='cancel_return' value='http://localhost:90/pool/payment/cancel.php'>
+<<<<<<< HEAD
+	<input type='hidden' name='return' value='http://localhost:90/pool/payment/success.php'>
+=======
 	<input type='hidden' name='return' value='http://localhost:90/pool/payment/success.php?item_name&'>
+>>>>>>> b18ea399db7142b8cacd67af70a77855b0538c55
     <input type="image" src="https://www.sandbox.paypal.com/en_US/i/btn/btn_buynowCC_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
     <img alt="" border="0" src="https://www.sandbox.paypal.com/en_US/i/scr/pixel.gif" width="1" height="1">
     </form> 
