@@ -14,6 +14,7 @@ if (isset($_POST["submit"])) {
         if ($result == $_POST['login']) {
             echo "<script type='text/javascript'>alert('Já existe este email registado!');</script>";
             header("Refresh:0");
+            include 'getNewUserModal.php';
             return;
         }
     }
