@@ -3,6 +3,7 @@ include 'main.php';
 ?>
 
 <script>
-    $('body > :not(#phchart)').hide();
-    $('#phchart').appendTo('body');
+    $('body > :not(#ph_chart_div)').hide();
+    $('#ph_chart_div').appendTo('body');
+    $('#phtitle').hide();
 </script>

@@ -87,7 +87,7 @@ and open the template in the editor.
     </div>
     <div class="container">
      
-        <div class="col-md-12">
+        <div class="col-md-12" id="ph_chart_div">
         <h2 id="phtitle">PH</h2>
         <div class="ct-chart ct-golden-section" id="phchart"></div>
             <button class="btn btn-default" style="display:block" type="submit" id="phback">Back</button>
