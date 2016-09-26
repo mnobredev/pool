@@ -32,9 +32,4 @@ include '../tools/chave.php';
        $ar = array($login1, $result, $result1, $result3, $result4);
         echo json_encode($ar);
     }
-    else
-    {
-        echo 'FAIL';
-       
-    }
 ?>
