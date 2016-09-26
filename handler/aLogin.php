@@ -29,12 +29,7 @@ include '../tools/chave.php';
     $login1="";
     if(password_verify($pw, $result)){
         $login1=true;
-       $ar = array($login1, $result, $result1, $result3, $result4);
+       $ar = array($login1, $result1, $result3, $result4);
         echo json_encode($ar);
-    }
-    else
-    {
-        echo 'FAIL';
-       
     }
 ?>
