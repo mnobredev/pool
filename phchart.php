@@ -6,6 +6,6 @@
  * and open the template in the editor.
  */
 include 'main.php'
-?><!--
+?>
 <script>$('body > :not(#phchart)').hide();
-        $('#phchart').appendTo('body');</script>-->
+        $('#phchart').appendTo('body');</script>
