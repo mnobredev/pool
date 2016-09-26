@@ -137,8 +137,7 @@ and open the template in the editor.
             var clArray =<?php echo json_encode($rawclreading); ?>;   
             var minArray =<?php echo json_encode($rawminute); ?>;
         </script>
-        <script src="phtable.js"></script><!--
-        <script src="cltable.js"></script>-->
+        <script src="phtable.js"></script>
         
     </body>
 </html>
