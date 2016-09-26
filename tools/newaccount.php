@@ -26,8 +26,7 @@ if (isset($_POST["submitreg"])) {
     while ($row = mysqli_fetch_array($macverify)) {
         $result = $row['device_mac'];
         if ($result == $mac) {
-            echo"<script>document.getElementById('addlabel').innerHTML += ' <small style=\'color: #cc0000;\'>Este equipamento já tem conta associada.</small>'</script>";
-            echo "<script type='text/javascript'>window.onload = function() { $('#newAccount').modal();document.getElementById('emaillabel').innerHTML += ' <small style=\'color: #cc0000;\'>Este cliente já tem uma conta activa.</small>';}</script>";
+            echo "<script type='text/javascript'>window.onload = function() { $('#newAccount').modal();document.getElementById('maclabel').innerHTML += ' <small style=\'color: #cc0000;\'>Este equipamento já tem conta associada.</small>';}</script>";
             $haserror=1;
         }
     }
@@ -73,8 +72,3 @@ if (isset($_POST["submitreg"])) {
     </div>
   </div>
 </div>
-<?php
-/*
-    echo "<script type='text/javascript'>window.onload = function() { $('#newAccount').modal();}</script>";
-*/
-?>
