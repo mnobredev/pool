@@ -30,7 +30,7 @@
     </div>
 </div>
 <div class="form-group">
-    <label id="addlabel" for="mac1">Mac Address</label>
+    <label id="maclabel" for="mac1">Mac Address</label>
     <div class="row">
       <div class="col-xs-2">
           <input class="form-control" type="text" class="col-md-1" name="mac1" size="2" pattern="[0-9A-Fa-f]{2}" maxlength="2" style="text-align: center;" required>

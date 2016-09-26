@@ -18,3 +18,4 @@ $id = $_REQUEST['mesano'];
         $ar[] = $row;
 
         echo json_encode($ar);
+?>
