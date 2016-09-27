@@ -87,9 +87,9 @@ and open the template in the editor.
     </div>
     <div class="container">
      
-        <div class="col-md-12" id="ph_chart_div">
+        <div class="col-md-12">
         <h2 id="phtitle">PH</h2>
-        <div class="ct-chart ct-golden-section"></div>
+        <div class="ct-chart ct-golden-section" id="phchart"></div>
             <button class="btn btn-default" style="display:block" type="submit" id="phback">Back</button>
             <div id="phother" class="dropdown" style="display:none">
                 <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Escolha outro mês<span class="caret"></span></button>
