@@ -10,7 +10,10 @@ and open the template in the editor.
 
 
 @media only screen and (max-width: 500){
-   #phptitle{
-       color: red;
+   #phtitle{
+       color: #18b3df;
+       font-size: 22px;
+       font-weight: bold;
+       text-align: left;
    }
 }
