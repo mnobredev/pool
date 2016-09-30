@@ -21,7 +21,7 @@
     <div class="row">
         <div class="col-md-4">
             <label for="Cpostal">Código Postal</label>
-            <input type="text" class="form-control" name="Cpostal" pattern="[0-9]{4}[\-][0-9]{3}|[0-9]{4}" maxlength="8" required>
+            <input type="text" class="form-control" name="Cpostal" pattern="[0-9]{4}[\-][0-9]{3}|[0-9]{4}" title="Por favor insira o seu número com as seguintes características: 0000-000 ou 0000" maxlength="8" required>
         </div>
         <div class="col-md-8">
             <label for="City">Cidade</label>
@@ -54,13 +54,17 @@
 </div>
 <div class="form-group">
     <div class="row">
-        <div class="col-md-6">
+        <div class="col-md-4">
             <label id='emaillabel' for="loginreg">Email</label>
             <input type="email" class="form-control" name="loginreg" required>
         </div>
-        <div class="col-md-6">
+        <div class="col-md-4">
             <label for="passreg">Password</label>
           <input type="password" class="form-control" name="passreg" required>
+        </div>
+        <div class="col-md-4">
+            <label for="passreg">Telefone</label>
+            <input type="text" class="form-control" name="tel" maxlength="13" pattern="[0-9\+].{8,12}" title="Formato de número sugerido: 910000000" required>
         </div>
     </div>
 </div>

@@ -45,7 +45,7 @@ if (isset($_POST["submitreg"])) {
     }
     $auth = "0";
     $sql2 = mysqli_query($conn, "Insert into device(device_user_id, device_mac, auth) VALUES ('" . $result . "','" . $mac . "','" . $auth . "')");
-    $sql3 = mysqli_query($conn, "Insert into customer(address, city, customer_user_id, first_name, last_name, zipcode) VALUES ('" . $_POST['Address'] . "', '" . $_POST['City'] . "','" . $result . "' ,'" . $_POST['Fname'] . "' , '" . $_POST['Lname'] . "', '" . $_POST['Cpostal'] . "')");
+    $sql3 = mysqli_query($conn, "Insert into customer(address, city, customer_user_id, first_name, last_name, zipcode, tel) VALUES ('" . $_POST['Address'] . "', '" . $_POST['City'] . "','" . $result . "' ,'" . $_POST['Fname'] . "' , '" . $_POST['Lname'] . "', '" . $_POST['Cpostal'] . "', '" . $_POST['tel'] . "')");
 
     }
     }

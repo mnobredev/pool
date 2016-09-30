@@ -65,53 +65,7 @@ and open the template in the editor.
 
         ?>
        
-        <div id="myCarousel" class="carousel slide" data-ride="carousel">     
-            <ol class="carousel-indicators">
-                <li data-target="#myCarousel" data-slide-to="0" class=""></li>
-                <li data-target="#myCarousel" data-slide-to="1" class=""></li>
-                <li data-target="#myCarousel" data-slide-to="2" class="active"></li>
-            </ol>
-            <div class="carousel-inner" role="listbox">
-                <div class="item" >
-                    <div class="first-slide" style="min-height: 400px; background-color: #337ab7;"></div>
-                    <div class="container">
-                        <div class="carousel-caption">
-                            <h1>Já tem o seu equipamento?</h1>
-                            <p>Registe já o seu Arduino e tire partido do sistema de controlo de valores de água mais avançado do mercado.</p>
-                            <p><a class="btn btn-lg btn-default" href="#" role="button">Registe-se já</a></p>
-                        </div>
-                    </div>
-                </div>
-                <div class="item">
-                    <div class="second-slide" style="min-height: 400px; background-color: #337ab7;"></div>
-                    <div class="container">
-                        <div class="carousel-caption">
-                            <h1>Conheça a equipa</h1>
-                            <p>Conheça os alunos que desenvolveram este sistema com o objectivo de revolucionar o mercado dos Arduinos.</p>
-                            <p><a class="btn btn-lg btn-default" href="#" role="button">Ver mais</a></p>
-                        </div>
-                    </div>
-                </div>
-                <div class="item active">
-                    <div class="third-slide" style="min-height: 400px; background-color: #337ab7;"></div>
-                    <div class="container">
-                        <div class="carousel-caption">
-                            <h1>Fiabilidade e design</h1>
-                            <p>O nosso equipamento foi construído para durar e com um design irresistível.</p>
-                            <p><a class="btn btn-lg btn-default" href="#" role="button">Veja a galeria</a></p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
-                <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-                <span class="sr-only">Previous</span>
-            </a>
-            <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
-                <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-                <span class="sr-only">Next</span>
-            </a>
-        </div>
+        
        
         <div class="container marketing" style="margin-top: 5%; text-align: center;"> 
             <div class="row featurette">
