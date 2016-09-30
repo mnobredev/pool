@@ -9,11 +9,9 @@ and open the template in the editor.
 */
 
 
-@media only screen and (max-width: 500){
    #phtitle{
-       color: #18b3df;
+       color: green;
        font-size: 22px;
        font-weight: bold;
        text-align: left;
    }
-}
