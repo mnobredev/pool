@@ -6,6 +6,8 @@
  * and open the template in the editor.
  */
 $login = $_REQUEST['email'];
+$result5 ="";
+$result5 = $login;
 $pw = $_REQUEST['pass'];
 
 include '../tools/chave.php';
