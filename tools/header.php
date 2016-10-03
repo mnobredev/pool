@@ -16,11 +16,11 @@
                 <div class="btn-group">
                     <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Entrou como António Silva <span class="caret"></span></button>
                     <ul class="dropdown-menu col-xs-12">
-                        <li><a href="#"><span class="glyphicon glyphicon-user" aria-label="Logout"></span>   Perfil</a></li>
-                        <li><a href="#"><span class="glyphicon glyphicon-dashboard" aria-label="Logout"></span>   Leituras</a></li>
-                        <li><a href="#"><span class="glyphicon glyphicon-shopping-cart" aria-label="Logout"></span>   Loja</a></li>
+                        <li><a href="#"><span class="glyphicon glyphicon-user" aria-label="profile"></span>   Perfil</a></li>
+                        <li><a href="main.php"><span class="glyphicon glyphicon-dashboard" aria-label="readings"></span>   Leituras</a></li>
+                        <li><a href="store.php"><span class="glyphicon glyphicon-shopping-cart" aria-label="store"></span>   Loja</a></li>
                         <li role="separator" class="divider"></li>
-                        <li><a href="#"><span class="glyphicon glyphicon-log-out" aria-label="Logout"></span>   Logout</a></li>
+                        <li><a href="#"><span class="glyphicon glyphicon-log-out" aria-label="logout"></span>   Logout</a></li>
                     </ul>
                 </div>
             <button type="button" class="btn btn-danger"><span class="glyphicon glyphicon-log-out" aria-label="Logout"></span></button>
