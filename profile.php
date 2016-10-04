@@ -36,44 +36,50 @@ and open the template in the editor.
                     case "0":
                         $onRecord = $firstName;
                         $dbName = 'first_name';
-                        $dbTable = 'user';
+                        $dbTable = 'customer';
                         $fieldName = 'Primeiro Nome';
                         $inputType = 'text';
+                        $id = 'customer_user_id';
                         break;
                     case "1":
                         $onRecord = $lastName;
                         $dbName = 'last_name';
-                        $dbTable = 'user';
+                        $dbTable = 'customer';
                         $fieldName = 'Apelido';
                         $inputType = 'text';
+                        $id = 'customer_user_id';
                         break;
                     case "2":
                         $onRecord = $address;
                         $dbName = 'address';
-                        $dbTable = 'user';
+                        $dbTable = 'customer';
                         $fieldName = 'Morada';
                         $inputType = 'text';
+                        $id = 'customer_user_id';
                         break;
                     case "3":
                         $onRecord = $zip;
                         $dbName = 'zipcode';
-                        $dbTable = 'user';
+                        $dbTable = 'customer';
                         $fieldName = 'Código Postal';
                         $inputType = 'text';
+                        $id = 'customer_user_id';
                         break;
                     case "4":
                         $onRecord = $city;
                         $dbName = 'city';
-                        $dbTable = 'user';
+                        $dbTable = 'customer';
                         $fieldName = 'Cidade';
                         $inputType = 'text';
+                        $id = 'customer_user_id';
                         break;
                     case "5":
                         $onRecord = $tel;
                         $dbName = 'tel';
-                        $dbTable = 'user';
+                        $dbTable = 'customer';
                         $fieldName = 'Telefone';
                         $inputType = 'text';
+                        $id = 'customer_user_id';
                         break;
                     case "6":
                         $onRecord = $mac;
@@ -81,6 +87,7 @@ and open the template in the editor.
                         $dbTable = 'device';
                         $fieldName = 'MAC Address';
                         $inputType = 'text';
+                        $id = 'device_user_id';
                         break;
                     default:
                         break;
@@ -88,7 +95,8 @@ and open the template in the editor.
                 include 'tools/eprofilemodal.php';
                 include 'tools/success.php';
                 if (isset($_POST["submitEdit"])) {
-                    $write = mysqli_query($conn, "UPDATE ".$dbTable." SET ".$dbName."=".$_GET["newData"]." WHERE user_id=8");
+                    $write = mysqli_query($conn, "UPDATE ".$dbTable." SET ".$dbName."='".$_POST["newData"]."' WHERE ".$id."=8");
+                    echo "table = ".$dbTable." name = ".$dbName." newdata = ".$_POST["newData"];
                     echo "<script type='text/javascript'>$('#success').modal();</script>";
                 }
                 else{

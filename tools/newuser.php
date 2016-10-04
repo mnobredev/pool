@@ -30,29 +30,6 @@
     </div>
 </div>
 <div class="form-group">
-    <label id="maclabel" for="mac1">Mac Address</label>
-    <div class="row">
-      <div class="col-xs-2">
-          <input class="form-control" type="text" class="col-md-1" name="mac1" size="2" pattern="[0-9A-Fa-f]{2}" maxlength="2" style="text-align: center;" required>
-      </div>
-      <div class="col-xs-2">
-          <input class="form-control" type="text" class="col-md-1" name="mac2" size="2" pattern="[0-9A-Fa-f]{2}" maxlength="2" style="text-align: center;" required>
-      </div>
-      <div class="col-xs-2">
-          <input class="form-control" type="text" class="col-md-1" name="mac3" size="2" pattern="[0-9A-Fa-f]{2}" maxlength="2" style="text-align: center;" required>
-      </div>
-      <div class="col-xs-2">
-          <input class="form-control" type="text" class="col-md-1" name="mac4" size="2" pattern="[0-9A-Fa-f]{2}" maxlength="2" style="text-align: center;" required>
-      </div>
-      <div class="col-xs-2">
-          <input class="form-control" type="text" class="col-md-1" name="mac5" size="2" pattern="[0-9A-Fa-f]{2}" maxlength="2" style="text-align: center;" required>
-      </div>
-      <div class="col-xs-2">
-          <input class="form-control" type="text" class="col-md-1" name="mac6" size="2" pattern="[0-9A-Fa-f]{2}" maxlength="2" style="text-align: center;" required>
-      </div>
-  </div>
-</div>
-<div class="form-group">
     <div class="row">
         <div class="col-md-4">
             <label id='emaillabel' for="loginreg">Email</label>
@@ -68,3 +45,39 @@
         </div>
     </div>
 </div>
+<div class="form-group">
+    <label>Já tenho equipamento e quero regista-lo <input type="checkbox" name="insertMac" value="" onchange="checkAddress(this)"></label><br>
+    <label id="maclabel" style="visibility: hidden" for="mac1">Mac Address</label>
+    <div class="row" id="macrow" style="visibility: hidden">
+      <div class="col-xs-2">
+          <input class="form-control" type="text" class="col-md-1" name="mac1" size="2" pattern="[0-9A-Fa-f]{2}" maxlength="2" style="text-align: center;">
+      </div>
+      <div class="col-xs-2">
+          <input class="form-control" type="text" class="col-md-1" name="mac2" size="2" pattern="[0-9A-Fa-f]{2}" maxlength="2" style="text-align: center;">
+      </div>
+      <div class="col-xs-2">
+          <input class="form-control" type="text" class="col-md-1" name="mac3" size="2" pattern="[0-9A-Fa-f]{2}" maxlength="2" style="text-align: center;">
+      </div>
+      <div class="col-xs-2">
+          <input class="form-control" type="text" class="col-md-1" name="mac4" size="2" pattern="[0-9A-Fa-f]{2}" maxlength="2" style="text-align: center;">
+      </div>
+      <div class="col-xs-2">
+          <input class="form-control" type="text" class="col-md-1" name="mac5" size="2" pattern="[0-9A-Fa-f]{2}" maxlength="2" style="text-align: center;">
+      </div>
+      <div class="col-xs-2">
+          <input class="form-control" type="text" class="col-md-1" name="mac6" size="2" pattern="[0-9A-Fa-f]{2}" maxlength="2" style="text-align: center;">
+      </div>
+  </div>
+</div>
+<script>function checkAddress(checkbox)
+{
+    if (checkbox.checked)
+    {
+        document.getElementById("macrow").style.visibility = "visible";
+        document.getElementById("maclabel").style.visibility = "visible";
+    }
+    else{
+        document.getElementById("macrow").style.visibility = "hidden";
+        document.getElementById("maclabel").style.visibility = "hidden";
+    }
+}</script>

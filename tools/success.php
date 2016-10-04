@@ -7,7 +7,7 @@
       </div><form method="POST" action="">
       <div class="modal-body">Alterações efectuadas com sucesso</div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+            <a href="profile.php" class="btn btn-default">Fechado</a>
       </div></form>
     </div>
   </div>

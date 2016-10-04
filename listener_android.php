@@ -1,37 +1,15 @@
-    <?php
+<?php
+
+    $field = $_REQUEST['field'];
+    $data = $_REQUEST['data'];
+    $id = $_REQUEST['id'];
+    $val = 0;
+
+    include 'tools/chave.php';
+    $sql = "UPDATE customer SET " . $field . "='" . $data . "' where customer_user_id='" . $id . "'";
+    $hello = mysqli_query($conn, $sql);
     
-            $field = $_REQUEST['field'];
-            $param = $_REQUEST['param'];
-            $id = $_REQUEST['id'];
-            $val = 0;
-            
-            include 'tools/chave.php';
-            
-            $sql = "INSERT INTO "; 
-            mysqli_query ($conn, $sql);
-            
-            switch ($field){
-                case "tel":
-                    $val = 1;
-                    
-                break;
-            
-                case "zipcode":
-                    $val = 2;                    
-                break;
-            
-                case "city":
-                    $val = 3;                    
-                break;
-            
-                case "address":
-                    $val = 4;                    
-                break;
-            
-                
-            }
-            if($val != 0){
-                
-            }
-            
-        ?>
+    if ($hello=="1"){
+        $ar = Array("success");
+    echo json_encode($ar);}
+?>
