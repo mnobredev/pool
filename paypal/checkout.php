@@ -29,6 +29,9 @@ echo '1';
 $payer = new Payer();
 $payer->setPaymentMethod('paypal');
 
+
+
+
 $item = new Item();
 $item->setName($product)
         ->setCurrency('GBP')
