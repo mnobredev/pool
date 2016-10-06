@@ -6,9 +6,6 @@
  * da compra ainda não está aproved. só depois no pay.php é 
  * que altera a tabela referente á compra em si, para 'aproved'
  */
-include 'tools/chave.php'; // chave de login
- $buy = mysqli_query($conn, "INSERT into sales");
- 
 
 
 ?>
