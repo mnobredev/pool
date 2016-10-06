@@ -96,8 +96,12 @@ and open the template in the editor.
                 include 'tools/eprofilemodal.php';
                 include 'tools/success.php';
                 if (isset($_POST["submitEdit"])) {
-                    $write = mysqli_query($conn, "UPDATE ".$dbTable." SET ".$dbName."='".$_POST["newData"]."' WHERE ".$id."=8");
-                    echo "table = ".$dbTable." name = ".$dbName." newdata = ".$_POST["newData"];
+                    if ($toEdit=="6"){
+                        include "handler/password.php?id=8&password=".$_POST["newData"];
+                    }
+                    else{
+                        $write = mysqli_query($conn, "UPDATE ".$dbTable." SET ".$dbName."='".$_POST["newData"]."' WHERE ".$id."=8");
+                    }
                     echo "<script type='text/javascript'>$('#success').modal();</script>";
                 }
                 else{
