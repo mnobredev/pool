@@ -11,7 +11,7 @@
         
             <div class="form-group">
                 <?php 
-                echo "<label>Indique o novo ".$fieldName."</label>";
+                echo "<label>Alterar ".$fieldName."</label>";
                 echo "<input type='".$inputType."' class='form-control' name='newData' placeholder='".$onRecord."'>";
                 ?>
             </div>

@@ -17,7 +17,11 @@
                 title: 'Média de leitura'
             },
             legend: {position: 'none'},
-            
+            animation:{
+                startup:true,
+                duration: 3000,
+                easing: 'inAndOut'
+              }
         };
         
     var optmonth = {
@@ -39,6 +43,11 @@
                 title: 'Dia do mês',
                 gridlines: { color: 'white' }
         },
+        animation:{
+                startup:true,
+                duration: 3000,
+                easing: 'inAndOut'
+              },
         legend: {position: 'none'},
 
     };
