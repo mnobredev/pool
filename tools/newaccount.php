@@ -12,22 +12,23 @@ if (isset($_POST["submitreg"])) {
             $haserror=1;
         }
     }
-   
-    $mac = "";
-    for ($i = 1; $i < 7; $i++) {
-        $mac.=$_POST['mac' . $i . ''] . ":";
-        echo "<script>console.log('v1=".$mac."');</script>";
-        if ($i == 6) {
-            $mac.=$_POST['mac' . $i . ''];
+    if(isset($_POST['insertMac'])){
+        $mac = "";
+        for ($i = 1; $i < 7; $i++) {
+            $mac.=$_POST['mac' . $i . ''] . ":";
+            echo "<script>console.log('v1=".$mac."');</script>";
+            if ($i == 6) {
+                $mac.=$_POST['mac' . $i . ''];
+            }
         }
-    }
 
-    $macverify = mysqli_query($conn, "Select device_mac FROM device WHERE device_mac = '" . $mac . "'");
-    while ($row = mysqli_fetch_array($macverify)) {
-        $result = $row['device_mac'];
-        if ($result == $mac) {
-            echo "<script type='text/javascript'>window.onload = function() { $('#newAccount').modal();document.getElementById('maclabel').innerHTML += ' <small style=\'color: #cc0000;\'>Este equipamento já tem conta associada.</small>';}</script>";
-            $haserror=1;
+        $macverify = mysqli_query($conn, "Select device_mac FROM device WHERE device_mac = '" . $mac . "'");
+        while ($row = mysqli_fetch_array($macverify)) {
+            $result = $row['device_mac'];
+            if ($result == $mac) {
+                echo "<script type='text/javascript'>window.onload = function() { $('#newAccount').modal();document.getElementById('maclabel').innerHTML += ' <small style=\'color: #cc0000;\'>Este equipamento já tem conta associada.</small>';}</script>";
+                $haserror=1;
+            }
         }
     }
     if ($haserror==0){
@@ -44,8 +45,10 @@ if (isset($_POST["submitreg"])) {
         $result = trim($row['user_id']);
     }
     $auth = "0";
+    if(isset($_POST['insertMac'])){
     $sql2 = mysqli_query($conn, "Insert into device(device_user_id, device_mac, auth) VALUES ('" . $result . "','" . $mac . "','" . $auth . "')");
-    $sql3 = mysqli_query($conn, "Insert into customer(address, city, customer_user_id, first_name, last_name, zipcode) VALUES ('" . $_POST['Address'] . "', '" . $_POST['City'] . "','" . $result . "' ,'" . $_POST['Fname'] . "' , '" . $_POST['Lname'] . "', '" . $_POST['Cpostal'] . "')");
+    }
+    $sql3 = mysqli_query($conn, "Insert into customer(address, city, customer_user_id, first_name, last_name, zipcode, tel) VALUES ('" . $_POST['Address'] . "', '" . $_POST['City'] . "','" . $result . "' ,'" . $_POST['Fname'] . "' , '" . $_POST['Lname'] . "', '" . $_POST['Cpostal'] . "', '" . $_POST['tel'] . "')");
 
     }
     }
