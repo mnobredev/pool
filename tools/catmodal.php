@@ -29,7 +29,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
-                    <button type="submit" class="btn btn-primary" id="submitEdit" name="submitCat" value="submitCat">Gravar</button>
+                    <button type="submit" class="btn btn-primary" id="submitCat" name="submitCat" value="submitCat">Gravar</button>
                 </div>
             </form>
         </div>

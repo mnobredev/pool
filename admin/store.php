@@ -39,103 +39,213 @@ and open the template in the editor.
             <script>
             $( "#store" ).toggleClass( "active" );
             </script>
-            <div class="col-md-10">
-                <div class="panel panel-primary">
-                    <div class="panel-heading"><h3 class="panel-title">Inserir produto</h3></div>
-                    <div class="panel-body">
-                        <div class="col-md-4">
-                            <div class="form-group">
-                                <label>Nome</label>
-                                <input class="form-control" type="text" required>                             
-                            </div>
-                            <div class="form-group">
-                                <label>Preço</label>
-                                <input class="form-control" type="text" required>                             
-                            </div>
-                            <div class="form-group">
-                                <label>Categoria </label> <a href="#" data-toggle="modal" data-target="#addCat" title="Adicionar nova categoria"> <span class="glyphicon glyphicon-plus" aria-hidden="true"></span></a>
-                                <select class="form-control" id="category" onchange="getSub()">
-                                    <option>Escolha uma opção</option>
-                                    <?php
-                                    for ($i=0; $i<count($arCatID); $i++) {
-                                        if ($arCatParent[$i]==0){
-                                            echo "<option value='".$arCatID[$i]."'>".$arCatName[$i]."</option>";
-                                        }
-                                    }
-                                    ?>
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label>Subcategoria</label>
-                                <select id="subcat" class="form-control">
-                                    <script>
-                                        function getSub(){
-                                            var cat = document.getElementById("category");
-                                            var chosenCat = cat.options[cat.selectedIndex].value;
-                                            var catName =<?php echo json_encode($arCatName); ?>;
-                                            var catID =<?php echo json_encode($arCatID); ?>;
-                                            var catParent =<?php echo json_encode($arCatParent); ?>;
-                                            var x = document.getElementById("subcat");
-                                            x.options.length = 0;
-                                            for (var i=0; i<catID.length; i++) {
-                                                var option = document.createElement("option");
-                                                if (catParent[i]===chosenCat){
-                                                    option.text = catName[i];
-                                                    option.value = catID[i];
-                                                    x.add(option);
-                                                }
+            <form method="POST" action="" enctype="multipart/form-data">
+                <div class="col-md-10">
+                    <div class="panel panel-primary">
+                        <div class="panel-heading"><h3 class="panel-title">Inserir produto</h3></div>
+                        <div class="panel-body">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>Nome</label>
+                                    <input name="nameProduct" class="form-control" type="text" required>                             
+                                </div>
+                                <div class="form-group">
+                                    <label>Preço</label>
+                                    <input name="priceProduct" class="form-control" type="text" required>                             
+                                </div>
+                                <div class="form-group">
+                                    <label>Categoria </label> <a href="#" data-toggle="modal" data-target="#addCat" title="Adicionar nova categoria"> <span class="glyphicon glyphicon-plus" aria-hidden="true"></span></a>
+                                    <select class="form-control" id="category" onchange="getSub()">
+                                        <option>Escolha uma opção</option>
+                                        <?php
+                                        for ($i=0; $i<count($arCatID); $i++) {
+                                            if ($arCatParent[$i]==0){
+                                                echo "<option value='".$arCatID[$i]."'>".$arCatName[$i]."</option>";
                                             }
                                         }
-                                    </script>
-                                </select>
+                                        ?>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label>Subcategoria</label>
+                                    <select name="subcatProduct" id="subcat" class="form-control">
+                                        <script>
+                                            function getSub(){
+                                                var cat = document.getElementById("category");
+                                                var chosenCat = cat.options[cat.selectedIndex].value;
+                                                var catName =<?php echo json_encode($arCatName); ?>;
+                                                var catID =<?php echo json_encode($arCatID); ?>;
+                                                var catParent =<?php echo json_encode($arCatParent); ?>;
+                                                var x = document.getElementById("subcat");
+                                                x.options.length = 0;
+                                                for (var i=0; i<catID.length; i++) {
+                                                    var option = document.createElement("option");
+                                                    if (catParent[i]===chosenCat){
+                                                        option.text = catName[i];
+                                                        option.value = catID[i];
+                                                        x.add(option);
+                                                    }
+                                                }
+                                            }
+                                        </script>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group  col-md-8">
+                                <label>Descrição</label>
+                                <textarea name="descProduct" class="form-control" rows="6" type="text" required></textarea>
+                            </div>
+                            <div class="form-group col-md-8">
+                                <label>Imagens</label>
+
+                                    <div class="row">
+                                        <div class='col-md-4'>
+                                            <div class="thumbnail">
+                                                <img id='addImg1' style='width: 15vw; height: 15vw;' src="../img/add.png">
+                                                <div class="caption">
+                                                    <label class="btn btn-default btn-file" style="width: 100%">
+                                                    Adicionar imagem<input type='file' style="display: none;" id="imgInp1" name="imgInp1" />
+                                                </label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class='col-md-4'>
+                                            <div class="thumbnail">
+                                                <img id='addImg2' style='width: 15vw; height: 15vw;' src="../img/add.png">
+                                                <div class="caption">
+                                                <label class="btn btn-default btn-file" style="width: 100%">
+                                                    Adicionar imagem<input type='file' style="display: none;" id="imgInp2" />
+                                                </label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class='col-md-4'>
+                                            <div class="thumbnail">
+                                                <img id='addImg3' style='width: 15vw; height: 15vw;'  src="../img/add.png">
+                                                <div class="caption">
+                                                <label class="btn btn-default btn-file" style="width: 100%">
+                                                    Adicionar imagem<input type='file' style="display: none;" id="imgInp3" />
+                                                </label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                <script>
+                                    function readURL1(input) {
+                                        if (input.files && input.files[0]) {
+                                            var reader = new FileReader();
+
+                                            reader.onload = function (e) {
+                                                $('#addImg1').attr('src', e.target.result);
+                                            }
+
+                                            reader.readAsDataURL(input.files[0]);
+                                        }
+                                    }
+
+                                    $("#imgInp1").change(function(){
+                                        readURL1(this);
+                                    });
+
+                                    function readURL2(input) {
+                                        if (input.files && input.files[0]) {
+                                            var reader = new FileReader();
+
+                                            reader.onload = function (e) {
+                                                $('#addImg2').attr('src', e.target.result);
+                                            }
+
+                                            reader.readAsDataURL(input.files[0]);
+                                        }
+                                    }
+
+                                    $("#imgInp2").change(function(){
+                                        readURL2(this);
+                                    });
+
+                                    function readURL3(input) {
+                                        if (input.files && input.files[0]) {
+                                            var reader = new FileReader();
+
+                                            reader.onload = function (e) {
+                                                $('#addImg3').attr('src', e.target.result);
+                                            }
+
+                                            reader.readAsDataURL(input.files[0]);
+                                        }
+                                    }
+
+                                    $("#imgInp3").change(function(){
+                                        readURL3(this);
+                                    });
+
+                                </script>
                             </div>
                         </div>
-                        <div class="form-group  col-md-8">
-                            <label>Descrição</label>
-                            <textarea class="form-control" rows="6" type="text" required></textarea>
-                            <form id="form1" runat="server">
-                                <label class="btn btn-default btn-file">
-                                    Adicionar imagem<input type='file' style="display: none;" id="imgInp" />
-                                </label>
-                                <img id="blah" src="#" alt="your image" style="" />
-                            </form>
-                            <script>
-                            function readURL(input) {
-    if (input.files && input.files[0]) {
-        var reader = new FileReader();
-
-        reader.onload = function (e) {
-            $('#blah').attr('src', e.target.result);
-        }
-
-        reader.readAsDataURL(input.files[0]);
-    }
-}
-
-$("#imgInp").change(function(){
-    readURL(this);
-});
-                            </script>
+                        <div class="panel-footer"><button type="submit" id="newProduct" name="newProduct" value="newProduct" class="btn btn-primary" >Inserir</button></div>
+                    </div>
+                    <div class="panel panel-primary">
+                        <div class="panel-heading"><h3 class="panel-title">Editar equipamento</h3></div>
+                        <div class="panel-body">
+                            I AM THE WATCHER ON THE WALL - PLZ MAKE ME DECENT CONTENT
                         </div>
+                        <div class="panel-footer"><button type="button" class="btn btn-primary" >Editar</button></div>
                     </div>
-                    <div class="panel-footer"><button type="button" class="btn btn-primary" >Inserir</button></div>
                 </div>
-                <div class="panel panel-primary">
-                    <div class="panel-heading"><h3 class="panel-title">Editar equipamento</h3></div>
-                    <div class="panel-body">
-                        I AM THE WATCHER ON THE WALL - PLZ MAKE ME DECENT CONTENT
-                    </div>
-                    <div class="panel-footer"><button type="button" class="btn btn-primary" >Editar</button></div>
-                </div>
-            </div>
+            </form>
         </div>
+        
         <?php
         if(isset($_POST["submitCat"])){
-            
             $sql = mysqli_query($conn,"INSERT INTO category (name_category, parent_category) VALUES ('".$_POST[newCat]."', '".$_POST[parentCat]."')");
-            echo "fils de pute ".$_POST[parentCat]." pascua ".$_POST[newCat];
         }
-
+        
+        if(isset($_POST["newProduct"])){
+            //$sql = mysqli_query($conn,"INSERT INTO product (name_product, price_product, description_product, category_product) VALUES ('".$_POST[nameProduct]."', '".$_POST[priceProduct]."', '".$_POST[descProduct]."', '".$_POST[subcatProduct]."')");
+            $target_dir = "../img/";
+            $target_file = $target_dir . basename($_FILES["imgInp1"]["name"]);
+            $nfoto = basename($_FILES["imgInp1"]["name"]);
+            $uploadOk = 1;
+            $imageFileType = pathinfo($target_file,PATHINFO_EXTENSION);
+            $check = getimagesize($_FILES["imgInp1"]["tmp_name"]);
+    	if($check !== false) {
+            echo "File is an image - " . $check["mime"] . ".";
+       	 $uploadOk = 1;
+    	} else {
+        	echo "Por favor selecione um ficheiro jpg.";
+        	$uploadOk = 0;
+    	}
+		// Ficheiro existe?
+		if (file_exists($target_file)) {
+    		echo "Este ficheiro já existe.";
+    		$uploadOk = 0;
+		}
+		// Ver tamanho
+		if ($_FILES["imgInp1"]["size"] > 500000) {
+    		echo "A imagem selecionada é demasiado grande";
+    		$uploadOk = 0;
+		}
+		// Validar formato
+		if($imageFileType != "jpg") {
+			echo "A foto de perfil tem que ter a extensão jpg.";
+			$uploadOk = 0;
+		}
+		// Ver se upload correu bem 
+		if ($uploadOk == 0) {
+			echo "Algo correu mal.";
+		// Tudo OK fazer upload
+		} else {
+			if (move_uploaded_file($_FILES["imgInp1"]["tmp_name"], $target_file)) {
+				
+			} else {
+				echo "Ocorreu um erro.";
+			}
+	//mysqli_query($conn,"UPDATE utilizadores SET foto = '$nfoto' WHERE id_u='$_SESSION[id]'");
+	}
+            //$sqlImage = mysqli_query($conn,"INSERT into images (id_product, src_image) VALUES ('".$_POST[nameProduct]."','".$_POST[nameProduct]."')");
+        }
+        
         ?>
     </body>
 </html>
