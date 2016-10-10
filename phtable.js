@@ -39,6 +39,7 @@
                 title: 'Dia do mês',
                 gridlines: { color: 'white' }
         },
+        
         legend: {position: 'none'},
 
     };

@@ -21,7 +21,7 @@ and open the template in the editor.
             //include 'tools/checksession.php';
             include 'tools/chave.php';
             $toEdit=$_GET["change"];
-            $sql = mysqli_query($conn, "SELECT email, address, city, customer_id, first_name, last_name, tel, zipcode, device_mac FROM `user` left join customer on customer_user_id=user_id left join device on device_user_id=user_id WHERE user_id=8");
+            $sql = mysqli_query($conn, "SELECT email, address, city, customer_id, first_name, last_name, tel, zipcode, device_mac, password FROM `user` left join customer on customer_user_id=user_id left join device on device_user_id=user_id WHERE user_id=8");
             while ($row = mysqli_fetch_array($sql)) {
                 $firstName = $row['first_name'];
                 $lastName = $row['last_name'];
@@ -30,6 +30,7 @@ and open the template in the editor.
                 $city = $row['city'];
                 $tel = $row['tel'];
                 $mac = $row['device_mac'];
+                $password = "Introduza a nova password";
             }
             if ($toEdit!=NULL){
                 switch ($toEdit):
@@ -82,12 +83,12 @@ and open the template in the editor.
                         $id = 'customer_user_id';
                         break;
                     case "6":
-                        $onRecord = $mac;
-                        $dbName = 'device_mac';
-                        $dbTable = 'device';
-                        $fieldName = 'MAC Address';
+                        $onRecord = $password;
+                        $dbName = 'password';
+                        $dbTable = 'user';
+                        $fieldName = 'Password';
                         $inputType = 'text';
-                        $id = 'device_user_id';
+                        $id = 'user_id';
                         break;
                     default:
                         break;
@@ -95,8 +96,12 @@ and open the template in the editor.
                 include 'tools/eprofilemodal.php';
                 include 'tools/success.php';
                 if (isset($_POST["submitEdit"])) {
-                    $write = mysqli_query($conn, "UPDATE ".$dbTable." SET ".$dbName."='".$_POST["newData"]."' WHERE ".$id."=8");
-                    echo "table = ".$dbTable." name = ".$dbName." newdata = ".$_POST["newData"];
+                    if ($toEdit=="6"){
+                        include "handler/password.php?id=8&password=".$_POST["newData"];
+                    }
+                    else{
+                        $write = mysqli_query($conn, "UPDATE ".$dbTable." SET ".$dbName."='".$_POST["newData"]."' WHERE ".$id."=8");
+                    }
                     echo "<script type='text/javascript'>$('#success').modal();</script>";
                 }
                 else{
@@ -115,13 +120,14 @@ and open the template in the editor.
                             <img src="img/drop.png" alt="company-icon" class="img-thumbnail">
                         </div> 
                         <div class="col-md-8">
-                            <?php echo "<p><strong>Nome: </strong>".$firstName." <a href='profile.php?change=0'><span class='glyphicon glyphicon-edit' aria-hidden='true'></span></a></p>";
-                            echo "<p><strong>Apelido: </strong>".$lastName." <a href='profile.php?change=1'><span class='glyphicon glyphicon-edit' aria-hidden='true'></span></a></p>";
-                            echo "<p><strong>Morada: </strong>".$address." <a href='profile.php?change=2'><span class='glyphicon glyphicon-edit' aria-hidden='true'></span></a></p>";
-                            echo "<p><strong>Código Postal: </strong>".$zip." <a href='profile.php?change=3'><span class='glyphicon glyphicon-edit' aria-hidden='true'></span></a></p>";
-                            echo "<p><strong>Cidade: </strong>".$city." <a href='profile.php?change=4'><span class='glyphicon glyphicon-edit' aria-hidden='true'></span></a></p>";
-                            echo "<p><strong>Telefone: </strong>".$tel." <a href='profile.php?change=5'><span class='glyphicon glyphicon-edit' aria-hidden='true'></span></a></p>";
-                            echo "<p><strong>Equipamento: </strong>".$mac." <a href='profile.php?change=6'><span class='glyphicon glyphicon-edit' aria-hidden='true'></span></a></p>"; ?>                 
+                            <?php echo "<p><strong>Nome: </strong>".$firstName." <a href='profile.php?change=0' title= 'Alterar nome'><span class='glyphicon glyphicon-edit' aria-hidden='true'></span></a></p>";
+                            echo "<p><strong>Apelido: </strong>".$lastName." <a href='profile.php?change=1' title= 'Alterar apelido'><span class='glyphicon glyphicon-edit' aria-hidden='true'></span></a></p>";
+                            echo "<p><strong>Morada: </strong>".$address." <a href='profile.php?change=2' title= 'Alterar morada'><span class='glyphicon glyphicon-edit' aria-hidden='true'></span></a></p>";
+                            echo "<p><strong>Código Postal: </strong>".$zip." <a href='profile.php?change=3' title= 'Alterar CP'><span class='glyphicon glyphicon-edit' aria-hidden='true'></span></a></p>";
+                            echo "<p><strong>Cidade: </strong>".$city." <a href='profile.php?change=4' title= 'Alterar cidade'><span class='glyphicon glyphicon-edit' aria-hidden='true'></span></a></p>";
+                            echo "<p><strong>Telefone: </strong>".$tel." <a href='profile.php?change=5' title= 'Alterar telefone'><span class='glyphicon glyphicon-edit' aria-hidden='true'></span></a></p>";
+                            echo "<p><strong>Password: </strong>Alterar password <a href='profile.php?change=6' title= 'Alterar telefone'><span class='glyphicon glyphicon-edit' aria-hidden='true'></span></a></p>";
+                            echo "<p><strong>Equipamento: </strong>".$mac."</p>"; ?>                 
                         </div>
                     </div>
                 </div>
