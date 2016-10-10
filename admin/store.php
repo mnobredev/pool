@@ -14,12 +14,14 @@ and open the template in the editor.
         <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
         <script type="text/javascript" src="https://www.google.com/jsapi"></script>
         <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+        <style>#scrollhide::-webkit-scrollbar {width: 0px !important;}</style>
         <title>Projecto Final ATEC</title>
     </head>
     <body>
         <?php
         include 'navbar.php';
         include '../tools/chave.php';
+        include '../tools/newproductmodal.php';
         $sql = mysqli_query($conn, "SELECT * FROM category");
         $arCatName=array();
         $arCatID=array();
@@ -39,8 +41,9 @@ and open the template in the editor.
             <script>
             $( "#store" ).toggleClass( "active" );
             </script>
-            <form method="POST" action="" enctype="multipart/form-data">
+            
                 <div class="col-md-10">
+                    <form method="POST" action="" enctype="multipart/form-data">
                     <div class="panel panel-primary">
                         <div class="panel-heading"><h3 class="panel-title">Inserir produto</h3></div>
                         <div class="panel-body">
@@ -51,7 +54,7 @@ and open the template in the editor.
                                 </div>
                                 <div class="form-group">
                                     <label>Preço</label>
-                                    <input name="priceProduct" class="form-control" type="text" required>                             
+                                    <input name="priceProduct" class="form-control" pattern="[0-9\.].{3,8}" type="text" required>                             
                                 </div>
                                 <div class="form-group">
                                     <label>Categoria </label> <a href="#" data-toggle="modal" data-target="#addCat" title="Adicionar nova categoria"> <span class="glyphicon glyphicon-plus" aria-hidden="true"></span></a>
@@ -68,7 +71,7 @@ and open the template in the editor.
                                 </div>
                                 <div class="form-group">
                                     <label>Subcategoria</label>
-                                    <select name="subcatProduct" id="subcat" class="form-control">
+                                    <select name="subcatProduct" id="subcat" class="form-control" required>
                                         <script>
                                             function getSub(){
                                                 var cat = document.getElementById("category");
@@ -114,7 +117,7 @@ and open the template in the editor.
                                                 <img id='addImg2' style='width: 15vw; height: 15vw;' src="../img/add.png">
                                                 <div class="caption">
                                                 <label class="btn btn-default btn-file" style="width: 100%">
-                                                    Adicionar imagem<input type='file' style="display: none;" id="imgInp2" />
+                                                    Adicionar imagem<input type='file' style="display: none;" id="imgInp2" name="imgInp2" />
                                                 </label>
                                                 </div>
                                             </div>
@@ -124,7 +127,7 @@ and open the template in the editor.
                                                 <img id='addImg3' style='width: 15vw; height: 15vw;'  src="../img/add.png">
                                                 <div class="caption">
                                                 <label class="btn btn-default btn-file" style="width: 100%">
-                                                    Adicionar imagem<input type='file' style="display: none;" id="imgInp3" />
+                                                    Adicionar imagem<input type='file' style="display: none;" id="imgInp3" name="imgInp3" />
                                                 </label>
                                                 </div>
                                             </div>
@@ -185,15 +188,26 @@ and open the template in the editor.
                         </div>
                         <div class="panel-footer"><button type="submit" id="newProduct" name="newProduct" value="newProduct" class="btn btn-primary" >Inserir</button></div>
                     </div>
+                    </form>
+                    <form method="POST" action="" enctype="multipart/form-data">
                     <div class="panel panel-primary">
                         <div class="panel-heading"><h3 class="panel-title">Editar equipamento</h3></div>
                         <div class="panel-body">
-                            I AM THE WATCHER ON THE WALL - PLZ MAKE ME DECENT CONTENT
+                            <?php
+                            if(isset($_GET["id"])){
+                                $id = $_GET["id"];
+                                include '../tools/editproduct.php';
+                            }
+                            else{
+                                include '../tools/searchproduct.php';
+                            }
+                            ?>
                         </div>
                         <div class="panel-footer"><button type="button" class="btn btn-primary" >Editar</button></div>
                     </div>
+                    </form>
                 </div>
-            </form>
+            
         </div>
         
         <?php
@@ -202,48 +216,19 @@ and open the template in the editor.
         }
         
         if(isset($_POST["newProduct"])){
-            //$sql = mysqli_query($conn,"INSERT INTO product (name_product, price_product, description_product, category_product) VALUES ('".$_POST[nameProduct]."', '".$_POST[priceProduct]."', '".$_POST[descProduct]."', '".$_POST[subcatProduct]."')");
-            $target_dir = "../img/";
-            $target_file = $target_dir . basename($_FILES["imgInp1"]["name"]);
-            $nfoto = basename($_FILES["imgInp1"]["name"]);
-            $uploadOk = 1;
-            $imageFileType = pathinfo($target_file,PATHINFO_EXTENSION);
-            $check = getimagesize($_FILES["imgInp1"]["tmp_name"]);
-    	if($check !== false) {
-            echo "File is an image - " . $check["mime"] . ".";
-       	 $uploadOk = 1;
-    	} else {
-        	echo "Por favor selecione um ficheiro jpg.";
-        	$uploadOk = 0;
-    	}
-		// Ficheiro existe?
-		if (file_exists($target_file)) {
-    		echo "Este ficheiro já existe.";
-    		$uploadOk = 0;
-		}
-		// Ver tamanho
-		if ($_FILES["imgInp1"]["size"] > 500000) {
-    		echo "A imagem selecionada é demasiado grande";
-    		$uploadOk = 0;
-		}
-		// Validar formato
-		if($imageFileType != "jpg") {
-			echo "A foto de perfil tem que ter a extensão jpg.";
-			$uploadOk = 0;
-		}
-		// Ver se upload correu bem 
-		if ($uploadOk == 0) {
-			echo "Algo correu mal.";
-		// Tudo OK fazer upload
-		} else {
-			if (move_uploaded_file($_FILES["imgInp1"]["tmp_name"], $target_file)) {
-				
-			} else {
-				echo "Ocorreu um erro.";
-			}
-	//mysqli_query($conn,"UPDATE utilizadores SET foto = '$nfoto' WHERE id_u='$_SESSION[id]'");
-	}
-            //$sqlImage = mysqli_query($conn,"INSERT into images (id_product, src_image) VALUES ('".$_POST[nameProduct]."','".$_POST[nameProduct]."')");
+            $sql = mysqli_query($conn,"INSERT INTO product (name_product, price_product, description_product, category_product) VALUES ('".$_POST[nameProduct]."', '".$_POST[priceProduct]."', '".$_POST[descProduct]."', '".$_POST[subcatProduct]."')");
+            $sql1 = mysqli_query($conn,"SELECT id_product FROM product ORDER BY id_product DESC LIMIT 1;");
+            include "../tools/addimg.php";
+            echo "<script type='text/javascript'>$('#confirmationModal').modal();</script>";
+        }
+        
+        if (isset($_POST["searchProduct"])){
+            $sql = mysqli_query($conn,"SELECT * FROM product where name_product like '%".$_POST[tobeSearched]."%';");
+            while ($row = mysqli_fetch_array($sql)){
+                $displayme = $row['name_product'];
+                $displayID = $row['id_product'];
+                echo "<script>$('#scrollhide').append('<a href=\'?id=$displayID\' class=\'list-group-item\'>$displayme</a>');</script>";
+            }
         }
         
         ?>
