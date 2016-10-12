@@ -1,4 +1,14 @@
 <?php
+session_start();
+if (!$_SESSION["id"]){
+    session_unset();
+    session_destroy();
+    header("location:admin.php");
+}
+else{
+    $id = $_SESSION["id"];
+    $sessionName = $_SESSION["name"];
+}
 ?>
 
 <nav class="navbar navbar-inverse navbar-fixed-top">
@@ -15,12 +25,8 @@
         <div id="navbar" class="navbar-collapse collapse">
             <form class="navbar-form navbar-right">
                 <div class="btn-group">
-                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Entrou como António Silva <span class="caret"></span></button>
+                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><?php echo $sessionName; ?><span class="caret"></span></button>
                     <ul class="dropdown-menu col-xs-12">
-                        <li><a href="#"><span class="glyphicon glyphicon-user" aria-label="Logout"></span>   Perfil</a></li>
-                        <li><a href="#"><span class="glyphicon glyphicon-dashboard" aria-label="Logout"></span>   Leituras</a></li>
-                        <li role="separator" class="divider"></li>
-                        <li><a href="#"><span class="glyphicon glyphicon-log-out" aria-label="Logout"></span>   Logout</a></li>
                     </ul>
                 </div>
                 <button type="button" class="btn btn-danger"><span class="glyphicon glyphicon-log-out" aria-label="Logout"></span></button>

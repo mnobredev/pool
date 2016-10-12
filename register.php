@@ -1,13 +1,19 @@
 <?php 
 
+	$id = "";
+	$tk = "";
+    $id = $_REQUEST['Id'];
+    $tk = $_REQUEST['Token'];
     include "tools/chave.php";
-	if (isset($_POST["Token"])) {
 		
-		   $_uv_Token=$_POST["Token"];
-		   $q="INSERT INTO users (Token) VALUES ( '$_uv_Token') "
-              ." ON DUPLICATE KEY UPDATE Token = '$_uv_Token';";
-              
-      mysqli_query($conn,$q) or die(mysqli_error($conn));
-      mysqli_close($conn);
+	if(id != "" && $tk != ""){
+		$sql ="UPDATE customer SET token = '$tk' WHERE customer_user_id = '$id';";
+		  
+		$hello = mysqli_query($conn, $sql);
+		    if ($hello=="1"){
+				$ar = Array("success");
+				echo json_encode($ar);
+			}
 	}
+	
  ?>

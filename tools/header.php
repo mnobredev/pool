@@ -14,7 +14,7 @@
         <div id="navbar" class="navbar-collapse collapse">
             <form class="navbar-form navbar-right">
                 <div class="btn-group">
-                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Entrou como António Silva <span class="caret"></span></button>
+                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Entrou como <?php echo $sessionName;?> <span class="caret"></span></button>
                     <ul class="dropdown-menu col-xs-12">
                         <li><a href="profile.php"><span class="glyphicon glyphicon-user" aria-label="profile"></span>   Perfil</a></li>
                         <li><a href="main.php"><span class="glyphicon glyphicon-dashboard" aria-label="readings"></span>   Leituras</a></li>

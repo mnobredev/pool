@@ -14,6 +14,7 @@ and open the template in the editor.
         <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
         <script type="text/javascript" src="https://www.google.com/jsapi"></script>
         <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+        <link rel="icon" href="../favicon.ico" type="image/x-icon">
         <title>Projecto Final ATEC</title>
     </head>
     <body>

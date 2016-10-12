@@ -15,14 +15,14 @@ and open the template in the editor.
             google.charts.load('current', {packages: ['corechart']});
             google.charts.setOnLoadCallback(drawChart);
         </script>
+        <link rel="icon" href="/favicon.ico" type="image/x-icon">
         <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
         <title>Projecto Final ATEC</title>
     </head>
     <body>
         <?php
-        /*
-        include 'tools/checksession.php';
-         */    
+        
+        include 'tools/checksession.php';           
         include 'tools/chave.php';
         
         $rawphreading = []; //recieves all readings from current month
@@ -34,7 +34,12 @@ and open the template in the editor.
         $phideal = [];
         $clideal = [];
         
-        $sql = "SELECT ph_status, chlorine_status,DAY(date) as day, HOUR(date) as hour, MINUTE(date) as minute FROM readings where MONTH(date)=MONTH(NOW())";
+        $getDevice = mysqli_query ($conn,"SELECT * from device where device_user_id=$id");
+        while ($row = mysqli_fetch_assoc($getDevice)){
+            $devid = $row['device_id'];
+
+        }
+        $sql = "SELECT ph_status, chlorine_status,DAY(date) as day, HOUR(date) as hour, MINUTE(date) as minute FROM readings where MONTH(date)=MONTH(NOW()) AND reading_device_id=$devid";
         $rs_result = mysqli_query ($conn, $sql);
         
         while ($row = mysqli_fetch_assoc($rs_result)) {
@@ -51,7 +56,7 @@ and open the template in the editor.
         }
         include "tools/header.php"
         ?>
- 
+        <script language='Javascript'>var id = <?php echo $devid; ?>;</script>
         <div class="jumbotron">
             <div class="container">
                 <h1>Controlo de valores</h1>
@@ -105,6 +110,6 @@ and open the template in the editor.
             var clArray =<?php echo json_encode($rawclreading); ?>;   
             var minArray =<?php echo json_encode($rawminute); ?>;
         </script>
-        <script src="phtable.js"></script>
+        <script src="js/phtable.js"></script>
     </body>
 </html>

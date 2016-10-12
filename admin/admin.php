@@ -12,6 +12,7 @@ and open the template in the editor.
         <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
         <script type="text/javascript" src="https://www.google.com/jsapi"></script>
         <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+        <link rel="icon" href="../favicon.ico" type="image/x-icon">
         <title>Acesso Administrador</title>
     </head>
     <body>        
@@ -56,9 +57,15 @@ and open the template in the editor.
             {
                 $result = trim($row['password']);
                 $auth = $row['user_type'];
+                $id = $row['user_id'];
+                $name = $_POST[user];
             }
 
             if(password_verify($_POST['pass'], trim($result)) && $auth=="2"){
+                 session_start();
+                $_SESSION["id"] = $id;
+                $_SESSION["auth"] = $auth;
+                $_SESSION["name"] = $name;
                 header("Location: equip.php");
             }
             else{
