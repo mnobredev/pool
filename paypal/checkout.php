@@ -66,7 +66,7 @@ $payment->setIntent('sale')
 
 
 include '../tools/chave.php'; 
-try
+try //teste - not working at the moment
 {
  $buy = mysqli_query($conn, "INSERT into sales(id_sale, nameitem, quantity) VALUES("
          ."'".$payment->getId()."',"
