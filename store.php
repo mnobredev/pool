@@ -5,6 +5,7 @@ To change this template file, choose Tools | Templates
 and open the template in the editor.
 -->
 <html>
+    
     <head>
         <meta charset="UTF-8">
         <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -16,9 +17,12 @@ and open the template in the editor.
         <title>Projecto Final ATEC</title>
     </head>
     <body>
+         
         <?php
             include 'tools/header.php';
+            include 'tools/chave.php';
             //include 'tools/checksession.php';
+
         ?>
         <!--I AM SOON TO BE A GLORIOUS STORE! HAIL HYDRA!!!!!-->
         
@@ -79,45 +83,17 @@ and open the template in the editor.
 						<span>ITEM</span>
 						<span>Price</span>
 					</li>
-					<li class="row">
-						<span class="quantity">1</span>
-						<span class="itemName">Birthday Cake</span>
-						<span class="popbtn" data-original-title="" title=""><a class="arrow"></a></span>
-						<span class="price">$49.95</span>
-					</li>
-					<li class="row">
-						<span class="quantity">50</span>
-						<span class="itemName">Party Cups</span>
-						<span class="popbtn" data-original-title="" title=""><a class="arrow"></a></span>
-						<span class="price">$5.00</span>
-					</li>
-					<li class="row">
-						<span class="quantity">20</span>
-						<span class="itemName">Beer kegs</span>
-						<span class="popbtn" data-original-title="" title=""><a class="arrow"></a></span>
-						<span class="price">$919.99</span>				
-					</li>
-					<li class="row">
-						<span class="quantity">18</span>
-						<span class="itemName">Pound of beef</span>
-						<span class="popbtn" data-original-title="" title=""><a class="arrow"></a></span>
-						<span class="price">$269.45</span>
-					</li>
-					<li class="row">
-						<span class="quantity">1</span>
-						<span class="itemName">Bullet-proof vest</span>
-						<span class="popbtn" data-parent="#asd" data-toggle="collapse" data-target="#demo" data-original-title="" title=""><a class="arrow"></a></span>
-						<span class="price">$450.00</span>				
-					</li>
+					
 					<li class="row totals">
 						<span class="itemName">Total:</span>
-						<span class="price">$1694.43</span>
+						<span class="price">To be added.43</span>
 						<span class="order"> <a class="text-center">ORDER</a></span>
 					</li>
 				</ul>
             </div>
-            <div class="col-sm-6 col-md-3">
-                <div class="thumbnail">
+           <!-- <div class="col-sm-6 col-md-3">
+             <div id="thumbnail">
+                
                     <img src="img/store/arduino.png" alt="Arduino" width="242px" height="200px">
                     <div class="caption">
                         <h3>Thumbnail label</h3>
@@ -125,29 +101,46 @@ and open the template in the editor.
                         <p><a href="#" class="btn btn-primary" role="button">BUY ME NOW!</a> <a href="#" class="btn btn-default" role="button">Button</a></p>
                     </div>
                 </div>
+            </div>-->
+    <?php
+        $editMe = mysqli_query($conn, "SELECT * from product");
+        while ($row = mysqli_fetch_array($editMe)){
+            $editName = $row['name_product'];
+            $editPrice = $row['price_product'];
+            $editCat = $row['category_product'];
+            $editDesc = $row['description_product'];
+        
+        $getCat = mysqli_query($conn, "SELECT * from category where id_category=$editCat");
+        while ($row = mysqli_fetch_array($getCat)){
+            $editPCat = $row['parent_category'];
+        }
+        $getPics = mysqli_query($conn, "SELECT * from images where id_product=$id");
+        $i=0;
+        $editSource = Array();
+        $editImgID = Array();
+        while ($row = mysqli_fetch_array($getPics)){
+            $editSource[i] = $row['src_image'];
+            $editImgID[i] = $row['id_image'];
+        }
+        
+        echo "<div class='col-sm-6 col-md-3'>";
+        echo "<div id='thumbnail'>";
+        echo "<img src='img/store/$editSource[i].png' alt='Arduino' width='242px' height='200px'>";
+        echo "<div class='caption'>";
+        echo "<h3>$editCat</h3>";
+        echo "<p>$editName</p>";
+        echo "<p><a href='#' class='btn btn-primary' role='button'>BUY ME NOW!</a> <a href='#' class='btn btn-default' role='button'>Button</a></p>";
+        echo "</div>";
+        echo "</div>";
+        echo "</div>";
+        }
+            
+    ?>
+            <!--     
+             </div>
             </div>
-            <div class="col-sm-6 col-md-3">
-                <div class="thumbnail">
-                    <img src="img/store/arduino.png" alt="Arduino" width="242px" height="200px">
-                    <div class="caption">
-                        <h3>Thumbnail label</h3>
-                        <p>ZE BEST</p>
-                        <p><a href="#" class="btn btn-primary" role="button">BUY ME NOW!</a> <a href="#" class="btn btn-default" role="button">Button</a></p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-6 col-md-3">
-                <div class="thumbnail">
-                    <img src="img/store/arduino.png" alt="Arduino" width="242px" height="200px">
-                    <div class="caption">
-                        <h3>Thumbnail label</h3>
-                        <p>ZE BEST</p>
-                        <p><a href="#" class="btn btn-primary" role="button">BUY ME NOW!</a> <a href="#" class="btn btn-default" role="button">Button</a></p>
-                    </div>
-                </div>
-            </div>
-        </div>
-        </div>
+  -->
+        
         <?php
             include 'tools/footer.php';
         ?>
