@@ -14,6 +14,7 @@ and open the template in the editor.
         <script type="text/javascript" src="https://www.google.com/jsapi"></script>
         <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
         <link rel="stylesheet" href="css/caroussel.css">
+        <link rel="icon" href="/favicon.ico" type="image/x-icon">
         <title>Aqua Quality Systems</title>
     </head>
     <body style="position: relative;">    
@@ -50,14 +51,24 @@ and open the template in the editor.
         if(isset($_POST["login"])){
             
             include 'tools/chave.php';
-            $sql = mysqli_query($conn,"SELECT password FROM user WHERE email = '$_POST[user]'" );
+            $sql = mysqli_query($conn,"SELECT * FROM user WHERE email = '$_POST[user]'" );
 
             while($row = mysqli_fetch_array($sql))
             {
                 $result = trim($row['password']);
+                $id = $row['user_id'];
+                $name = $row['email'];
             }
 
             if(password_verify($_POST['pass'], trim($result))){
+                session_start();
+                $_SESSION["id"] = $id;
+                $sql = mysqli_query($conn,"SELECT * FROM customer WHERE customer_user_id=$id");
+                while($row = mysqli_fetch_array($sql))
+                {
+                    $name = $row['first_name']." ".$row['last_name'];
+                }
+                $_SESSION["name"] = $name;
                 header("Location: main.php");
             }
             else{
@@ -150,9 +161,9 @@ and open the template in the editor.
                                 </div>
                             </div>
                             <div class="item" style="background-color: transparent;">
-                                <img src="img/cyber.png" alt="img1" style="min-width: 100%;">
+                                <img src="img/phone1.png" alt="img1" style="min-width: 100%;">
                                 <div class="carousel-caption" style="background-color: rgba(1,1,1,0.4); border-radius: 25px;">
-                                    Encriptamos a sua informação.
+                                    Receba alertas no seu dispositivo android com a nossa App.
                                 </div>
                             </div>
                           </div>
@@ -179,7 +190,7 @@ and open the template in the editor.
                 <div class="col-lg-4">
                     <img class="img-circle" src="img/mnobre.png" alt="Generic placeholder image" width="140" height="140">
                     <h2>Mário Nobre</h2>
-                    <p>Inserir texto genérico aqui!</p>
+                    <p>Apaixonado por problemas desafiantes, acredito que descobrir e entender o problema é o passo mais importante para o resolver. O Aqua nasceu de uma ideia universal a todos os projectos que idealizo, dotar todos os utilizadores de ferramentas avançadas mas de simples compreensão. De elevada qualidade mas de baixo custo, mais valor por menos dinheiro.</p>
                 </div>
                 <div class="col-lg-4">
                     <img class="img-circle" src="img/asilva.png" alt="Generic placeholder image" width="140" height="140">
@@ -189,7 +200,7 @@ and open the template in the editor.
                 <div class="col-lg-4">
                     <img class="img-circle" src="img/fakeiurie.png" alt="Generic placeholder image" width="140" height="140">
                     <h2>Iurie Caradja</h2>
-                    <p>Inserir texto genérico aqui!</p>
+                    <p>Desde que me lembro, senti-me fascinado pelo desenvolvimento de software, considero que a programação é uma excelente forma de dar vida e materializar as minhas ideias e trabalhar neste projeto foi uma experiência bastante interessante considerando que é essencialmente uma integração de diferentes tipos de tecnologias e formas de desenvolvimento.</p>
                 </div>
             </div>
             

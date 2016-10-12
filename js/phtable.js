@@ -48,7 +48,7 @@
 
         var clickedID = $(this).attr('id'); 
         var xmlhttp = new XMLHttpRequest();
-        var url = "handler/hvaloresmes.php?mesano="+clickedID;
+        var url = "handler/hvaloresmes.php?mesano="+clickedID+"&dev="+id;
         
         xmlhttp.onreadystatechange = function() {
             
@@ -145,7 +145,6 @@
                             var res = phArrayphora[i].replace(",", ".");
                             media+= parseFloat(res);
                             counter++;
-                            console.log(media+" "+h);
                         }
                     }
 
@@ -244,7 +243,6 @@
                     var res = phArrayphora[i].replace(",", ".");
                     media+= parseFloat(res);
                     counter++;
-                    console.log(media+" "+h);
                 }
             }
             if (counter!=0){
@@ -311,7 +309,6 @@
         else if (status=="month"){
             document.getElementById("phother").style.display = "none";
             document.getElementById("phback").style.display = "block";
-            console.log(value);
         var day = new google.visualization.DataTable();
         day.addColumn('string', 'Time of Day');
         day.addColumn('number', 'PH');
@@ -327,7 +324,6 @@
                     var res = phArrayphora[i].replace(",", ".");
                     media+= parseFloat(res);
                     counter++;
-                    console.log(media+" "+h);
                 }
             }
             if (counter!=0){

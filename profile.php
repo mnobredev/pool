@@ -13,15 +13,16 @@ and open the template in the editor.
         <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
         <script type="text/javascript" src="https://www.google.com/jsapi"></script>
         <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+        <link rel="icon" href="/favicon.ico" type="image/x-icon">
         <title>Projecto Final ATEC</title>
     </head>
     <body>
         <?php
-            include 'tools/header.php';
-            //include 'tools/checksession.php';
             include 'tools/chave.php';
+            include 'tools/checksession.php';    
+            include 'tools/header.php';
             $toEdit=$_GET["change"];
-            $sql = mysqli_query($conn, "SELECT email, address, city, customer_id, first_name, last_name, tel, zipcode, device_mac, password FROM `user` left join customer on customer_user_id=user_id left join device on device_user_id=user_id WHERE user_id=8");
+            $sql = mysqli_query($conn, "SELECT email, address, city, customer_id, first_name, last_name, tel, zipcode, device_mac, password FROM `user` left join customer on customer_user_id=user_id left join device on device_user_id=user_id WHERE user_id=$id");
             while ($row = mysqli_fetch_array($sql)) {
                 $firstName = $row['first_name'];
                 $lastName = $row['last_name'];
@@ -40,7 +41,7 @@ and open the template in the editor.
                         $dbTable = 'customer';
                         $fieldName = 'Primeiro Nome';
                         $inputType = 'text';
-                        $id = 'customer_user_id';
+                        $idtochange = 'customer_user_id';
                         break;
                     case "1":
                         $onRecord = $lastName;
@@ -48,7 +49,7 @@ and open the template in the editor.
                         $dbTable = 'customer';
                         $fieldName = 'Apelido';
                         $inputType = 'text';
-                        $id = 'customer_user_id';
+                        $idtochange = 'customer_user_id';
                         break;
                     case "2":
                         $onRecord = $address;
@@ -56,7 +57,7 @@ and open the template in the editor.
                         $dbTable = 'customer';
                         $fieldName = 'Morada';
                         $inputType = 'text';
-                        $id = 'customer_user_id';
+                        $idtochange = 'customer_user_id';
                         break;
                     case "3":
                         $onRecord = $zip;
@@ -64,7 +65,7 @@ and open the template in the editor.
                         $dbTable = 'customer';
                         $fieldName = 'Código Postal';
                         $inputType = 'text';
-                        $id = 'customer_user_id';
+                        $idtochange = 'customer_user_id';
                         break;
                     case "4":
                         $onRecord = $city;
@@ -72,7 +73,7 @@ and open the template in the editor.
                         $dbTable = 'customer';
                         $fieldName = 'Cidade';
                         $inputType = 'text';
-                        $id = 'customer_user_id';
+                        $idtochange = 'customer_user_id';
                         break;
                     case "5":
                         $onRecord = $tel;
@@ -80,7 +81,7 @@ and open the template in the editor.
                         $dbTable = 'customer';
                         $fieldName = 'Telefone';
                         $inputType = 'text';
-                        $id = 'customer_user_id';
+                        $idtochange = 'customer_user_id';
                         break;
                     case "6":
                         $onRecord = $password;
@@ -88,7 +89,7 @@ and open the template in the editor.
                         $dbTable = 'user';
                         $fieldName = 'Password';
                         $inputType = 'text';
-                        $id = 'user_id';
+                        $idtochange = 'user_id';
                         break;
                     default:
                         break;
@@ -97,10 +98,10 @@ and open the template in the editor.
                 include 'tools/success.php';
                 if (isset($_POST["submitEdit"])) {
                     if ($toEdit=="6"){
-                        include "handler/password.php?id=8&password=".$_POST["newData"];
+                        include "handler/password.php?id=$id&password=".$_POST["newData"];
                     }
                     else{
-                        $write = mysqli_query($conn, "UPDATE ".$dbTable." SET ".$dbName."='".$_POST["newData"]."' WHERE ".$id."=8");
+                        $write = mysqli_query($conn, "UPDATE ".$dbTable." SET ".$dbName."='".$_POST["newData"]."' WHERE ".$idtochange."=$id");
                     }
                     echo "<script type='text/javascript'>$('#success').modal();</script>";
                 }

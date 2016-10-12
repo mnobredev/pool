@@ -1,10 +1,15 @@
 <?php
 // API access key from Google API's Console
-define( 'API_ACCESS_KEY', 'AIzaSyBqg_tSLE72fhXuUr6VEJJd7T7jCYf_0e0');
+define( 'API_ACCESS_KEY', 'AIzaSyB8rKmOhKUNeV3Xn25qhLFoUYPOMazsTRI');
 
-$registrationIds = ["dqXEjbxKvpk:APA91bFpjmDci5G0naR3beFFHOWcRGRswr-yWAnnOwKbcL1mMo697zpMooJwEAO8fRG3VmYxrlXz0UD00QT61AnVgqNfupvD0AI4JKR563kMw4LFU6gfNnaM-PLCH0EKVcfOe3l8Qjwt"];
-
-
+include 'tools/chave.php';
+$customer_id = $_REQUEST['id'];
+$sql = mysqli_query($conn, "SELECT token FROM customer WHERE customer_user_id = '".$customer_id."'");
+$result ="";
+while($row = mysqli_fetch_array($sql))
+    $result = $row['token'];
+    echo $result;
+$registrationIds = ["$result"];
 // prep the bundle
 $msg = [
     'title'         => 'Android',
