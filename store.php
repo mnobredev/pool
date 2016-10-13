@@ -9,7 +9,6 @@ and open the template in the editor.
     <head>
         <meta charset="UTF-8">
         <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-        <link rel="stylesheet" href="css/style.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
         <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
         <script type="text/javascript" src="https://www.google.com/jsapi"></script>
@@ -19,95 +18,21 @@ and open the template in the editor.
     <body>
          
         <?php
-           // include 'tools/header.php';
             include 'tools/chave.php';
-            //include 'tools/checksession.php';
-
+            include 'tools/checksession.php';
+            include 'tools/header.php';
         ?>
-        <!--I AM SOON TO BE A GLORIOUS STORE! HAIL HYDRA!!!!!-->
-        
-        <div id="myCarousel" class="carousel slide" data-ride="carousel">     
-            <ol class="carousel-indicators">
-                <li data-target="#myCarousel" data-slide-to="0" class=""></li>
-                <li data-target="#myCarousel" data-slide-to="1" class=""></li>
-                <li data-target="#myCarousel" data-slide-to="2" class="active"></li>
-            </ol>
-            <div class="carousel-inner" role="listbox">
-                <div class="item" >
-                    <div class="first-slide" style="min-height: 400px; background-color: #337ab7;"></div>
-                    <div class="container">
-                        <div class="carousel-caption">
-                            <h1>Já tem o seu equipamento?</h1>
-                            <p>Registe já o seu Arduino e tire partido do sistema de controlo de valores de água mais avançado do mercado.</p>
-                            <p><a class="btn btn-lg btn-default" href="#" role="button">Registe-se já</a></p>
-                        </div>
-                    </div>
-                </div>
-                <div class="item">
-                    <div class="second-slide" style="min-height: 400px; background-color: #337ab7;"></div>
-                    <div class="container">
-                        <div class="carousel-caption">
-                            <h1>Conheça a equipa</h1>
-                            <p>Conheça os alunos que desenvolveram este sistema com o objectivo de revolucionar o mercado dos Arduinos.</p>
-                            <p><a class="btn btn-lg btn-default" href="#" role="button">Ver mais</a></p>
-                        </div>
-                    </div>
-                </div>
-                <div class="item active">
-                    <div class="third-slide" style="min-height: 400px; background-color: #337ab7;"></div>
-                    <div class="container">
-                        <div class="carousel-caption">
-                            <h1>Fiabilidade e design</h1>
-                            <p>O nosso equipamento foi construído para durar e com um design irresistível.</p>
-                            <p><a class="btn btn-lg btn-default" href="#" role="button">Veja a galeria</a></p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
-                <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-                <span class="sr-only">Previous</span>
-            </a>
-            <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
-                <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-                <span class="sr-only">Next</span>
-            </a>
-        </div>
         
         <div class="container" style="margin-top: 2%;">
             
                 
         <div class="row">
-            <!--<div class="col-sm-6 col-md-3  text-left">
-				<ul>
-					<li class="row list-inline columnCaptions">
-						<span>QTY</span>
-						<span>ITEM</span>
-						<span>Price</span>
-					</li>
-				
-					<li class="row totals">
-						<span class="itemName">Total:</span>
-						<span class="price">To be added</span>
-						<span class="order"> <a class="text-center">ORDER</a></span>
-					</li>
-				</ul>
-            </div>-->
-           <!-- <div class="col-sm-6 col-md-3">
-             <div id="thumbnail">
-                
-                    <img src="img/store/arduino.png" alt="Arduino" width="242px" height="200px">
-                    <div class="caption">
-                        <h3>Thumbnail label</h3>
-                        <p>ZE BEST</p>
-                        <p><a href="#" class="btn btn-primary" role="button">BUY ME NOW!</a> <a href="#" class="btn btn-default" role="button">Button</a></p>
-                    </div>
-                </div>
-            </div>-->
+        
            
-<div id="myCart" class="modal">
-<div class="modal-content">
-  <div class="modal-header">
+<div id="myCart" class="modal fade">
+    <div class="modal-dialog" role="document">
+    <div class="modal-content">
+        <div class="modal-header">
           
     <span class="close">×</span>
     <h2>Carrinho de compras</h2>
@@ -118,7 +43,11 @@ and open the template in the editor.
       <ul id="lista">
           
       </ul>
-      <script>
+      
+
+
+            
+            <script>
          function resposta(str)
          {
              var pa = document.getElementById("lista");
@@ -149,13 +78,12 @@ and open the template in the editor.
          }
         
           </script>
-
-  </div>
+            </div>
   <div class="modal-footer">
       <h3><i>atec.marionobre.com</i></h3>
   </div>
+</div></div>
 </div>
-           </div>
            <div class="col-md-2">  
     <?php
     include 'tools/storenav.php';
@@ -203,7 +131,8 @@ and open the template in the editor.
            
     ?>
            </div>
-        
+        </div>
+        </div>
         <?php
             include 'tools/footer.php';
         ?>
@@ -214,7 +143,6 @@ var btn = document.getElementsByTagName("myBtn");
 var span = document.getElementsByClassName("close")[0];
 var btnclick ="";
 var btns = document.getElementsByClassName("btn btn-primary");
-
 $(btns).click(function(event) { //função que vê os clicks butões que adicionam as mensagens -- WORKING
    btnclick = event.target.id;
    
@@ -232,7 +160,6 @@ function showcart()
     modal.style.display = "block";
    // console.log(modal.textContent);
 }
-
 function addCart() 
 {
      if (window.XMLHttpRequest) {
@@ -248,7 +175,6 @@ function addCart()
                  var response = this.responseText;
                  
 var finalres = response.split("&");
-
                 resposta(finalres);     
               
                 var response = this.responseText;
@@ -256,14 +182,11 @@ var finalres = response.split("&");
         };
         xmlhttp.open("GET","itemFinder.php?id="+btnclick,true);
         xmlhttp.send();
-
    modal.style.display = "block";
 }
-
 span.onclick = function() {
     modal.style.display = "none";
 }
-
 window.onclick = function(event) {
     if (event.target == modal) {
         modal.style.display = "none";
