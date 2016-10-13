@@ -75,7 +75,7 @@ and open the template in the editor.
         </div>
         
         <div class="container" style="margin-top: 2%;">
-            <p><a href="javascript:showcart()" id="myBtn" class="btn btn-primary" role="button" >SHOW CART</a>
+            
                 
         <div class="row">
             <!--<div class="col-sm-6 col-md-3  text-left">
@@ -108,14 +108,47 @@ and open the template in the editor.
 <div id="myCart" class="modal">
 <div class="modal-content">
   <div class="modal-header">
+          
     <span class="close">×</span>
     <h2>Carrinho de compras</h2>
-   
+   <p class="divider"> ID NOME PRECO</p>
   </div>
   <div class="modal-body">
       
+      <ul id="lista">
+          
+      </ul>
+      <script>
+         function resposta(str)
+         {
+             var pa = document.getElementById("lista");
+             var li = document.createElement("li");
+             
+             var id = document.createElement("ID");
+             id.innerHTML=str[0];
+             li.appendChild(id);
+             
+             var nome = document.createElement("Nome");
+             nome.innerHTML=str[1];
+             li.appendChild(nome);
+             
+             var preco = document.createElement("Preço");
+             preco.innerHTML=str[2];
+             li.appendChild(preco);
+           
+             li.className = id.innerHTML;
+             
+             console.log(li.classname);
+             var remove = document.createElement("Remove");
+             remove.innerHTML="<a href='javascript:removeelement("+li.className+")' id='myBtn' class='' role='button' ><span class='glyphicon glyphicon-remove' aria-hidden='true'></span></a>";
+             li.appendChild(remove);
+             
+             pa.appendChild(li);
+    
+             //li.innerHTML = str[0]+" "+str[1]+" "+str[2];  
+         }
         
-      
+          </script>
 
   </div>
   <div class="modal-footer">
@@ -123,7 +156,14 @@ and open the template in the editor.
   </div>
 </div>
            </div>
+           <div class="col-md-2">  
     <?php
+    include 'tools/storenav.php';
+    ?>
+           </div>
+           <div class="col-md-10"> 
+    <?php
+    
     $i=0;
         $editMe = mysqli_query($conn, "SELECT * from product");
         while ($row = mysqli_fetch_array($editMe)){
@@ -147,7 +187,7 @@ and open the template in the editor.
             $editImgID[i] = $row['id_image'];
         }
         
-        echo "<div class='col-sm-6 col-md-3' style=''>";
+        echo "<div class='col-md-4' style=''>";
         echo "<div id='thumbnail'>";
         echo "<img src='img/store/arduino.png' alt='Arduino' width='242px' height='200px'>"; 
         echo "<div class='caption'>";
@@ -160,9 +200,9 @@ and open the template in the editor.
         echo "</div>";
         
         }
-            
+           
     ?>
-     
+           </div>
         
         <?php
             include 'tools/footer.php';
@@ -177,13 +217,20 @@ var btns = document.getElementsByClassName("btn btn-primary");
 
 $(btns).click(function(event) { //função que vê os clicks butões que adicionam as mensagens -- WORKING
    btnclick = event.target.id;
-   console.log(btnclick);
+   
   
 });
-
+  function removeelement(id)
+  {
+             console.log("chegou aqui"+id);
+             var pa = document.getElementById("lista");
+             var toremove = document.getElementsByClassName(id);
+             pa.removeChild(toremove);
+    }
 function showcart()
 {
     modal.style.display = "block";
+   // console.log(modal.textContent);
 }
 
 function addCart() 
@@ -197,8 +244,14 @@ function addCart()
         }
         xmlhttp.onreadystatechange = function() {
             if (this.readyState == 4 && this.status == 200) {
-                console.log("RESPONSE TEXT ="+this.responseText);
-                //document.getElementById("modal-body").innerHTML = this.responseText;
+                
+                 var response = this.responseText;
+                 
+var finalres = response.split("&");
+
+                resposta(finalres);     
+              
+                var response = this.responseText;
             }
         };
         xmlhttp.open("GET","itemFinder.php?id="+btnclick,true);
@@ -210,8 +263,6 @@ function addCart()
 span.onclick = function() {
     modal.style.display = "none";
 }
-
-
 
 window.onclick = function(event) {
     if (event.target == modal) {
