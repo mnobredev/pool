@@ -14,23 +14,19 @@ use PayPal\Api\Payment;
  */
 
 require 'app/start.php';
-echo '1';
+
 if(!isset($_POST['product'], $_POST['price']))
 {
     die();
 }
-echo '1';
 $product = $_POST['product'];
 $price = $_POST['price'];
 $shipping = 2.00;
 
 $total = $price + $shipping;
-echo '1';
+
 $payer = new Payer();
 $payer->setPaymentMethod('paypal');
-
-
-
 
 $item = new Item();
 $item->setName($product)
@@ -39,7 +35,7 @@ $item->setName($product)
         ->setPrice($price);
 
 $itemList = new ItemList();
-$itemList->setItems([$item]);
+$itemList->setItems([$item]); //hmm
 
 $details = new Details();
 $details->setShipping($shipping)
@@ -53,7 +49,7 @@ $amount->setCurrency('GBP')
 $transaction = new Transaction();
 $transaction->setAmount($amount)
         ->setItemList($itemList)
-        ->setDescription('lolol')
+        ->setDescription('Pool read app')
         ->setInvoiceNumber(uniqid());
 
 
@@ -69,8 +65,8 @@ $payment->setIntent('sale')
         ->setTransactions([$transaction]);  
 
 
-include '../tools/chave.php'; // WORKING agora é só necessário definir o que queremos guardar - fazer update no pay, status complete/aproved
-try
+include '../tools/chave.php'; 
+try //teste - not working at the moment
 {
  $buy = mysqli_query($conn, "INSERT into sales(id_sale, nameitem, quantity) VALUES("
          ."'".$payment->getId()."',"

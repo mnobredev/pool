@@ -34,23 +34,28 @@ die();
 
 //inserir na base de dados só aqui é que se confirma o pagamento
 $jdecode= json_decode($payment->toJSON(), true);
+//se a loja tiver a opção de comprar mais items iterar o 0 pelos items todos
 $firstName=$jdecode["payer"]["payer_info"]["first_name"];
 $lastName=$jdecode["payer"]["payer_info"]["last_name"];
 $amount=$jdecode["transactions"]["0"]["item_list"]["items"]["0"]["quantity"];
 $itemname=$jdecode["transactions"]["0"]["item_list"]["items"]["0"]["name"];
 $address=$jdecode["transactions"]["0"]["item_list"]["items"]["shipping_address"];
+$total=$jdecode["transactions"]["0"]["amount"]["total"];
+$emailpayer=$jdecode["payer"]["payer_info"]["email"];
+
 echo ("<p><h3>Obrigado pela sua compra</h3></p>");
      
     echo ("<b>Detalhes de pagamento</b><br>\n");
-    echo "<li>Nome: ".$firstName." ";
-    echo $lastName."</li>\n";
+    echo "<li>Nome: ".$firstName." ".$lastName."</li>\n";
+    echo ("<li>email: ".$emailpayer."</li>\n");
     echo ("<li>Item: ".$itemname."</li>\n");
     echo ("<li>Quantidade: ".$amount."</li>\n");
-    echo ("");
+    echo ("<li>Total: ".$total."</li>\n");
     $ea="";
-    foreach ($jdecode["transactions"]["0"]["item_list"]["items"]["shipping_address"] as $ea)
+    echo ("<li>Morada: </li>");
+    foreach ($jdecode["transactions"]["0"]["item_list"]["shipping_address"] as $ea)
     {
-        echo $ea;
+        echo $ea."<br />";
     }
     
    
