@@ -49,7 +49,7 @@ and open the template in the editor.
             array_push($rawhour, $row['hour']);
             array_push($rawminute, $row['minute']);
         }
-        $sql = "select distinct DATE_FORMAT(date, '%m-%Y') as mmyyyy from readings";
+        $sql = "select distinct DATE_FORMAT(date, '%m-%Y') as mmyyyy from readings where reading_device_id=$devid";
         $rs_result = mysqli_query ($conn, $sql);
         while ($row = mysqli_fetch_assoc($rs_result)) {
              array_push($otherdates,$row['mmyyyy']);

@@ -12,13 +12,15 @@ $pw = $_REQUEST['pass'];
 
 include '../tools/chave.php';
 
-    $sql = mysqli_query($conn, "SELECT password, user_id FROM user WHERE email = '".$login."'");
+    $sql = mysqli_query($conn, "SELECT password, user_id, device_id FROM user left join device on user_id=device_user_id WHERE email = '".$login."'");
     $result ="";
     $result1 ="";
+    $result10 ="";
     while($row = mysqli_fetch_array($sql))
     {
         $result = $row['password'];
         $result1 = $row['user_id']; 
+        $result10 = $row['device_id']; 
     }
     $sql1 = mysqli_query($conn, "SELECT first_name,tel,zipcode,city,last_name, address FROM customer WHERE customer_user_id = '".$result1."'");
     $result3 ="";
@@ -39,7 +41,7 @@ include '../tools/chave.php';
     $login1="";
     if(password_verify($pw, $result)){
         $login1=true;
-        $ar = array($login1, $result1, $result3, $result4, $result5, $result6,$result7,$result8,$result9);
+        $ar = array($login1, $result1, $result3, $result4, $result5, $result6,$result7,$result8,$result9, $result10);
         echo json_encode($ar);
     }
 ?>
