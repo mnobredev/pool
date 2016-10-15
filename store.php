@@ -22,57 +22,7 @@ and open the template in the editor.
             include 'tools/checksession.php';
             include 'tools/header.php';          
         ?>
-        
-        <div id="myCarousel" class="carousel slide" data-ride="carousel">     
-            <ol class="carousel-indicators">
-                <li data-target="#myCarousel" data-slide-to="0" class=""></li>
-                <li data-target="#myCarousel" data-slide-to="1" class=""></li>
-                <li data-target="#myCarousel" data-slide-to="2" class="active"></li>
-            </ol>
-            <div class="carousel-inner" role="listbox">
-                <div class="item" >
-                    <div class="first-slide" style="min-height: 400px; background-color: #337ab7;"></div>
-                    <div class="container">
-                        <div class="carousel-caption">
-                            <h1>Já tem o seu equipamento?</h1>
-                            <p>Registe já o seu Arduino e tire partido do sistema de controlo de valores de água mais avançado do mercado.</p>
-                            <p><a class="btn btn-lg btn-default" href="#" role="button">Registe-se já</a></p>
-                        </div>
-                    </div>
-                </div>
-                <div class="item">
-                    <div class="second-slide" style="min-height: 400px; background-color: #337ab7;"></div>
-                    <div class="container">
-                        <div class="carousel-caption">
-                            <h1>Conheça a equipa</h1>
-                            <p>Conheça os alunos que desenvolveram este sistema com o objectivo de revolucionar o mercado dos Arduinos.</p>
-                            <p><a class="btn btn-lg btn-default" href="#" role="button">Ver mais</a></p>
-                        </div>
-                    </div>
-                </div>
-                <div class="item active">
-                    <div class="third-slide" style="min-height: 400px; background-color: #337ab7;"></div>
-                    <div class="container">
-                        <div class="carousel-caption">
-                            <h1>Fiabilidade e design</h1>
-                            <p>O nosso equipamento foi construído para durar e com um design irresistível.</p>
-                            <p><a class="btn btn-lg btn-default" href="#" role="button">Veja a galeria</a></p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
-                <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-                <span class="sr-only">Previous</span>
-            </a>
-            <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
-                <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-                <span class="sr-only">Next</span>
-            </a>
-        </div>
-        
-        <div class="container" style="margin-top: 2%;">
-            
+        <div class="container" style="margin-top: 5%;">  
             <div class="row">
                 <div id="myCart" class="modal">
                     <div class="modal-content">
@@ -81,24 +31,27 @@ and open the template in the editor.
                             <h2>Carrinho de compras</h2>
                         </div>
                         <div class="modal-body">
-                            <ul id="lista">
-                            
-                            </ul>
+                            <table id="lista" class="table">
+                                <tr>
+                                    <th>Nome</th>
+                                    <th>Preço</th>
+                                    <th></th>
+                                </tr>
+                            </table>
                             <script>
                                 function resposta(str){
                                     var pa = document.getElementById("lista");
-                                    var li = document.createElement("li");
-                                    li.innerHTML=str["id_product"] + " " + str["name_product"] + " " + str["price_product"];
-                                    //li.appendChil
-                                    li.id = "b"+str["id_product"];
+                                    var row = pa.insertRow();
+                                    var nome = row.insertCell(0);
+                                    var preco = row.insertCell(1);
+                                    var remove = row.insertCell(2);
+                                    nome.innerHTML = str["name_product"];
+                                    preco.innerHTML = " €" + str["price_product"];
                                     var ids = "b"+str["id_product"].toString();
-                                    console.log("b"+str["id_product"]+" a enviar");
-                                    var remove = document.createElement("Remove");
-                                    remove.innerHTML="<a href=\"javascript:removeelement("+ids.toString()+")\" id='myBtn' class='' role='button' ><span class='glyphicon glyphicon-remove' aria-hidden='true'></span></a>";
-                                    li.appendChild(remove);
-                                    pa.appendChild(li);
+                                    remove.innerHTML = "<input type='button' class='btn btn-danger' value='Remover' onClick='removeelement(this)'></a>";
                                 }
                             </script>
+                            
                         </div>
                         <div class="modal-footer">
                             <a href="paypal/checkout.php" class="btn btn-primary">Finalizar Compra</a>
@@ -190,10 +143,13 @@ and open the template in the editor.
             $(btns).click(function(event) { 
                btnclick = event.target.id;
             });
-            function removeelement(id){
+            function removeelement(id){/*
                 var elem = document.getElementById("lista");
                 var main = document.getElementById(id.id);
-                elem.removeChild(main);
+                elem.removeChild(main);*/
+                var i = id.parentNode.parentNode.rowIndex;
+                document.getElementById("lista").deleteRow(i);
+
             }
             function showcart(){
                 modal.style.display = "block";

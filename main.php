@@ -11,10 +11,6 @@ and open the template in the editor.
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
         <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
         <script type="text/javascript" src="https://www.google.com/jsapi"></script>
-        <script type="text/javascript">
-            google.charts.load('current', {packages: ['corechart']});
-            google.charts.setOnLoadCallback(drawChart);
-        </script>
         <link rel="icon" href="/favicon.ico" type="image/x-icon">
         <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
         <title>Projecto Final ATEC</title>
