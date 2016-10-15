@@ -109,7 +109,7 @@ and open the template in the editor.
 
                         </div>
                         <div class="modal-footer">
-                            <h3><i>atec.marionobre.com</i></h3>
+                            <a href="paypal/checkout.php" class="btn btn-primary">Finalizar Compra</a>
                         </div>
                     </div>
                 </div>
