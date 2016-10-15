@@ -79,34 +79,26 @@ and open the template in the editor.
                         <div class="modal-header">
                             <span class="close">×</span>
                             <h2>Carrinho de compras</h2>
-                            <p class="divider"> ID NOME PRECO</p>
                         </div>
                         <div class="modal-body">
                             <ul id="lista">
                             
                             </ul>
                             <script>
-                               function resposta(str){
-                                   var pa = document.getElementById("lista");
-                                   var li = document.createElement("li");
-                                   var id = document.createElement("ID");
-                                   id.innerHTML=str[0];
-                                   li.appendChild(id);
-                                   var nome = document.createElement("Nome");
-                                   nome.innerHTML=str[1];
-                                   li.appendChild(nome);
-                                   var preco = document.createElement("Preço");
-                                   preco.innerHTML=str[2];
-                                   li.appendChild(preco);
-                                   li.className = id.innerHTML;
-                                   console.log(li.classname);
-                                   var remove = document.createElement("Remove");
-                                   remove.innerHTML="<a href='javascript:removeelement("+li.className+")' id='myBtn' class='' role='button' ><span class='glyphicon glyphicon-remove' aria-hidden='true'></span></a>";
-                                   li.appendChild(remove);
-                                   pa.appendChild(li);
+                                function resposta(str){
+                                    var pa = document.getElementById("lista");
+                                    var li = document.createElement("li");
+                                    li.innerHTML=str["id_product"] + " " + str["name_product"] + " " + str["price_product"];
+                                    //li.appendChil
+                                    li.id = "b"+str["id_product"];
+                                    var ids = "b"+str["id_product"].toString();
+                                    console.log("b"+str["id_product"]+" a enviar");
+                                    var remove = document.createElement("Remove");
+                                    remove.innerHTML="<a href=\"javascript:removeelement("+ids.toString()+")\" id='myBtn' class='' role='button' ><span class='glyphicon glyphicon-remove' aria-hidden='true'></span></a>";
+                                    li.appendChild(remove);
+                                    pa.appendChild(li);
                                 }
                             </script>
-
                         </div>
                         <div class="modal-footer">
                             <a href="paypal/checkout.php" class="btn btn-primary">Finalizar Compra</a>
@@ -195,46 +187,35 @@ and open the template in the editor.
             var span = document.getElementsByClassName("close")[0];
             var btnclick ="";
             var btns = document.getElementsByClassName("btn btn-primary");
-            $(btns).click(function(event) { //função que vê os clicks butões que adicionam as mensagens -- WORKING
+            $(btns).click(function(event) { 
                btnclick = event.target.id;
-
-
             });
-              function removeelement(id)
-              {
-                         console.log("chegou aqui"+id);
-                         var pa = document.getElementById("lista");
-                         var toremove = document.getElementsByClassName(id);
-                         pa.removeChild(toremove);
-                }
-            function showcart()
-            {
-                modal.style.display = "block";
-               // console.log(modal.textContent);
+            function removeelement(id){
+                var elem = document.getElementById("lista");
+                var main = document.getElementById(id.id);
+                elem.removeChild(main);
             }
-            function addCart() 
-            {
-                 if (window.XMLHttpRequest) {
-                        // code for IE7+, Firefox, Chrome, Opera, Safari
-                        xmlhttp = new XMLHttpRequest();
-                    } else {
-                        // code for IE6, IE5
-                        xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+            function showcart(){
+                modal.style.display = "block";
+            }
+
+            function addCart(){
+                if (window.XMLHttpRequest) {
+                    // code for IE7+, Firefox, Chrome, Opera, Safari
+                    xmlhttp = new XMLHttpRequest();
+                } 
+                else{
+                    // code for IE6, IE5
+                    xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+                }
+                xmlhttp.onreadystatechange = function(){
+                    if (this.readyState == 4 && this.status == 200) {
+                        resposta(JSON.parse(this.responseText));    
                     }
-                    xmlhttp.onreadystatechange = function() {
-                        if (this.readyState == 4 && this.status == 200) {
-
-                             var response = this.responseText;
-
-            var finalres = response.split("&");
-                            resposta(finalres);     
-
-                            var response = this.responseText;
-                        }
-                    };
-                    xmlhttp.open("GET","itemFinder.php?id="+btnclick,true);
-                    xmlhttp.send();
-               modal.style.display = "block";
+                };
+                xmlhttp.open("GET","itemFinder.php?id="+btnclick,true);
+                xmlhttp.send();
+                modal.style.display = "block";
             }
             span.onclick = function() {
                 modal.style.display = "none";
