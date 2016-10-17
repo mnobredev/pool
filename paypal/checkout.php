@@ -13,14 +13,44 @@ use PayPal\Api\Payment;
  * and open the template in the editor.
  */
 
-require 'app/start.php';
+//require 'app/start.php';
 
-if(!isset($_POST['product'], $_POST['price']))
+include '../tools/chave.php';
+/*if(!isset($_POST['product'], $_POST['price']))
 {
     die();
+}*/
+//$id = $_SESSION["id"];
+$id = "19";
+
+$str = mysqli_query($conn, "Select cart_id from cart WHERE cart_user_id='".$id."' and cart_active=1");
+while($row = mysqli_fetch_array($str))
+{
+    $cartid = $row["cart_id"];
 }
-$product = $_POST['product'];
-$price = $_POST['price'];
+
+$array = array();
+$str2 = mysqli_query($conn, "Select cartitem_product_id from cartitem WHERE cartitem_cart_id=".$cartid);
+while($row = mysqli_fetch_assoc($str2))
+{
+    print_r($row["cartitem_product_id"]. " ");
+    array_push($array, $row["cartitem_product_id"]);
+}
+print_r($array);
+
+$sum=0;
+for($i=0; $i<sizeof($array); $i++)
+{
+    $str3= mysqli_query($conn, "Select price_product from product where id_product=".$array[$i]);
+    while($row = mysqli_fetch_array($str3))
+    {
+        $sum+=$row["price_product"];
+    }
+}
+echo $sum." A SOMA";
+  
+$product = "PoolReadApp";
+$price = $sum;
 $shipping = 2.00;
 
 $total = $price + $shipping;
@@ -63,7 +93,7 @@ $payment->setIntent('sale')
         ->setPayer($payer)
         ->setRedirectUrls($redirectUrl)
         ->setTransactions([$transaction]);  
-
+/*
 
 include '../tools/chave.php'; 
 try //teste - not working at the moment
@@ -77,7 +107,7 @@ try //teste - not working at the moment
     die($e);
    
 }
-
+*/
 try{
     $payment->create($paypal);
 } catch (Exception $ex) {
