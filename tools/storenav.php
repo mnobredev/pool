@@ -25,10 +25,10 @@
 <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
     <?php
     for ($i=0; $i<count($main); $i++){
-        echo "<div class='panel panel-default'>";
+        echo "<div class='panel'>";
         echo "<div class='panel-heading' role='tab' id=h'$main[$i]'>";
         echo "<h4 class='panel-title'>";
-        echo "<a  class='collapsed' role='button' data-toggle='collapse' data-parent='#accordion' href='#c$main[$i]' aria-expanded='true' aria-controls='c$main[$i]'>";
+        echo "<a style='text-style: bold;' class='collapsed' role='button' data-toggle='collapse' data-parent='#accordion' href='#c$main[$i]' aria-expanded='true' aria-controls='c$main[$i]'>";
         echo "$mainname[$i]";
         echo "</a>";
         echo "</h4>";
@@ -37,7 +37,7 @@
         for ($j=0; $j<count($sub); $j++){
             if ($subparent[$j]==$main[$i]){
                 echo "<div class='panel-body'>";
-                echo "<a href='?cat=$sub[$j]'>$subname[$j]</a>";
+                echo "<a style='margin-left: 2%; font-size: 12px;' href='?cat=$sub[$j]'>$subname[$j]</a>";
                 echo "</div>";
             }
         }
