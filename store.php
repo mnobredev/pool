@@ -48,9 +48,16 @@ and open the template in the editor.
                                     {   
                                        pa.deleteRow(i);
                                     }
+                                    var row = pa.insertRow();
+                                    var nome = row.insertCell(0);
+                                    var preco = row.insertCell(1);
+                                    var remove = row.insertCell(2);
+                                    nome.innerHTML = "Nome";
+                                    preco.innerHTML = "Preço";
+                                    remove.innerHTML = "";
                                     for (var i=0; i<str.length; i++){
-                                        var pa = document.getElementById("lista");
                                         var row = pa.insertRow();
+                                        row.id=(str[i]["id_product"]);
                                         var nome = row.insertCell(0);
                                         var preco = row.insertCell(1);
                                         var remove = row.insertCell(2);
@@ -153,11 +160,40 @@ and open the template in the editor.
                btnclick = event.target.id;
             });
             function removeelement(id){
-                var i = id.parentNode.parentNode.rowIndex;
-                document.getElementById("lista").deleteRow(i);
-
+                var i = id.parentNode.parentNode.id;
+                if (window.XMLHttpRequest) {
+                    // code for IE7+, Firefox, Chrome, Opera, Safari
+                    xmlhttp = new XMLHttpRequest();
+                } 
+                else{
+                    // code for IE6, IE5
+                    xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+                }
+                xmlhttp.onreadystatechange = function(){
+                    if (this.readyState == 4 && this.status == 200) {
+                        resposta(JSON.parse(this.responseText));    
+                    }
+                };
+                xmlhttp.open("GET","tools/itemremover.php?id="+i+"&sess="+sessionvar,true);
+                xmlhttp.send();
             }
             function showcart(){
+                modal.style.display = "block";
+                if (window.XMLHttpRequest) {
+                    // code for IE7+, Firefox, Chrome, Opera, Safari
+                    xmlhttp = new XMLHttpRequest();
+                } 
+                else{
+                    // code for IE6, IE5
+                    xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+                }
+                xmlhttp.onreadystatechange = function(){
+                    if (this.readyState == 4 && this.status == 200) {
+                        resposta(JSON.parse(this.responseText));    
+                    }
+                };
+                xmlhttp.open("GET","itemFinder.php?sess="+sessionvar,true);
+                xmlhttp.send();
                 modal.style.display = "block";
             }
 
