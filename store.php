@@ -43,14 +43,19 @@ and open the template in the editor.
                             </table>
                             <script>
                                 function resposta(str){
-                                    while (str){
+                                    var pa = document.getElementById("lista");
+                                    for(var i = 0; i < pa.rows.length;)
+                                    {   
+                                       pa.deleteRow(i);
+                                    }
+                                    for (var i=0; i<str.length; i++){
                                         var pa = document.getElementById("lista");
                                         var row = pa.insertRow();
                                         var nome = row.insertCell(0);
                                         var preco = row.insertCell(1);
                                         var remove = row.insertCell(2);
-                                        nome.innerHTML = str["name_product"];
-                                        preco.innerHTML = " €" + str["price_product"];
+                                        nome.innerHTML = str[i]["name_product"];
+                                        preco.innerHTML = " €" + str[i]["price_product"];
                                         remove.innerHTML = "<input type='button' class='btn btn-danger' value='Remover' onClick='removeelement(this)'></a>";
                                     }
                                 }

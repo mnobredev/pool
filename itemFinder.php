@@ -17,7 +17,7 @@
     }
     mysqli_query($conn, "INSERT INTO cartitem (cartitem_cart_id,cartitem_product_id, cartitem_quantity) VALUES ($cartid,$idprod,1)");
     
-    $query = mysqli_query($conn, "select * from cartitem where cartitem_cart_id=$cartid");
+    $query = mysqli_query($conn, "select id_product, name_product, price_product from product left join cartitem on cartitem_product_id=id_product where cartitem_cart_id=$cartid");
     while($row = mysqli_fetch_assoc($query)){
         $ar [] = $row;
     }
