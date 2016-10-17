@@ -22,6 +22,9 @@ and open the template in the editor.
             include 'tools/checksession.php';
             include 'tools/header.php';          
         ?>
+        <script type="text/javascript">
+            var sessionvar = <?php echo $id; ?>;
+        </script>
         <div class="container" style="margin-top: 5%;">  
             <div class="row">
                 <div id="myCart" class="modal">
@@ -40,15 +43,16 @@ and open the template in the editor.
                             </table>
                             <script>
                                 function resposta(str){
-                                    var pa = document.getElementById("lista");
-                                    var row = pa.insertRow();
-                                    var nome = row.insertCell(0);
-                                    var preco = row.insertCell(1);
-                                    var remove = row.insertCell(2);
-                                    nome.innerHTML = str["name_product"];
-                                    preco.innerHTML = " €" + str["price_product"];
-                                    var ids = "b"+str["id_product"].toString();
-                                    remove.innerHTML = "<input type='button' class='btn btn-danger' value='Remover' onClick='removeelement(this)'></a>";
+                                    while (str){
+                                        var pa = document.getElementById("lista");
+                                        var row = pa.insertRow();
+                                        var nome = row.insertCell(0);
+                                        var preco = row.insertCell(1);
+                                        var remove = row.insertCell(2);
+                                        nome.innerHTML = str["name_product"];
+                                        preco.innerHTML = " €" + str["price_product"];
+                                        remove.innerHTML = "<input type='button' class='btn btn-danger' value='Remover' onClick='removeelement(this)'></a>";
+                                    }
                                 }
                             </script>
                             
@@ -143,10 +147,7 @@ and open the template in the editor.
             $(btns).click(function(event) { 
                btnclick = event.target.id;
             });
-            function removeelement(id){/*
-                var elem = document.getElementById("lista");
-                var main = document.getElementById(id.id);
-                elem.removeChild(main);*/
+            function removeelement(id){
                 var i = id.parentNode.parentNode.rowIndex;
                 document.getElementById("lista").deleteRow(i);
 
@@ -169,7 +170,7 @@ and open the template in the editor.
                         resposta(JSON.parse(this.responseText));    
                     }
                 };
-                xmlhttp.open("GET","itemFinder.php?id="+btnclick,true);
+                xmlhttp.open("GET","itemFinder.php?id="+btnclick+"&sess="+sessionvar,true);
                 xmlhttp.send();
                 modal.style.display = "block";
             }

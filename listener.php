@@ -49,7 +49,8 @@
                                 $alarmid.="cl=0";
                             }
                             
-                            header("Location: $alarmid");
+                            //header("Location: $alarmid");
+                            header("Location: gcm.php?id=19");
                 }
             
         ?>
