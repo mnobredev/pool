@@ -21,6 +21,7 @@ include '../tools/chave.php';
     die();
 }*/
 
+
 $id = $_SESSION["id"];
 
 $str = mysqli_query($conn, "Select cart_id from cart WHERE cart_user_id='".$id."' and cart_active=1");
@@ -46,7 +47,6 @@ for($i=0; $i<sizeof($array); $i++)
     }
 }
 
-  
 $product = "PoolReadApp";
 $price = $sum;
 $shipping = 2.00;
