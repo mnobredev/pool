@@ -13,15 +13,15 @@ use PayPal\Api\Payment;
  * and open the template in the editor.
  */
 
-//require 'app/start.php';
+require 'app/start.php';
 
 include '../tools/chave.php';
 /*if(!isset($_POST['product'], $_POST['price']))
 {
     die();
 }*/
-//$id = $_SESSION["id"];
-$id = "19";
+
+$id = $_SESSION["id"];
 
 $str = mysqli_query($conn, "Select cart_id from cart WHERE cart_user_id='".$id."' and cart_active=1");
 while($row = mysqli_fetch_array($str))
@@ -33,10 +33,8 @@ $array = array();
 $str2 = mysqli_query($conn, "Select cartitem_product_id from cartitem WHERE cartitem_cart_id=".$cartid);
 while($row = mysqli_fetch_assoc($str2))
 {
-    print_r($row["cartitem_product_id"]. " ");
     array_push($array, $row["cartitem_product_id"]);
 }
-print_r($array);
 
 $sum=0;
 for($i=0; $i<sizeof($array); $i++)
@@ -47,7 +45,7 @@ for($i=0; $i<sizeof($array); $i++)
         $sum+=$row["price_product"];
     }
 }
-echo $sum." A SOMA";
+
   
 $product = "PoolReadApp";
 $price = $sum;
