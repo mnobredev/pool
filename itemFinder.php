@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <?php
     include "tools/chave.php";
     $idprod= intval($_GET['id']);
@@ -22,4 +23,5 @@
     }
     
     echo json_encode($ar);
+
 ?>
