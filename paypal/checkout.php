@@ -20,7 +20,7 @@ include '../tools/chave.php';
 {
     die();
 }*/
-
+session_start();
 
 $id = $_SESSION["id"];
 
