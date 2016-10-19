@@ -7,6 +7,8 @@ use PayPal\Api\Amount;
 use PayPal\Api\Transaction;
 use PayPal\Api\RedirectUrls;
 use PayPal\Api\Payment;
+
+
 /* 
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -89,6 +91,7 @@ $redirectUrl->setReturnUrl(SITE_URL.'/pay.php?success=true')
 $payment = new Payment();
 $payment->setIntent('sale')
         ->setPayer($payer)
+
         ->setRedirectUrls($redirectUrl)
         ->setTransactions([$transaction]);  
 /*
