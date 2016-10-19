@@ -141,38 +141,38 @@ and open the template in the editor.
             
             <div class="row featurette">
                 <div class="col-md-5">
-                    <div id="carousel-example-generic"class="carousel slide featurette-image img-responsive center-block" data-ride="carousel">
+                    <div id="carousel-example-generic" style=" height: 500px;" class="carousel slide featurette-image img-responsive center-block" data-ride="carousel">
                         <ol class="carousel-indicators">
                             <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
                             <li data-target="#carousel-example-generic" data-slide-to="1"></li>
                             <li data-target="#carousel-example-generic" data-slide-to="2"></li>
                         </ol>
-                        <div class="carousel-inner" role="listbox">
-                            <div class="item active" style="background-color: transparent;">
-                                <img src="img/graphs1.png" alt="img1" style="min-width: 100%;">
+                        <div class="carousel-inner" style=" height: 500px;"  role="listbox">
+                            <div class="item active" style="background-color: transparent; height: 500px;">
+                                <img src="img/graphs1.png" alt="img1" style="min-width: 100%; height: 500px;">
                                 <div class="carousel-caption" style="background-color: rgba(1,1,1,0.4); border-radius: 25px;">
                                     Medições detalhadas e de leitura fácil
                                 </div>
                             </div>
-                            <div class="item" style="background-color: transparent;">
-                                <img src="img/responsive.png" alt="img1" style="min-width: 100%;">
+                            <div class="item" style="background-color: transparent; height: 500px;">
+                                <img src="img/responsive.png" alt="img1" style="min-width: 100%; height: 500px;">
                                 <div class="carousel-caption" style="background-color: rgba(1,1,1,0.4); border-radius: 25px;">
                                     A nossa interface adapta-se a qualquer dispositivo.
                                 </div>
                             </div>
-                            <div class="item" style="background-color: transparent;">
-                                <img src="img/phone1.png" alt="img1" style="min-width: 100%;">
+                            <div class="item" style="background-color: transparent; height: 500px;">
+                                <img src="img/phone1.png" alt="img1" style="min-width: 100%; height: 500px;">
                                 <div class="carousel-caption" style="background-color: rgba(1,1,1,0.4); border-radius: 25px;">
                                     Receba alertas no seu dispositivo android com a nossa App.
                                 </div>
                             </div>
                           </div>
 
-                    <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
+                    <a class="left carousel-control" style="background-image: none" href="#carousel-example-generic" role="button" data-slide="prev">
     <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
     <span class="sr-only">Previous</span>
   </a>
-  <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
+  <a class="right carousel-control" style="background-image: none" href="#carousel-example-generic" role="button" style="background-image: none" data-slide="next">
     <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
     <span class="sr-only">Next</span>
   </a>
@@ -193,7 +193,7 @@ and open the template in the editor.
                     <p>Apaixonado por problemas desafiantes, acredito que descobrir e entender o problema é o passo mais importante para o resolver. O Aqua nasceu de uma ideia universal a todos os projectos que idealizo, dotar todos os utilizadores de ferramentas avançadas mas de simples compreensão. De elevada qualidade mas de baixo custo, mais valor por menos dinheiro.</p>
                 </div>
                 <div class="col-lg-4">
-                    <img class="img-circle" src="img/asilva.png" alt="Generic placeholder image" width="140" height="140">
+                    <img class="img-circle" src="img/asilva.jpg" alt="Generic placeholder image" width="140" height="140">
                     <h2>António Silva</h2>
                     <p>A programação é um elemento que faz parte do meu dia à dia. A curiosidade levou-me a aprender cada vez mais, e é um enorme prazer fazer parte de um processo de criação tão importante, como o desenvolvimento de software. O Aqua é uma aplicação online, fruto do espirito da nossa equipa, que satisfaz uma necessidade de mercado.</p>
                 </div>

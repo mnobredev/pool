@@ -83,7 +83,7 @@ and open the template in the editor.tesate
                     <ul class="dropdown-menu">
                         <?php
                         foreach ($otherdates as $dates){
-                            echo '<li id="'.$dates.'"><a class="monthlink" id="'.$dates.'">'.$dates.'</a></li>';
+                            echo '<li id="'.$dates.'"><a class="clmonthlink" id="'.$dates.'">'.$dates.'</a></li>';
                         }
                         ?>
                     </ul>
@@ -101,11 +101,15 @@ and open the template in the editor.tesate
             var clArray = [];
             var minArray = [];
             var hrArrayphora =<?php echo json_encode($rawhour); ?>;
+            var clhrArray =<?php echo json_encode($rawhour); ?>;
             var phArrayphora =<?php echo json_encode($rawphreading); ?>;
             var dayArray =<?php echo json_encode($rawday); ?>;
+            var cldayArray =<?php echo json_encode($rawday); ?>;
             var clArray =<?php echo json_encode($rawclreading); ?>;   
             var minArray =<?php echo json_encode($rawminute); ?>;
+            var clminArray =<?php echo json_encode($rawminute); ?>;
         </script>
         <script src="js/phtable.js"></script>
+        <script src="js/cltable.js"></script>
     </body>
 </html>
