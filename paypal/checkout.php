@@ -7,8 +7,6 @@ use PayPal\Api\Amount;
 use PayPal\Api\Transaction;
 use PayPal\Api\RedirectUrls;
 use PayPal\Api\Payment;
-
-
 /* 
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -49,13 +47,14 @@ for($i=0; $i<sizeof($array); $i++)
     }
 }
 
-$product = "PoolReadApp";
+$product = "AquaSystems";
 $price = $sum;
 $shipping = 2.00;
 
 $total = $price + $shipping;
 
 $payer = new Payer();
+
 $payer->setPaymentMethod('paypal');
 
 $item = new Item();
@@ -76,11 +75,18 @@ $amount->setCurrency('GBP')
         ->setTotal($total)
         ->setDetails($details);
 
+$str3= mysqli_query($conn, "Select cart_id from cart WHERE cart_user_id=".$id." AND cart_active=1");
+    while($row = mysqli_fetch_array($str3))
+    {
+        $idcart=$row["cart_id"];
+    }
+
+
 $transaction = new Transaction();
 $transaction->setAmount($amount)
         ->setItemList($itemList)
         ->setDescription('Pool read app')
-        ->setInvoiceNumber(uniqid());
+        ->setInvoiceNumber($idcart);
 
 
 $redirectUrl = new RedirectUrls();
@@ -91,26 +97,29 @@ $redirectUrl->setReturnUrl(SITE_URL.'/pay.php?success=true')
 $payment = new Payment();
 $payment->setIntent('sale')
         ->setPayer($payer)
-
+        
         ->setRedirectUrls($redirectUrl)
-        ->setTransactions([$transaction]);  
-/*
+        ->setTransactions([$transaction]); 
 
-include '../tools/chave.php'; 
-try //teste - not working at the moment
+try 
 {
- $buy = mysqli_query($conn, "INSERT into sales(id_sale, nameitem, quantity) VALUES("
-         ."'".$payment->getId()."',"
+ $buy = mysqli_query($conn, "INSERT into sales(Id_sale_Invoice, Item_name, Amount, Pay_status) VALUES("
+         ."'".$transaction->getInvoiceNumber()."',"
          ."'".$item->getName()."',"
-         ."'".$amount->getTotal()."')");
+         ."'".$amount->getTotal()."',"
+         ."'".$payment->getState()."')");
 }  catch (Exception $e)
 {
     die($e);
    
 }
-*/
+
 try{
     $payment->create($paypal);
+} catch (PayPal\Exception\PayPalConnectionException $ex) {
+    echo $ex->getCode(). " CODE"; // Prints the Error Code
+    echo $ex->getData(). " MESSAGE"; // Prints the detailed error message 
+    die($ex);
 } catch (Exception $ex) {
 die($ex);
 }
