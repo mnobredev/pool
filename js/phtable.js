@@ -58,7 +58,6 @@
                 phArrayphora = [];
                 hrArrayphora = [];
                 dayArray = [];
-                clArray = [];
                 minArray = [];
                 myFunction(myArr);
             
@@ -69,7 +68,6 @@
                         phArrayphora[i]=arr[i].ph_status;
                         hrArrayphora[i]=arr[i].hour;
                         dayArray[i]=arr[i].day;
-                        clArray[i]=arr[i].chlorine_status;
                         minArray[i]=arr[i].minute;
                     }
                 }
@@ -352,6 +350,5 @@
         var chart = new google.visualization.ColumnChart(document.getElementById('phchart'));
         google.visualization.events.addListener(chart, 'select', selectHandler);
         chart.draw(day, options);
-        }
-            
+        }           
     }

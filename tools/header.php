@@ -20,10 +20,10 @@
                         <li><a href="main.php"><span class="glyphicon glyphicon-dashboard" aria-label="readings"></span>   Leituras</a></li>
                         <li><a href="store.php"><span class="glyphicon glyphicon-shopping-cart" aria-label="store"></span>   Loja</a></li>
                         <li role="separator" class="divider"></li>
-                        <li><a href="#"><span class="glyphicon glyphicon-log-out" aria-label="logout"></span>   Logout</a></li>
+                        <li><a href="tools/logout.php"><span class="glyphicon glyphicon-log-out" aria-label="logout"></span>   Logout</a></li>
                     </ul>
                 </div>
-            <button type="button" class="btn btn-danger"><span class="glyphicon glyphicon-log-out" aria-label="Logout"></span></button>
+            <a href="tools/logout.php"  class="btn btn-danger"><span class="glyphicon glyphicon-log-out" aria-label="Logout"></span></a>
         </form>
     </div>
   </div>

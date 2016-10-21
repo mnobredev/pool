@@ -1,32 +1,32 @@
     google.charts.load('current', {packages: ['corechart', 'bar']});
     google.charts.setOnLoadCallback(drawToday);
     
-    var status="day";
-    var today= new Date();
-    var selectedDay = today.getDate();
-    var selectedMonth = today.getMonth();
-    var selectedYear = today.getFullYear();
+    var clstatus="day";
+    var cltoday= new Date();
+    var clselectedDay = today.getDate();
+    var clselectedMonth = today.getMonth();
+    var clselectedYear = today.getFullYear();
     var month = ["Janeiro","Fevereiro","Março","Abril","Maio","Junho","Julho","Agosto","Setembro","Outubro","Novembro","Dezembro"];
-    var options = {
+    var cloptions = {
             vAxis: {
                 viewWindow: {
                     min: 0,
                     max: 2
                 },
-                ticks: [0.4, 0.8,1.2,1.6],
+                ticks: [0.4, 0.8, 1.2, 1.6, 2],
                 title: 'Média de leitura'
             },
             legend: {position: 'none'},
             
         };
         
-    var optmonth = {
+    var cloptmonth = {
         vAxis: {
             viewWindow: {
                 min: 0,
                 max: 2
             },
-            ticks: [0.4, 0.8,1.2,1.6],
+            ticks: [0.4, 0.8, 1.2, 1.6, 2],
             title: 'Média de leitura'
         },
         hAxis:{
@@ -39,54 +39,53 @@
                 title: 'Dia do mês',
                 gridlines: { color: 'white' }
         },
+        
         legend: {position: 'none'},
 
     };
     
-    jQuery('.monthlink').click(function(){
+    jQuery('.clmonthlink').click(function(){
 
         var clickedID = $(this).attr('id'); 
         var xmlhttp = new XMLHttpRequest();
-        var url = "handler/hvaloresmes.php?mesano="+clickedID;
+        var url = "handler/hvaloresmes.php?mesano="+clickedID+"&dev="+id;
         
         xmlhttp.onreadystatechange = function() {
             
             if (this.readyState == 4 && this.status == 200) {
             
                 var myArr = JSON.parse(this.responseText);
-                phArrayphora = [];
-                hrArrayphora = [];
-                dayArray = [];
+                clhrArray = [];
+                cldayArray = [];
                 clArray = [];
-                minArray = [];
-                myFunction(myArr);
+                clminArray = [];
+                clmyFunction(myArr);
             
-                function myFunction(arr) {
+                function clmyFunction(arr) {
                     
                     var i;
                     for(i = 0; i < arr.length; i++) {
-                        phArrayphora[i]=arr[i].ph_status;
-                        hrArrayphora[i]=arr[i].hour;
-                        dayArray[i]=arr[i].day;
+                        clhrArray[i]=arr[i].hour;
+                        cldayArray[i]=arr[i].day;
                         clArray[i]=arr[i].chlorine_status;
-                        minArray[i]=arr[i].minute;
+                        clminArray[i]=arr[i].minute;
                     }
                 }
-            selectedMonth=parseInt(clickedID.substring(0, 2))-1;
-            selectedYear=parseInt(clickedID.substring(3, 8));
+            clselectedMonth=parseInt(clickedID.substring(0, 2))-1;
+            clselectedYear=parseInt(clickedID.substring(3, 8));
 
             var chosenmonth = new google.visualization.DataTable();
             chosenmonth.addColumn('number', 'Day of the Month');
             chosenmonth.addColumn('number', 'Cloro');
             chosenmonth.addColumn({type:'string', role:'style'});
-            document.getElementById("cltitle").innerHTML = "Cloro - Média por dia de "+month[selectedMonth]+" de "+selectedYear;
-            var size = dayArray.length;
+            document.getElementById("cltitle").innerHTML = "Cloro - Média por dia de "+month[clselectedMonth]+" de "+clselectedYear;
+            var size = cldayArray.length;
             for (var h=1; h<=31; h++){
                 
                 var counter=0;
                 var media=0;
                 for (var i=0; i<size; i++){
-                        if (dayArray[i]==h){
+                        if (cldayArray[i]==h){
                             var res = clArray[i].replace(",", ".");
                             media+= parseFloat(res);
                             counter++;
@@ -94,7 +93,7 @@
                     }
 
                 if (counter!=0){
-                    if ((media/counter)<7||(media/counter)>7.2 )
+                    if ((media/counter)<0.5||(media/counter)>1 )
                     chosenmonth.addRows([[h, media/counter, 'color:red']]);
                     else
                     chosenmonth.addRows([[h, media/counter, 'color:#3366cc']]); 
@@ -106,18 +105,18 @@
             
             function selectHandler() {
             
-                var selectedItem = chart.getSelection()[0];
+                var selectedItem = clchart.getSelection()[0];
                 if (selectedItem) {
                     var value = selectedItem.row;
                 }
-                clicked(value); 
+                clclicked(value); 
             }
-            var formatter = new google.visualization.NumberFormat({fractionDigits: 2});
-            formatter.format(chosenmonth, 1);
-            var chart = new google.visualization.ColumnChart(document.getElementById('clchart'));
-            google.visualization.events.addListener(chart, 'select', selectHandler);
-            chart.draw(chosenmonth,optmonth);
-            status="month";
+            var clformatter = new google.visualization.NumberFormat({fractionDigits: 2});
+            clformatter.format(chosenmonth, 1);
+            var clchart = new google.visualization.ColumnChart(document.getElementById('clchart'));
+            google.visualization.events.addListener(clchart, 'select', selectHandler);
+            clchart.draw(chosenmonth,cloptmonth);
+            clstatus="month";
         }
     };
     xmlhttp.open("GET", url, true);
@@ -127,28 +126,28 @@
 
     document.getElementById("clback").onclick = function back(){
         var chosenday = new google.visualization.DataTable();
-        if (status=="hour"){
+        if (clstatus=="hour"){
 
             chosenday.addColumn('string', 'Time of Day');
-            chosenday.addColumn('number', 'Clor');
+            chosenday.addColumn('number', 'Cloro');
             chosenday.addColumn({type:'string', role:'style'});
-            var size = dayArray.length;
-            document.getElementById("cltitle").innerHTML = "Cloro - Média por hora de dia "+selectedDay+"/"+(parseInt(selectedMonth)+1)+"/"+selectedYear;
+            var size = cldayArray.length;
+            document.getElementById("cltitle").innerHTML = "Cloro - Média por hora de dia "+clselectedDay+"/"+(parseInt(clselectedMonth)+1)+"/"+clselectedYear;
             for (var h=0; h<24; h++){
 
                 var counter=0;
                 var media=0;
 
                     for (var i=0; i<size; i++){
-                        if (selectedDay==dayArray[i] && clArray[i]==h){
-                            var res = phArrayphora[i].replace(",", ".");
+                        if (clselectedDay==cldayArray[i] && clhrArray[i]==h){
+                            var res = clArray[i].replace(",", ".");
                             media+= parseFloat(res);
                             counter++;
                         }
                     }
 
                 if (counter!=0){
-                    if ((media/counter)<7||(media/counter)>7.2 )
+                    if ((media/counter)<0.5||(media/counter)>1 )
                     chosenday.addRows([[h+':00', media/counter, 'color:red']]);
                     else
                     chosenday.addRows([[h+':00', media/counter, 'color:#3366cc']]); 
@@ -160,21 +159,21 @@
 
             function selectHandler() {
 
-                var selectedItem = chart.getSelection()[0];
+                var selectedItem = clchart.getSelection()[0];
                     if (selectedItem) {
                         var value = selectedItem.row;
                     }
-                clicked(value); 
+                clclicked(value); 
             }
-            var formatter = new google.visualization.NumberFormat({fractionDigits: 2});
-            formatter.format(chosenday, 1);
-            var chart = new google.visualization.ColumnChart(document.getElementById('clchart'));
-            google.visualization.events.addListener(chart, 'select', selectHandler);
-            chart.draw(chosenday, options);
-            status="day";
+            var clformatter = new google.visualization.NumberFormat({fractionDigits: 2});
+            clformatter.format(chosenday, 1);
+            var clchart = new google.visualization.ColumnChart(document.getElementById('clchart'));
+            google.visualization.events.addListener(clchart, 'select', selectHandler);
+            clchart.draw(chosenday, cloptions);
+            clstatus="day";
         }
 
-        else if (status=="day"){
+        else if (clstatus=="day"){
             
             document.getElementById("clother").style.display = "block";
             document.getElementById("clback").style.display = "none";
@@ -183,14 +182,14 @@
             chosenmonth.addColumn('number', 'Day of the Month');
             chosenmonth.addColumn('number', 'Cloro');
             chosenmonth.addColumn({type:'string', role:'style'});
-            document.getElementById("phtitle").innerHTML = "Cloro - Média por dia de "+month[selectedMonth]+" de "+selectedYear;
-            var size = dayArray.length;
+            document.getElementById("cltitle").innerHTML = "Cloro - Média por dia de "+month[clselectedMonth]+" de "+clselectedYear;
+            var size = cldayArray.length;
             for (var h=1; h<=31; h++){
 
                 var counter=0;
                 var media=0;
                 for (var i=0; i<size; i++){
-                        if (dayArray[i]==h){
+                        if (cldayArray[i]==h){
                             var res = clArray[i].replace(",", ".");
                             media+= parseFloat(res);
                             counter++;
@@ -198,7 +197,7 @@
                 }
 
                 if (counter!=0){
-                    if ((media/counter)<7||(media/counter)>7.2 )
+                    if ((media/counter)<0.5||(media/counter)>1 )
                     chosenmonth.addRows([[h, media/counter, 'color:red']]);
                     else
                     chosenmonth.addRows([[h, media/counter, 'color:#3366cc']]); 
@@ -210,18 +209,18 @@
             
             function selectHandler() {
             
-                var selectedItem = chart.getSelection()[0];
+                var selectedItem = clchart.getSelection()[0];
                 if (selectedItem) {
                     var value = selectedItem.row;
                 }
-                clicked(value); 
+                clclicked(value); 
             }
-            var formatter = new google.visualization.NumberFormat({fractionDigits: 2});
-            formatter.format(chosenmonth, 1);
-            var chart = new google.visualization.ColumnChart(document.getElementById('clchart'));
-            google.visualization.events.addListener(chart, 'select', selectHandler);
-            chart.draw(chosenmonth,optmonth);
-            status="month";
+            var clformatter = new google.visualization.NumberFormat({fractionDigits: 2});
+            clformatter.format(chosenmonth, 1);
+            var clchart = new google.visualization.ColumnChart(document.getElementById('clchart'));
+            google.visualization.events.addListener(clchart, 'select', selectHandler);
+            clchart.draw(chosenmonth,cloptmonth);
+            clstatus="month";
         }
     }
         
@@ -231,21 +230,21 @@
         day.addColumn('string', 'Time of Day');
         day.addColumn('number', 'Cloro');
         day.addColumn({type:'string', role:'style'});
-        document.getElementById("cltitle").innerHTML = "Cloro - Média por hora do dia "+selectedDay+"/"+(parseInt(selectedMonth)+1)+"/"+selectedYear;
-        var size = dayArray.length;
+        document.getElementById("cltitle").innerHTML = "Cloro - Média por hora do dia "+clselectedDay+"/"+(parseInt(clselectedMonth)+1)+"/"+clselectedYear;
+        var size = cldayArray.length;
         
         for (var h=0; h<24; h++){
             var counter=0;
             var media=0;
             for (var i=0; i<size; i++){
-                if (today.getDate()==dayArray[i] && hrArrayphora[i]==h){
+                if (cltoday.getDate()==cldayArray[i] && clhrArray[i]==h){
                     var res = clArray[i].replace(",", ".");
                     media+= parseFloat(res);
                     counter++;
                 }
             }
             if (counter!=0){
-                if ((media/counter)<7||(media/counter)>7.2 )
+                if ((media/counter)<0.5||(media/counter)>1 )
                 day.addRows([[h+':00', media/counter, 'color:red']]);
                 else
                 day.addRows([[h+':00', media/counter, 'color:#3366cc']]); 
@@ -257,22 +256,22 @@
         
         function selectHandler() {
             
-            var selectedItem = chart.getSelection()[0];
+            var selectedItem = clchart.getSelection()[0];
             if (selectedItem) {
                 var value = selectedItem.row;
             }
-            clicked(value); 
+            clclicked(value); 
         }
-        var formatter = new google.visualization.NumberFormat({fractionDigits: 2});
-        formatter.format(day, 1);
-        var chart = new google.visualization.ColumnChart(document.getElementById('clchart'));
-        google.visualization.events.addListener(chart, 'select', selectHandler);
-        chart.draw(day, options);
+        var clformatter = new google.visualization.NumberFormat({fractionDigits: 2});
+        clformatter.format(day, 1);
+        var clchart = new google.visualization.ColumnChart(document.getElementById('clchart'));
+        google.visualization.events.addListener(clchart, 'select', selectHandler);
+        clchart.draw(day, cloptions);
     }
     
-    function clicked(value){
+    function clclicked(value){
         
-        if (status=="day"){
+        if (clstatus=="day"){
            
             var hour = new google.visualization.DataTable();
             
@@ -280,55 +279,53 @@
             hour.addColumn('string', 'Time of Day');
             hour.addColumn('number', 'Cloro');
             hour.addColumn({type:'string', role:'style'});
-            document.getElementById("cltitle").innerHTML = "Cloro - Leituras do dia "+selectedDay+"/"+(parseInt(selectedMonth)+1)+"/"+selectedYear+" às "+value+" horas";
+            document.getElementById("cltitle").innerHTML = "Cloro - Leituras do dia "+clselectedDay+"/"+(parseInt(clselectedMonth)+1)+"/"+clselectedYear+" às "+value+" horas";
             
-            var size = hrArrayphora.length;
+            var size = clhrArray.length;
             
             for (var i=0; i<size; i++){
             
-                if (hrArrayphora[i]==value && selectedDay==dayArray[i]){
-                    min = minArray[i];
+                if (clhrArray[i]==value && clselectedDay==cldayArray[i]){
+                    min = clminArray[i];
                     var res = clArray[i].replace(",", ".");
-                    ph = parseFloat(res);
-                    if (ph<7 || ph>7.2)
-                    hour.addRows([[value+":"+min, ph, 'color:red']]);
+                    cl = parseFloat(res);
+                    if (cl<0.5 || cl>1)
+                    hour.addRows([[value+":"+min, cl, 'color:red']]);
                     else 
-                    hour.addRows([[value+":"+min, ph, 'color:#3366cc']]); 
+                    hour.addRows([[value+":"+min, cl, 'color:#3366cc']]); 
                 }
                
             }
             
-            var formatter = new google.visualization.NumberFormat({fractionDigits: 2});
-            formatter.format(hour, 1);
-            var chart = new google.visualization.ColumnChart(document.getElementById('clchart'));
-            chart.draw(hour, options);
-            status="hour";
+            var clformatter = new google.visualization.NumberFormat({fractionDigits: 2});
+            clformatter.format(hour, 1);
+            var clchart = new google.visualization.ColumnChart(document.getElementById('clchart'));
+            clchart.draw(hour, cloptions);
+            clstatus="hour";
             }
             
-        else if (status=="month"){
+        else if (clstatus=="month"){
             document.getElementById("clother").style.display = "none";
             document.getElementById("clback").style.display = "block";
-            console.log(value);
         var day = new google.visualization.DataTable();
         day.addColumn('string', 'Time of Day');
         day.addColumn('number', 'Cloro');
         day.addColumn({type:'string', role:'style'});
-        document.getElementById("cltitle").innerHTML = "Cloro - Média por hora do dia "+selectedDay+"/"+(parseInt(selectedMonth)+1)+"/"+selectedYear;
-        var size = dayArray.length;
+        document.getElementById("cltitle").innerHTML = "Cloro - Média por hora do dia "+clselectedDay+"/"+(parseInt(clselectedMonth)+1)+"/"+clselectedYear;
+        var size = cldayArray.length;
         
         for (var h=0; h<24; h++){
             var counter=0;
             var media=0;
             for (var i=0; i<size; i++){
-                if (value+1==dayArray[i] && hrArrayphora[i]==h){
+                if (value+1==cldayArray[i] && clhrArray[i]==h){
                     var res = clArray[i].replace(",", ".");
                     media+= parseFloat(res);
                     counter++;
-                    console.log(media+" "+h);
                 }
             }
             if (counter!=0){
-                if ((media/counter)<7||(media/counter)>7.2 )
+                if ((media/counter)<0.5||(media/counter)>1 )
                 day.addRows([[h+':00', media/counter, 'color:red']]);
                 else
                 day.addRows([[h+':00', media/counter, 'color:#3366cc']]); 
@@ -340,19 +337,18 @@
         
         function selectHandler() {
             
-            var selectedItem = chart.getSelection()[0];
+            var selectedItem = clchart.getSelection()[0];
             if (selectedItem) {
                 var value = selectedItem.row;
             }
-            clicked(value); 
+            clclicked(value); 
         }
-        status="day";
-        selectedDay=value+1;
-        var formatter = new google.visualization.NumberFormat({fractionDigits: 2});
-        formatter.format(day, 1);
-        var chart = new google.visualization.ColumnChart(document.getElementById('clchart'));
-        google.visualization.events.addListener(chart, 'select', selectHandler);
-        chart.draw(day, options);
-        }
-            
+        clstatus="day";
+        clselectedDay=value+1;
+        var clformatter = new google.visualization.NumberFormat({fractionDigits: 2});
+        clformatter.format(day, 1);
+        var clchart = new google.visualization.ColumnChart(document.getElementById('clchart'));
+        google.visualization.events.addListener(clchart, 'select', selectHandler);
+        clchart.draw(day, cloptions);
+        }           
     }
