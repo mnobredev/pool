@@ -180,7 +180,7 @@
 
             var chosenmonth = new google.visualization.DataTable();
             chosenmonth.addColumn('number', 'Day of the Month');
-            chosenmonth.addColumn('number', 'PH');
+            chosenmonth.addColumn('number', 'Cloro');
             chosenmonth.addColumn({type:'string', role:'style'});
             document.getElementById("cltitle").innerHTML = "Cloro - Média por dia de "+month[clselectedMonth]+" de "+clselectedYear;
             var size = cldayArray.length;

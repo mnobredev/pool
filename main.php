@@ -27,6 +27,7 @@ and open the template in the editor.tesate
         $rawhour = []; //recieves all hour readings from current month
         $rawminute = []; //recieves all minute readings from current month
         $otherdates = []; //recieves all months where readings are found
+        $rawtempreading = []; //recieves all temperatures where readings are found
         $phideal = [];
         $clideal = [];
         
@@ -35,7 +36,7 @@ and open the template in the editor.tesate
             $devid = $row['device_id'];
 
         }
-        $sql = "SELECT ph_status, chlorine_status,DAY(date) as day, HOUR(date) as hour, MINUTE(date) as minute FROM readings where MONTH(date)=MONTH(NOW()) AND reading_device_id=$devid";
+        $sql = "SELECT ph_status, chlorine_status,DAY(date) as day, HOUR(date) as hour, MINUTE(date) as minute, temperature FROM readings where MONTH(date)=MONTH(NOW()) AND reading_device_id=$devid";
         $rs_result = mysqli_query ($conn, $sql);
         
         while ($row = mysqli_fetch_assoc($rs_result)) {
@@ -44,6 +45,7 @@ and open the template in the editor.tesate
             array_push($rawday, $row['day']);
             array_push($rawhour, $row['hour']);
             array_push($rawminute, $row['minute']);
+            array_push($rawtempreading, $row['temperature']);
         }
         $sql = "select distinct DATE_FORMAT(date, '%m-%Y') as mmyyyy from readings where reading_device_id=$devid";
         $rs_result = mysqli_query ($conn, $sql);
@@ -89,6 +91,21 @@ and open the template in the editor.tesate
                     </ul>
                 </div>
             </div>
+            <div class="col-md-12">
+                <h2 id="temptitle">Temperatura</h2>
+                <div class="ct-chart ct-golden-section" id="tempchart"></div>
+                <button class="btn btn-default" style="display:block" type="submit" id="tempback">Back</button>
+                <div id="tempother" class="dropdown" style="display:none">
+                    <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Escolha outro mês<span class="caret"></span></button>
+                    <ul class="dropdown-menu">
+                        <?php
+                        foreach ($otherdates as $dates){
+                            echo '<li id="'.$dates.'"><a class="tempmonthlink" id="'.$dates.'">'.$dates.'</a></li>';
+                        }
+                        ?>
+                    </ul>
+                </div>
+            </div>
         </div>
         <hr>
         <?php
@@ -102,14 +119,19 @@ and open the template in the editor.tesate
             var minArray = [];
             var hrArrayphora =<?php echo json_encode($rawhour); ?>;
             var clhrArray =<?php echo json_encode($rawhour); ?>;
+            var temphrArray =<?php echo json_encode($rawhour); ?>;
             var phArrayphora =<?php echo json_encode($rawphreading); ?>;
             var dayArray =<?php echo json_encode($rawday); ?>;
             var cldayArray =<?php echo json_encode($rawday); ?>;
+            var tempdayArray =<?php echo json_encode($rawday); ?>;
             var clArray =<?php echo json_encode($rawclreading); ?>;   
             var minArray =<?php echo json_encode($rawminute); ?>;
             var clminArray =<?php echo json_encode($rawminute); ?>;
+            var tempminArray =<?php echo json_encode($rawminute); ?>;
+            var tempArray =<?php echo json_encode($rawtempreading); ?>;
         </script>
         <script src="js/phtable.js"></script>
         <script src="js/cltable.js"></script>
+        <script src="js/temptable.js"></script>
     </body>
 </html>

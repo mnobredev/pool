@@ -100,7 +100,7 @@ and open the template in the editor.
                                 <textarea name="descProduct" class="form-control" rows="6" type="text" required></textarea>
                             </div>
                             <div class="form-group col-md-8">
-                                <label>Imagens</label>
+                                <label>Imagem</label>
 
                                     <div class="row">
                                         <div class='col-md-4'>
@@ -109,26 +109,6 @@ and open the template in the editor.
                                                 <div class="caption">
                                                     <label class="btn btn-default btn-file" style="width: 100%">
                                                     Adicionar imagem<input type='file' style="display: none;" id="imgInp1" name="imgInp1" />
-                                                </label>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class='col-md-4'>
-                                            <div class="thumbnail">
-                                                <img id='addImg2' style='width: 15vw; height: 15vw;' src="../img/add.png">
-                                                <div class="caption">
-                                                <label class="btn btn-default btn-file" style="width: 100%">
-                                                    Adicionar imagem<input type='file' style="display: none;" id="imgInp2" name="imgInp2" />
-                                                </label>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class='col-md-4'>
-                                            <div class="thumbnail">
-                                                <img id='addImg3' style='width: 15vw; height: 15vw;'  src="../img/add.png">
-                                                <div class="caption">
-                                                <label class="btn btn-default btn-file" style="width: 100%">
-                                                    Adicionar imagem<input type='file' style="display: none;" id="imgInp3" name="imgInp3" />
                                                 </label>
                                                 </div>
                                             </div>
@@ -152,38 +132,6 @@ and open the template in the editor.
                                         readURL1(this);
                                     });
 
-                                    function readURL2(input) {
-                                        if (input.files && input.files[0]) {
-                                            var reader = new FileReader();
-
-                                            reader.onload = function (e) {
-                                                $('#addImg2').attr('src', e.target.result);
-                                            }
-
-                                            reader.readAsDataURL(input.files[0]);
-                                        }
-                                    }
-
-                                    $("#imgInp2").change(function(){
-                                        readURL2(this);
-                                    });
-
-                                    function readURL3(input) {
-                                        if (input.files && input.files[0]) {
-                                            var reader = new FileReader();
-
-                                            reader.onload = function (e) {
-                                                $('#addImg3').attr('src', e.target.result);
-                                            }
-
-                                            reader.readAsDataURL(input.files[0]);
-                                        }
-                                    }
-
-                                    $("#imgInp3").change(function(){
-                                        readURL3(this);
-                                    });
-
                                 </script>
                             </div>
                         </div>
@@ -204,7 +152,7 @@ and open the template in the editor.
                             }
                             ?>
                         </div>
-                        <div class="panel-footer"><button type="button" class="btn btn-primary" >Editar</button></div>
+                        <div class="panel-footer"><button type="submit" id="editProduct" name="editProduct" value="editProduct" class="btn btn-primary" >Editar</button></div>
                     </div>
                     </form>
                 </div>
@@ -220,6 +168,17 @@ and open the template in the editor.
             $sql = mysqli_query($conn,"INSERT INTO product (name_product, price_product, description_product, category_product) VALUES ('".$_POST[nameProduct]."', '".$_POST[priceProduct]."', '".$_POST[descProduct]."', '".$_POST[subcatProduct]."')");
             $sql1 = mysqli_query($conn,"SELECT id_product FROM product ORDER BY id_product DESC LIMIT 1;");
             include "../tools/addimg.php";
+            echo "<script type='text/javascript'>$('#confirmationModal').modal();</script>";
+        }
+        
+        if(isset($_POST["editProduct"])){
+            $sql = mysqli_query($conn,"UPDATE product SET name_product='".$_POST[editNameProduct]."', price_product='".$_POST[editPriceProduct]."', description_product='".$_POST[editDescProduct]."', category_product='".$_POST[editsubcat]."' WHERE id_product=$id");
+            $target_dir = "../img/store/";            
+            $toupload = "id" . $id . ".png";
+            $target_file = $target_dir . $toupload;
+            if (move_uploaded_file($_FILES["Inp1"]["tmp_name"], $target_file)){
+                $sqlImage1 = mysqli_query($conn,"INSERT into images (id_product, src_image) VALUES ('$id','$toupload')");
+            }
             echo "<script type='text/javascript'>$('#confirmationModal').modal();</script>";
         }
         
