@@ -117,8 +117,8 @@ try
 try{
     $payment->create($paypal);
 } catch (PayPal\Exception\PayPalConnectionException $ex) {
-    echo $ex->getCode(). " CODE"; // Prints the Error Code
-    echo $ex->getData(). " MESSAGE"; // Prints the detailed error message 
+    echo $ex->getCode(); 
+    echo $ex->getData();
     die($ex);
 } catch (Exception $ex) {
 die($ex);
