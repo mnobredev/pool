@@ -1,4 +1,7 @@
 <?php
+    if (isset($_POST[editEmail])){
+        $sql = mysqli_query($conn,"UPDATE user SET email='$_POST[editEmail]' where user_id=$id;");
+    }
     $editMe = mysqli_query($conn, "SELECT * from user where user_id=$id");
     while ($row = mysqli_fetch_array($editMe)){
         $email = $row['email'];
@@ -18,13 +21,3 @@
         </div>
     </div>
 </div>
-<?php
-    if (isset($_POST["editAdmin"])){
-        $sql = mysqli_query($conn,"UPDATE ;");
-        while ($row = mysqli_fetch_array($sql)){
-            $displayme = $row['name_product'];
-            $displayID = $row['id_product'];
-            echo "<script>$('#scrollhide').append('<a href=\'?id=$displayID\' class=\'list-group-item\'>$displayme</a>');</script>";
-        }
-    }
-?>
