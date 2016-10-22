@@ -4,6 +4,12 @@ define( 'API_ACCESS_KEY', 'AIzaSyB8rKmOhKUNeV3Xn25qhLFoUYPOMazsTRI');
 
 include 'tools/chave.php';
 $customer_id = $_REQUEST['id'];
+$getdevice = mysqli_query($conn, "SELECT device_id FROM device WHERE device_user_id = '".$customer_id."'");
+while($row = mysqli_fetch_array($getdevice)){
+    $device = $row['device_id'];
+    echo $device;
+}
+mysqli_query($conn, "INSERT INTO alert (alert_date, alert_type, device_id) VALUES (NOW(), 2, $device)");
 $sql = mysqli_query($conn, "SELECT token FROM customer WHERE customer_user_id = '".$customer_id."'");
 $result ="";
 while($row = mysqli_fetch_array($sql))

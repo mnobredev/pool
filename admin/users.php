@@ -24,11 +24,75 @@ and open the template in the editor.
         
         <div class="row" style="padding: 70px 15px;">
             <?php
+            include '../tools/chave.php';
             include 'sidebar.php';
             ?>
             <script>
             $( "#users" ).toggleClass( "active" );
             </script>
+            
+            <div class="col-md-10">
+                    <form method="POST" action="" enctype="multipart/form-data">
+                    <div class="panel panel-primary">
+                        <div class="panel-heading"><h3 class="panel-title">Inserir administrador</h3></div>
+                        <div class="panel-body">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>Email</label>
+                                    <input name="nameProduct" class="form-control" type="text" required>                             
+                                </div>
+                                <div class="form-group">
+                                    <label>Password</label>
+                                    <input name="nameProduct" class="form-control" type="password" required>                             
+                                </div>
+                            </div>
+                            <div class="col-md-8">
+                                <div class="panel panel-default">
+                                    <div class="panel-body">
+                                        <label>Informação importante</label>
+                                        <p>Bacon ipsum dolor amet beef ribs sausage turducken fatback bacon pork belly cupim beef frankfurter landjaeger swine kevin pork chop short loin chuck. Strip steak beef ribs tri-tip, jerky short ribs biltong pancetta flank venison. Kielbasa pig kevin burgdoggen. Short loin cupim pastrami strip steak tail leberkas hamburger capicola filet mignon fatback. Porchetta rump hamburger pancetta cupim t-bone drumstick. Kevin shankle biltong ribeye.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="panel-footer"><button type="submit" id="newProduct" name="newProduct" value="newProduct" class="btn btn-primary" >Inserir</button></div>
+                    </div>
+                    </form>
+                    <form method="POST" action="" enctype="multipart/form-data">
+                    <div class="panel panel-primary">
+                        <div class="panel-heading"><h3 class="panel-title">Editar administrador</h3></div>
+                        <div class="panel-body">
+                            <?php
+                                if(isset($_GET["idadm"])){
+                                    $id = $_GET["idadm"];
+                                    include '../tools/editadmin.php';
+                                }
+                                else{
+                                    include '../tools/searchadmin.php';
+                                }
+                            ?>
+                        </div>
+                        <div class="panel-footer"><button type="submit" id="editAdmin" name="editProduct" value="editProduct" class="btn btn-primary" >Editar</button></div>
+                    </div>
+                    </form>
+                    <form method="POST" action="" enctype="multipart/form-data">
+                    <div class="panel panel-primary">
+                        <div class="panel-heading"><h3 class="panel-title">Editar utilizador</h3></div>
+                        <div class="panel-body">
+                            <?php
+                                if(isset($_GET["id"])){
+                                    $id = $_GET["id"];
+                                    include '../tools/edituser.php';
+                                }
+                                else{
+                                    include '../tools/searchuser.php';
+                                }
+                            ?>
+                        </div>
+                        <div class="panel-footer"><button type="submit" id="editProduct" name="editProduct" value="editProduct" class="btn btn-primary" >Editar</button></div>
+                    </div>
+                    </form>
+            
         </div>
     </body>
 </html>
