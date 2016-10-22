@@ -1,4 +1,9 @@
 <?php
+    if (isset($_POST[editEmail])){
+        mysqli_query($conn,"UPDATE user SET email='$_POST[aeditEmail]', where user_id=$id;");
+        mysqli_query($conn,"UPDATE customer SET address='$_POST[aeditMorada]', city='$_POST[aeditCidade]', first_name='$_POST[aeditNome]', last_name='$_POST[aeditApelido]', tel='$_POST[aeditTelefone]', zip='$_POST[aeditCP]' where customer_user_id=$id;");
+    }
+
     $editMe = mysqli_query($conn, "SELECT * from user where user_id=$id");
     while ($row = mysqli_fetch_array($editMe)){
         $email = $row['email'];
@@ -51,13 +56,3 @@
         </div>
     </div>
 </div>
-<?php
-    if (isset($_POST["editAdmin"])){
-        $sql = mysqli_query($conn,"UPDATE ;");
-        while ($row = mysqli_fetch_array($sql)){
-            $displayme = $row['name_product'];
-            $displayID = $row['id_product'];
-            echo "<script>$('#scrollhide').append('<a href=\'?id=$displayID\' class=\'list-group-item\'>$displayme</a>');</script>";
-        }
-    }
-?>
