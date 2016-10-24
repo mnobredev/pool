@@ -15,10 +15,11 @@ and open the template in the editor.
         <script type="text/javascript" src="https://www.google.com/jsapi"></script>
         <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
         <link rel="icon" href="../favicon.ico" type="image/x-icon">
-        <title>Projecto Final ATEC</title>
+        <title>Aqua Quality Systems</title>
     </head>
     <body>
         <?php
+        ob_start();
         include 'navbar.php';
         ?>
         
@@ -32,7 +33,7 @@ and open the template in the editor.
             </script>
             
             <div class="col-md-10">
-                    <form method="POST" action="" enctype="multipart/form-data">
+                    <form method="POST" action="">
                     <div class="panel panel-primary">
                         <div class="panel-heading"><h3 class="panel-title">Inserir administrador</h3></div>
                         <div class="panel-body">
@@ -58,7 +59,7 @@ and open the template in the editor.
                         <div class="panel-footer"><button type="submit" id="newProduct" name="newProduct" value="newProduct" class="btn btn-primary" >Inserir</button></div>
                     </div>
                     </form>
-                    <form method="POST" action="" enctype="multipart/form-data">
+                    <form method="POST" action="">
                     <div class="panel panel-primary">
                         <div class="panel-heading"><h3 class="panel-title">Editar administrador</h3></div>
                         <div class="panel-body">
@@ -72,10 +73,10 @@ and open the template in the editor.
                                 }
                             ?>
                         </div>
-                        <div class="panel-footer"><button type="submit" id="editAdmin" name="editProduct" value="editProduct" class="btn btn-primary" >Editar</button></div>
+                        <div class="panel-footer"><button type="submit" id="editAdmin" name="editAdmin" value="editAdmin" class="btn btn-primary" >Editar</button></div>
                     </div>
                     </form>
-                    <form method="POST" action="" enctype="multipart/form-data">
+                    <form method="POST" action="">
                     <div class="panel panel-primary">
                         <div class="panel-heading"><h3 class="panel-title">Editar utilizador</h3></div>
                         <div class="panel-body">
@@ -89,7 +90,7 @@ and open the template in the editor.
                                 }
                             ?>
                         </div>
-                        <div class="panel-footer"><button type="submit" id="editProduct" name="editProduct" value="editProduct" class="btn btn-primary" >Editar</button></div>
+                        <div class="panel-footer"><button type="submit" id="editUser" name="editUser" value="editUser" class="btn btn-primary" >Editar</button></div>
                     </div>
                     </form>
             

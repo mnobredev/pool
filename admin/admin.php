@@ -13,7 +13,7 @@ and open the template in the editor.
         <script type="text/javascript" src="https://www.google.com/jsapi"></script>
         <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
         <link rel="icon" href="../favicon.ico" type="image/x-icon">
-        <title>Acesso Administrador</title>
+        <title>Aqua Quality Systems</title>
     </head>
     <body>        
         <nav class="navbar navbar-inverse navbar-fixed-top">
@@ -25,7 +25,7 @@ and open the template in the editor.
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="#">ATEC - Projecto Final</a>
+                    <a class="navbar-brand" href="#">Aqua Quality Systems</a>
                 </div>
                 <div id="navbar" class="navbar-collapse collapse">
                     <form class="navbar-form navbar-right" method="POST" action="">

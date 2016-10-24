@@ -16,7 +16,7 @@ and open the template in the editor.
         <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
         <link rel="icon" href="../favicon.ico" type="image/x-icon">
         <style>#scrollhide::-webkit-scrollbar {width: 0px !important;}</style>
-        <title>Projecto Final ATEC</title>
+        <title>Aqua Quality Systems</title>
     </head>
     <body>
         <?php

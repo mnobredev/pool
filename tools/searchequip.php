@@ -13,7 +13,6 @@
         </div>
     </div>
     <div class="col-md-6">
-        <form class="" method="POST">
             <div class="row">
                 <label>Quero pesquisar por um MAC Address  <small>Insira o MAC separado por ":" (sem aspas).</small></label>
                 <div class="col-md-10">
@@ -23,17 +22,16 @@
                     <button type="submit" name="searchdev" id="searchdev" class="btn btn-success" style="margin-top: 1%;">Pesquisar</button>
                 </div>
             </div>
-        </form>
         <div id="scrollhide" class="list-group" style="margin-top: 1%; max-height: 160px; overflow-y: scroll;">
             <?php
                 if (isset($_POST[lookup])){
-            $sql = mysqli_query($conn,"SELECT * FROM device where device_mac like '%".$_POST[lookup]."%';");
-            while ($row = mysqli_fetch_array($sql)){
-                $displayme = $row['device_mac'];
-                $displayID = $row['device_id'];
-                echo "<script>$('#scrollhide').append('<a href=\'?id=$displayID\' class=\'list-group-item\'>$displayme</a>');</script>";
+                $sql = mysqli_query($conn,"SELECT * FROM device where device_mac like '%".$_POST[lookup]."%';");
+                while ($row = mysqli_fetch_array($sql)){
+                    $displayme = $row['device_mac'];
+                    $displayID = $row['device_id'];
+                    echo "<script>$('#scrollhide').append('<a href=\'?id=$displayID\' class=\'list-group-item\'>$displayme</a>');</script>";
+                }
             }
-        }
             ?>
         </div>
     </div>

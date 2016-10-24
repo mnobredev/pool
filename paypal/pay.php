@@ -32,7 +32,7 @@ die();
 
 $jdecode= json_decode($payment->toJSON(), true);
 
-$status = $jdecode["state"];
+$status = $jdecode["transactions"]["0"]["related_resources"]["0"]["sale"]["state"];
 $firstName=$jdecode["payer"]["payer_info"]["first_name"];
 $lastName=$jdecode["payer"]["payer_info"]["last_name"];
 $amount=$jdecode["transactions"]["0"]["item_list"]["items"]["0"]["quantity"];
@@ -56,7 +56,7 @@ $sqlupdate1 = mysqli_query($conn, "UPDATE sales "
 echo ("<p><h3>Obrigado pela sua compra</h3></p>");
      
     echo ("<b>Detalhes de pagamento</b><br>\n");
-    echo "<li>Nome: ".$firstName." ".$lastName."</li>\n";
+    echo "<li>Nome: ".$firstName." ".$lastName." ".$status."</li>\n";
     echo ("<li>email: ".$emailpayer."</li>\n");
     echo ("<li>Item: ".$itemname."</li>\n");
     echo ("<li>Quantidade: ".$amount."</li>\n");

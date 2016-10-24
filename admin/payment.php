@@ -15,20 +15,41 @@ and open the template in the editor.
         <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
         <script type="text/javascript" src="https://www.google.com/jsapi"></script>
         <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-        <title>Projecto Final ATEC</title>
+        <title>Aqua Quality Systems</title>
     </head>
     <body>
         <?php
+        include '../tools/chave.php';
         include 'navbar.php';
+        if (isset($_GET[editPayment])){
+            $sql = mysqli_query($conn,"UPDATE sales SET Pay_status='$_GET[taskOption]' where Id_sale=$_GET[editPayment];");
+        }
         ?>
         
         <div class="row" style="padding: 70px 15px;">
             <?php
-            include 'sidebar.php';
+                include 'sidebar.php';
             ?>
             <script>
-            $( "#paym" ).toggleClass( "active" );
+                $( "#paym" ).toggleClass( "active" );
             </script>
+            <div class="col-md-10">
+                <div class="panel panel-primary">
+                    <div class="panel-heading"><h3 class="panel-title">Pagamentos</h3></div>
+                    <div class="panel-body">
+                        <?php
+                                if(isset($_GET["id"])){
+                                    $id = $_GET["id"];
+                                    include '../tools/editpayment.php';
+                                }
+                                else{
+                                    include '../tools/searchpayment.php';
+                                }
+                            ?>
+                    </div>
+                    <div class="panel-footer"><button type="submit" id="editPayment" name="editPayment" value="<?php echo $id; ?>" class="btn btn-primary" >Editar</button></div>
+                </div> 
+            </div>
         </div>
     </body>
 </html>

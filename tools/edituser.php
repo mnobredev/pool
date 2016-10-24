@@ -1,7 +1,8 @@
 <?php
-    if (isset($_POST[editEmail])){
-        mysqli_query($conn,"UPDATE user SET email='$_POST[aeditEmail]', where user_id=$id;");
-        mysqli_query($conn,"UPDATE customer SET address='$_POST[aeditMorada]', city='$_POST[aeditCidade]', first_name='$_POST[aeditNome]', last_name='$_POST[aeditApelido]', tel='$_POST[aeditTelefone]', zip='$_POST[aeditCP]' where customer_user_id=$id;");
+    if (isset($_POST[editUser])){
+        mysqli_query($conn,"UPDATE user SET email='$_POST[aeditEmail]' where user_id=$id;");
+        mysqli_query($conn,"UPDATE customer SET address='$_POST[aeditMorada]', city='$_POST[aeditCidade]', first_name='$_POST[aeditNome]', last_name='$_POST[aeditApelido]', tel='$_POST[aeditTelefone]', zipcode='$_POST[aeditCP]' where customer_user_id=$id;");
+        header('Location: users.php');
     }
 
     $editMe = mysqli_query($conn, "SELECT * from user where user_id=$id");

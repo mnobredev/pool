@@ -1,6 +1,7 @@
 <?php
-    if (isset($_POST[editEmail])){
+    if (isset($_POST[editAdmin])){
         $sql = mysqli_query($conn,"UPDATE user SET email='$_POST[editEmail]' where user_id=$id;");
+        header('Location: users.php');
     }
     $editMe = mysqli_query($conn, "SELECT * from user where user_id=$id");
     while ($row = mysqli_fetch_array($editMe)){
