@@ -18,8 +18,8 @@ while($row = mysqli_fetch_array($sql))
 $registrationIds = ["$result"];
 // prep the bundle
 $msg = [
-    'title'         => 'Android',
-    'body'          => 'Pkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk'
+    'title'         => 'Aqua',
+    'body'          => 'Existe uma anomalia nos seus registos.'
 ];
 
 $fields = [

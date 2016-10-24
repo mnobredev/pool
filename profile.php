@@ -139,7 +139,15 @@ and open the template in the editor.
                         Histórico de compras
                     </div>
                     <div class="panel-body">
-                        COISAS BOAS DE COMPRAS ENTRAM AQUI!
+                        <?php
+                            $sql = mysqli_query($conn, "SELECT * from sales where Pay_status='completed' OR Pay_status='Enviado'");
+                            while ($row = mysqli_fetch_array($sql)){
+                            $saleid = $row['Id_sale'];
+                            $status = $row['Pay_status'];
+                            $date = $row['date_purchase'];
+                            echo "<a href='?id=$saleid' class='list-group-item'>$date"." Estado: "."$status</a>";
+                            }
+                        ?>
                     </div>
                 </div>
             </div>

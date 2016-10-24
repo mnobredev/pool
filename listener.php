@@ -7,8 +7,6 @@
             $temp = str_replace("%",".",$temp);
             $mac = $_REQUEST['mac'];
             $mac = str_replace("%",".",$mac);
-            
-            echo "Valor do PH: $ph <br>Valor do Cloro: $cloro";
 
             include 'tools/chave.php';
             
@@ -22,10 +20,11 @@
             
             mysqli_query ($conn, $sql);
             
-            $sql = "SELECT ph_status, chlorine_status FROM readings where reading_device_id=$mac order by reading_id desc limit 3;";
+            $sql = "SELECT ph_status, chlorine_status, temperature FROM readings where reading_device_id=$mac order by reading_id desc limit 3;";
             $rs_result = mysqli_query ($conn, $sql);
             $phalarmstatus = TRUE;
             $clalarmstatus = TRUE;
+            $tempalarmstatus = TRUE;
             while ($row = mysqli_fetch_assoc($rs_result)) {
                 echo "<br>";
                 echo $row["ph_status"];
@@ -36,9 +35,17 @@
                 if ($row["chlorine_status"]>=0.5 && $row["chlorine_status"]<=2){
                     $clalarmstatus = FALSE;
                 }
+                if ($row["temperature"]>=22 && $row["temperature"]<=32){
+                    $tempalarmstatus = FALSE;
+                }
             }
-            if ($phalarmstatus==TRUE || $clalarmstatus==TRUE){
-                    $alarmid="alarm.php?";
+            $sql = "SELECT device_user_id from device where device_id=$mac";
+            $rs_result = mysqli_query ($conn, $sql);
+            while ($row = mysqli_fetch_assoc($rs_result)) {
+                $id = $row['device_user_id'];
+            }
+            if ($phalarmstatus==TRUE || $clalarmstatus==TRUE || $tempalarmstatus==TRUE){
+                    /*$alarmid="alarm.php?";
                             if ($phalarmstatus==TRUE){
                                 $alarmid.="ph=0";
                                 if ($clalarmstatus==TRUE){
@@ -47,10 +54,8 @@
                             }
                             else {
                                 $alarmid.="cl=0";
-                            }
-                            
-                            //header("Location: $alarmid");
-                            header("Location: gcm.php?id=19");
+                            }*/
+                            header("Location: gcm.php?id=$id");
                 }
             
         ?>

@@ -13,9 +13,9 @@
             </button>
             <a class="navbar-brand" href="#">Aqua Quality Systems</a>
         </div>
-            <form class="navbar-form navbar-right">
+            <div class="navbar-form navbar-right">
                     <button type="button" class="btn btn-default"><?php echo $sessionName; ?></button>
                     <a href="../tools/logout.php" type="button" class="btn btn-danger"><span class="glyphicon glyphicon-log-out" aria-label="Logout"></span></a>
-        </div><!--/.navbar-collapse -->
+        </div>
     </div>
 </nav>
