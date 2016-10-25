@@ -14,7 +14,6 @@ use PayPal\Api\Payment;
  */
 
 require 'app/start.php';
-
 include '../tools/chave.php';
 /*if(!isset($_POST['product'], $_POST['price']))
 {

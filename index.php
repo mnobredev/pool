@@ -198,7 +198,7 @@ and open the template in the editor.
                     <p>A programação é um elemento que faz parte do meu dia à dia. A curiosidade levou-me a aprender cada vez mais, e é um enorme prazer fazer parte de um processo de criação tão importante, como o desenvolvimento de software. O Aqua é uma aplicação online, fruto do espirito da nossa equipa, que satisfaz uma necessidade de mercado.</p>
                 </div>
                 <div class="col-lg-4">
-                    <img class="img-circle" src="img/fakeiurie.png" alt="Generic placeholder image" width="140" height="140">
+                    <img class="img-circle" src="img/iurie.png" alt="Generic placeholder image" width="140" height="140">
                     <h2>Iurie Caradja</h2>
                     <p>Desde que me lembro, senti-me fascinado pelo desenvolvimento de software, considero que a programação é uma excelente forma de dar vida e materializar as minhas ideias e trabalhar neste projeto foi uma experiência bastante interessante considerando que é essencialmente uma integração de diferentes tipos de tecnologias e formas de desenvolvimento.</p>
                 </div>
