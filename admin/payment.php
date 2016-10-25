@@ -19,10 +19,12 @@ and open the template in the editor.
     </head>
     <body>
         <?php
+        ob_start();
         include '../tools/chave.php';
         include 'navbar.php';
-        if (isset($_GET[editPayment])){
-            $sql = mysqli_query($conn,"UPDATE sales SET Pay_status='$_GET[taskOption]' where Id_sale=$_GET[editPayment];");
+        if (isset($_POST[editPayment])){
+            $sql = mysqli_query($conn,"UPDATE sales SET Pay_status='$_POST[taskOption]' where Id_sale=$_POST[editPayment];");
+            header("Location: payment.php");
         }
         ?>
         
@@ -35,6 +37,7 @@ and open the template in the editor.
             </script>
             <div class="col-md-10">
                 <div class="panel panel-primary">
+                    <form method="POST" class="">
                     <div class="panel-heading"><h3 class="panel-title">Pagamentos</h3></div>
                     <div class="panel-body">
                         <?php
@@ -48,6 +51,7 @@ and open the template in the editor.
                             ?>
                     </div>
                     <div class="panel-footer"><button type="submit" id="editPayment" name="editPayment" value="<?php echo $id; ?>" class="btn btn-primary" >Editar</button></div>
+                </form>
                 </div> 
             </div>
         </div>

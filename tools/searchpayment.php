@@ -21,7 +21,7 @@
         <button type="submit" class="btn btn-success" style="margin-top: 1%;" name="searchPayment">Pesquisar</button>
         <div id="scrollhide" class="list-group" style="margin-top: 1%; max-height: 160px; overflow-y: scroll;">
             <?php
-                if (isset($_GET[namePayment])){
+                if (isset($_POST[namePayment])){
                     $sql = mysqli_query($conn,"SELECT * FROM sales where payer_name like '%".$_GET[namePayment]."%' and date_purchase like '%".$_GET[datePayment]."%';");
                     while ($row = mysqli_fetch_array($sql)){
                         $displayme = $row['payer_name'];

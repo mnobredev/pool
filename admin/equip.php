@@ -22,7 +22,28 @@ and open the template in the editor.
     <body>
         <?php
         include 'navbar.php';
-        include '../tools/chave.php'
+        include '../tools/chave.php';
+        if(isset($_POST["newEquip"])){
+            $mac = "";
+            for ($i = 1; $i < 7; $i++) {
+                $mac.=$_POST['newmac' . $i . ''] . ":";
+                if ($i == 6) {
+                    $mac.=$_POST['newmac' . $i . ''];
+                }
+            }
+            $sql = mysqli_query($conn,"INSERT INTO device (device_mac, device_user_id, auth) VALUES ('".$mac."', '0', '0')");
+        }
+        if(isset($_POST["editEquip"])){
+            $mac = "";
+            for ($i = 1; $i < 7; $i++) {
+                $mac.=$_POST['editmac' . $i . ''] . ":";
+                if ($i == 6) {
+                    $mac.=$_POST['editmac' . $i . ''];
+                }
+            }
+            $devid = $_GET["id"];
+            mysqli_query($conn,"UPDATE device SET device_mac='".$mac."' where device_id=$devid");
+        }
         ?>
         
         <div class="row" style="padding: 70px 15px;">
@@ -71,6 +92,7 @@ and open the template in the editor.
                         <div class="panel-footer"><button type="submit" id="newEquip" name="newEquip" value="newEquip" class="btn btn-primary" >Inserir</button></div>
                     </div>
                 </form>
+                <form method="POST" action="">
                 <div class="panel panel-primary">
                     <div class="panel-heading"><h3 class="panel-title">Editar equipamento</h3></div>
                     <?php
@@ -82,21 +104,10 @@ and open the template in the editor.
                             include '../tools/searchequip.php';
                         }
                     ?>
-                    <div class="panel-footer"><button type="button" class="btn btn-primary" >Editar</button></div>
+                    <div class="panel-footer"><button type="submit" id="editEquip" name="editEquip" value="editEquip" class="btn btn-primary" >Editar</button></div>
                 </div>
+                </form>
             </div>
         </div>
-        <?php
-            if(isset($_GET["newEquip"])){
-                $mac = "";
-                for ($i = 1; $i < 7; $i++) {
-                    $mac.=$_GET['newmac' . $i . ''] . ":";
-                    if ($i == 6) {
-                        $mac.=$_GET['newmac' . $i . ''];
-                    }
-                }
-                $sql = mysqli_query($conn,"INSERT INTO device (device_mac, device_user_id, auth) VALUES ('".$mac."', '0', '0')");
-            }
-        ?>
     </body>
 </html>

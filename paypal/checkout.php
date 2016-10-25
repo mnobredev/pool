@@ -46,9 +46,11 @@ for($i=0; $i<sizeof($array); $i++)
     }
 }
 
+mysqli_query($conn, "UPDATE cart SET cart_active=0 where cart_id=".$cartid);
+
 $product = "AquaSystems";
 $price = $sum;
-$shipping = 2.00;
+$shipping = 0;
 
 $total = $price + $shipping;
 
@@ -58,7 +60,7 @@ $payer->setPaymentMethod('paypal');
 
 $item = new Item();
 $item->setName($product)
-        ->setCurrency('GBP')
+        ->setCurrency('EUR')
         ->setQuantity(1)
         ->setPrice($price);
 
@@ -70,11 +72,11 @@ $details->setShipping($shipping)
         ->setSubtotal($price);
 
 $amount = new Amount();
-$amount->setCurrency('GBP')
+$amount->setCurrency('EUR')
         ->setTotal($total)
         ->setDetails($details);
 
-$str3= mysqli_query($conn, "Select cart_id from cart WHERE cart_user_id=".$id." AND cart_active=1");
+$str3= mysqli_query($conn, "Select cart_id from cart WHERE cart_user_id=".$id."");
     while($row = mysqli_fetch_array($str3))
     {
         $idcart=$row["cart_id"];

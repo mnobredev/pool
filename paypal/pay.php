@@ -40,7 +40,7 @@
                     } 
                     catch (Exception $ex) {
                         $data = json_decode($ex->getData());
-                        //var_dump($data);
+                        var_dump($data);
                         die();
                     }
                     $jdecode= json_decode($payment->toJSON(), true);

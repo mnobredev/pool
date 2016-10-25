@@ -140,12 +140,47 @@ and open the template in the editor.
                     </div>
                     <div class="panel-body">
                         <?php
-                            $sql = mysqli_query($conn, "SELECT * from sales where Pay_status='completed' OR Pay_status='Enviado'");
-                            while ($row = mysqli_fetch_array($sql)){
-                            $saleid = $row['Id_sale'];
-                            $status = $row['Pay_status'];
-                            $date = $row['date_purchase'];
-                            echo "<a href='?id=$saleid' class='list-group-item'>$date"." Estado: "."$status</a>";
+                            if (isset($_GET['id'])){
+                                $salesid=$_GET['id'];
+                                $editMe = mysqli_query($conn, "SELECT * from sales where Id_sale=$salesid");
+                                while ($row = mysqli_fetch_array($editMe)){
+                                    $cart = $row['ID_sale_invoice'];
+                                    $nome = $row['payer_name'];
+                                    $morada = $row['payer_address'];
+                                    $state = $row['Pay_status'];
+                                    echo "<div class='form-group'>";
+                                    echo "<label>Nome do cliente: </label> $nome";
+                                    echo "</div>"; 
+                                    echo "<div class='form-group'>";
+                                    echo "<label>Morada: </label> $morada";
+                                    echo "</div>"; 
+                                    echo "<div class='form-group'>";
+                                    echo "<label>Estado: </label> $state";
+                                    echo "</div>";
+                                }
+                                $editMe = mysqli_query($conn, "SELECT * from cartitem where cartitem_cart_id=$cart");
+                                echo "<div class='form-group'>";
+                                echo "<label>Produtos</label>";
+                                while ($row = mysqli_fetch_array($editMe)){
+                                    $prodid = $row['cartitem_product_id'];
+                                    $edit = mysqli_query($conn, "SELECT * from product where id_product=$prodid");
+                                    while ($row = mysqli_fetch_array($edit)){
+                                        $product = $row['name_product'];
+                                        echo "<input name='aeditEmail' class='form-control' type='text' value='$product' required>";
+                                    }
+                                }
+                                echo "</div>"; 
+                                echo "<a href='profile.php' class='btn btn-primary'>Voltar</a>";
+                            }
+                            else{
+                                
+                                $sql = mysqli_query($conn, "SELECT * from sales where Pay_status='completed' OR Pay_status='Enviado'");
+                                while ($row = mysqli_fetch_array($sql)){
+                                    $saleid = $row['Id_sale'];
+                                    $status = $row['Pay_status'];
+                                    $date = $row['date_purchase'];
+                                    echo "<a href='?id=$saleid' class='list-group-item'>$date"." Estado: "."$status</a>";
+                                }
                             }
                         ?>
                     </div>

@@ -19,12 +19,12 @@
                     <input class="form-control" id="lookup" name="lookup" type="text">
                 </div>
                 <div class="col-md-2">
-                    <button type="submit" name="searchdev" id="searchdev" class="btn btn-success" style="margin-top: 1%;">Pesquisar</button>
+                    <button type="submit" name="searchdev" id="searchdev" class="btn btn-success">Pesquisar</button>
                 </div>
             </div>
         <div id="scrollhide" class="list-group" style="margin-top: 1%; max-height: 160px; overflow-y: scroll;">
             <?php
-                if (isset($_POST[lookup])){
+                if (isset($_POST[searchdev])){
                 $sql = mysqli_query($conn,"SELECT * FROM device where device_mac like '%".$_POST[lookup]."%';");
                 while ($row = mysqli_fetch_array($sql)){
                     $displayme = $row['device_mac'];

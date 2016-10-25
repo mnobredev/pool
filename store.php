@@ -27,8 +27,9 @@ and open the template in the editor.
         </script>
         <div class="container" style="margin-top: 5%;">  
             <div class="row">
-                <div id="myCart" class="modal">
-                    <div class="modal-content">
+                <div id="myCart" class="modal" role="dialog" tabindex="-1">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
                         <div class="modal-header">
                             <span class="close">×</span>
                             <h2>Carrinho de compras</h2>
@@ -71,6 +72,7 @@ and open the template in the editor.
                         </div>
                         <div class="modal-footer">
                             <a href="paypal/checkout.php" class="btn btn-primary">Finalizar Compra</a>
+                        </div>
                         </div>
                     </div>
                 </div>

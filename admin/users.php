@@ -25,25 +25,23 @@ and open the template in the editor.
         
         <div class="row" style="padding: 70px 15px;">
             <?php
-            include '../tools/chave.php';
-            include 'sidebar.php';
-            if (isset($_GET[newAdmin])){
-                echo "teste";
-                $user = $_GET[emailadmin];
-                $pass = $_GET[passadmin];
-                $options = [
-                    'cost' => 11,
-                    'salt' => mcrypt_create_iv(22, MCRYPT_DEV_URANDOM),
-                ];
-                $password_hash1 = password_hash($pass, PASSWORD_BCRYPT, $options);
-                mysqli_query($conn, "Insert into user(user_type, email, password) VALUES('2','" . $user . "', '$password_hash1' )");
-            }
+                include '../tools/chave.php';
+                include 'sidebar.php';
+                if (isset($_POST[newAdmin])){
+                    echo "teste";
+                    $user = $_POST[emailadmin];
+                    $pass = $_POST[passadmin];
+                    $options = [
+                        'cost' => 11,
+                        'salt' => mcrypt_create_iv(22, MCRYPT_DEV_URANDOM),
+                    ];
+                    $password_hash1 = password_hash($pass, PASSWORD_BCRYPT, $options);
+                    mysqli_query($conn, "Insert into user(user_type, email, password) VALUES('2','" . $user . "', '$password_hash1' )");
+                }
             ?>
-            <script>
-            $( "#users" ).toggleClass( "active" );
-            </script>
-            
+            <script>$( "#users" ).toggleClass( "active" );</script>            
             <div class="col-md-10">
+                <form class="" method="POST">
                     <div class="panel panel-primary">
                         <div class="panel-heading"><h3 class="panel-title">Inserir administrador</h3></div>
                         <div class="panel-body">
@@ -68,6 +66,7 @@ and open the template in the editor.
                         </div>
                         <div class="panel-footer"><button type="submit" id="newAdmin" name="newAdmin" value="newAdmin" class="btn btn-primary" >Inserir</button></div>
                     </div>
+                </form>
                     <form method="POST" action="">
                     <div class="panel panel-primary">
                         <div class="panel-heading"><h3 class="panel-title">Editar administrador</h3></div>
@@ -101,7 +100,7 @@ and open the template in the editor.
                         </div>
                         <div class="panel-footer"><button type="submit" id="editUser" name="editUser" value="editUser" class="btn btn-primary" >Editar</button></div>
                     </div>
-                    </form>
+                </form>
             </div>
         </div>
     </body>
